@@ -1,0 +1,149 @@
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="user-scalable=no, width=720px, height=1280px"/>
+	<title>关于我和我的博客 | {{_pjango_param_title_message}}</title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">  
+	<link rel="stylesheet" href="/css/font-awesome.min.css"> 
+	<link rel="stylesheet" href="/css/buttons.css">  
+	<link rel="stylesheet" href="/css/height.css">  
+	<link rel="stylesheet" href="/css/me.css">  
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/buttons.js"></script>
+	<script src="/js/me.js"></script>
+</head>
+<style>
+	p.big-title {
+		color: white;
+		font-size: 32px;
+	}
+	p.title {
+		color: white;
+		font-size: 24px;
+	}
+	p.text {
+		color: white;
+		font-size: 18px;
+	}
+	p.time {
+		color: orange;
+		font-size: 16px;
+	}
+	div.archive-cell {
+		padding-bottom: 16px;
+	}
+	div.gap {
+		height: 24px;
+	}
+	div.header {
+		height: 60px;
+	}
+	button.title {
+		font-size: 22px;
+		pointer-events: none;
+	}
+	img.donate {
+		height: 150px;
+		width: 150px;
+	}
+</style>
+<body class="main">
+	
+<div class="box">
+	
+{{{_pjango_template_navigation_bar}}}
+	
+	<div class="col-md-12 column height-more-than-85">
+		<div class="col-md-12 column header">
+			<div class="height-10"></div>
+			<div class="col-md-4 column col-center height-100 corner-window shadow text-center">
+				<div class="height-30"></div>
+				<p class="title">关于我和我的博客</p>
+			</div>
+		</div>
+		<div class="col-md-offset-1 row clearfix">
+			<div class="col-md-3 column">
+				<div class="col-md-12 column">
+					<div class="gap"></div>
+					<div class="col-md-12 column corner-window shadow">
+						<div class="gap"></div>
+						<div class="text-center">
+							<button class="button button-primary button-plain button-rounded button-border button-primary title">关于博客</button>
+						</div>
+						<div class="gap"></div>
+						<p class="text"><i class="fa fa-fw fa-angle-right"></i>主人还没有写关于。</p>
+						<div class="gap"></div>
+					</div>
+					<div class="col-md-12 column gap"></div>
+				</div>
+				<div class="col-md-12 column">
+					<div class="col-md-12 column corner-window shadow">
+						<div class="gap"></div>
+						<div class="text-center">
+							<button class="button button-primary button-plain button-rounded button-border button-primary title">一些数据</button>
+						</div>
+						<hr />
+						<p class="text"><i class="fa fa-fw fa-angle-right"></i>总博文数量：<a class="footer-link">{{_pjango_param_counter_posts}}</a></p>
+						<p class="text"><i class="fa fa-fw fa-angle-right"></i>累计博文阅读：<a class="footer-link">{{_pjango_param_counter_read}}</a></p>
+						<p class="text"><i class="fa fa-fw fa-angle-right"></i>累计博文点赞：<a class="footer-link">{{_pjango_param_counter_love}}</a></p>
+						<hr />
+						<p class="text"><i class="fa fa-fw fa-angle-right"></i>累计主页访问：<a class="footer-link">{{_pjango_param_counter_index}}</a></p>
+						<p class="text"><i class="fa fa-fw fa-angle-right"></i>累计博文索引：<a class="footer-link">{{_pjango_param_counter_list}}</a></p>
+						<p class="text"><i class="fa fa-fw fa-angle-right"></i>累计博文搜索：<a class="footer-link">{{_pjango_param_counter_search}}</a></p>
+						<hr />
+					</div>
+					<div class="col-md-12 column gap"></div>
+				</div>
+				<div class="col-md-12 column">
+					<div class="col-md-12 column corner-window shadow">
+						<div class="gap"></div>
+						<div class="text-center">
+							<button class="button button-primary button-plain button-rounded button-border button-primary title">建设历史</button>
+						</div>
+						<div class="gap"></div>
+{{#_pjango_param_table_history}}
+					<div class="col-md-12 column archive-cell">
+						<p class="time">{{_pjango_param_table_PostsHistory_DATE}}</p>
+						<p class="text">{{_pjango_param_table_PostsHistory_CONTENT}}</p>
+					</div>
+{{/_pjango_param_table_history}}
+
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8 column">
+				<div class="col-md-12 column">
+					<div class="gap"></div>
+					<div class="col-md-12 column corner-window shadow">
+						<div class="height-5"></div>
+						<div class="col-md-12 column">
+							<div class="text-center">
+								<img class="head img-circle" src="/img/head_128.png">
+							</div>
+							<hr />
+							<p class="title"><i class="fa fa-fw fa-angle-right"></i>主人还没有写关于内容。</p>
+							<hr />
+						</div>
+					</div>
+					<div class="col-md-12 column gap"></div>
+				</div>
+			</div>
+
+		</div>
+		<div class="col-md-12 column height-10">
+			<div class="height-10"></div>
+			<div class="col-md-6 column col-center height-60 corner-window shadow text-center">
+			<div class="height-20"></div>
+					<a class="button button-plain button-border button-block end-button" onclick="toTop()">回到顶部</a>
+			</div>
+		</div>
+
+	</div>
+	
+{{{_pjango_template_footer_bar}}}
+</div>
+
+</body>
+</html>
+

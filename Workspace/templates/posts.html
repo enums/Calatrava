@@ -1,0 +1,142 @@
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="user-scalable=no, width=720px, height=1280px"/>
+	<title>{{_pjango_param_posts_title}} | {{_pjango_param_title_message}}</title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">  
+	<link rel="stylesheet" href="/css/font-awesome.min.css"> 
+	<link rel="stylesheet" href="/css/buttons.css">  
+	<link rel="stylesheet" href="/css/height.css">  
+	<link rel="stylesheet" href="/css/me.css"> 
+	<link rel="stylesheet" href="/css/markdown.css">   
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/buttons.js"></script>
+	<script src="/js/me.js"></script>
+</head>
+<style>
+	div.title {
+		height: 300px;
+	}
+	div.paper {
+		background-color: white
+	}
+	div.text-gap {
+		height: 60px;
+	}
+	div.paper-gap {
+		height: 120px;
+	}
+	div.paper-end-gap {
+		height: 60px;
+	}
+	div.author {
+		height: 240px;
+	}
+	div.end {
+		height: 320px;
+	}
+	p.title {
+		font-size: 36px;
+	}
+	p.author {
+		font-size: 20px;
+	}
+	p.end {
+		font-size: 20px;
+	}
+	i.date {
+		color: grey;
+		font-size: 16px;
+	}
+	a.end-button {
+		color: white;
+		font-size: 18px;
+		margin-top: 4px;
+		margin-bottom: 4px;
+	}
+	a.tag {
+		font-size: 18px;
+	}
+</style>
+<body class="main">
+
+<div class="box">
+	
+{{{_pjango_template_navigation_bar}}}
+	
+	<div class="col-md-12 column height-more-than-85">
+		<div class="paper-gap"></div>
+
+		<div class="col-md-8 col-md-offset-2 column paper grey-shadow">
+			
+			<div class="text-gap"></div>
+			<div class="col-md-12 column title">
+				<div class="col-md-12 column height-30"></div>
+				<div class="col-md-12 column height-60">
+					<p class="text-center title">{{_pjango_param_posts_title}}</p>
+				</div>
+				<div class="col-md-12 column height-10">
+					<div class="col-md-4 column text-center pull-left">
+						<i class="fa fa-fw fa-calendar date"></i>
+						<i class="date">发布于: {{_pjango_param_posts_date}}</i>
+					</div>
+					<div class="col-md-4 column text-center pull-left">
+						<i class="fa fa-fw fa-coffee date"></i>
+						<i class="date">阅读: {{_pjango_param_posts_read}}</i>
+					</div>
+					<div class="col-md-4 column text-center pull-left">
+						<i class="fa fa-fw fa-heart date"></i>
+						<i class="date">喜欢: {{_pjango_param_posts_love}}</i>
+					</div>
+				</div>
+			</div>					
+			<div class="col-md-12 column author">
+				<hr />
+				<div class="col-md-10 column col-center">
+					<p class="author"><i class="fa fa-fw fa-angle-right"></i>作者：<a style="color: #145d7e" href='http://{{_pjango_param_host}}'><i>{{_pjango_param_name}}</i></a></p>
+					<p class="author"><i class="fa fa-fw fa-angle-right"></i>原文链接：<a style="color: #145d7e" href='http://posts.{{_pjango_param_host}}/posts/{{_pjango_param_posts_pid}}'>http://posts.{{_pjango_param_host}}/posts/{{_pjango_param_posts_pid}}</a></p>
+					<p class="author"><i class="fa fa-fw fa-angle-right"></i> 
+						TAG: 
+						{{#_pjango_param_posts_tag}}
+						<a href="/list?tag={{{_pjango_param_table_PostsTag_TAG}}}" class="label {{{_pjango_param_table_PostsTag_LABEL}}} tag">{{{_pjango_param_table_PostsTag_TAG}}}</a>
+						{{/_pjango_param_posts_tag}}
+					</p>
+				</div>
+				<hr />
+			</div>
+			<div class="text-gap"></div>
+			<div class="col-md-10 col-md-offset-1 column">
+{{{_pjango_template_posts_text}}}
+			</div>
+			
+			<div class="text-gap"></div>
+			<div class="col-md-12 column end">
+				<hr />
+				<div class="col-md-11 column col-center">
+					<p class="end"><i class="fa fa-fw fa-angle-right"></i>Thanks for reading.</p>
+					<p class="end"><i class="fa fa-fw fa-angle-right"></i>All the best wishes for you! 💕</p>
+				</div>
+				<hr />
+				<div class="col-md-11 column col-center">
+					<div class="col-md-3 column col-center">
+						<a class="button button-block button-rounded button-caution end-button" onclick="love({{_pjango_param_posts_pid}})">喜欢这篇博文</a>
+					</div>
+				</div>
+				<hr />
+				<div class="col-md-12 column">
+					<a class="button button-block button-rounded button-primary end-button" onclick="toTop()">回到顶部</a>
+				</div>				
+			</div>
+
+		</div>
+		<div class="col-md-12 column paper-end-gap"></div>
+
+	</div>
+	
+{{{_pjango_template_footer_bar}}}
+</div>
+
+</body>
+</html>
+

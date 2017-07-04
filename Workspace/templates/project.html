@@ -1,0 +1,128 @@
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="user-scalable=no, width=720px, height=1280px"/>
+	<title>我的项目列表 | {{_pjango_param_title_message}}</title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">  
+	<link rel="stylesheet" href="/css/font-awesome.min.css"> 
+	<link rel="stylesheet" href="/css/buttons.css">  
+	<link rel="stylesheet" href="/css/height.css">  
+	<link rel="stylesheet" href="/css/me.css">  
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/buttons.js"></script>
+	<script src="/js/me.js"></script>
+</head>
+<style>
+	p.title {
+		color: white;
+		font-size: 24px;
+	}
+	p.big-title {
+		color: white;
+		font-size: 34px;
+	}
+	p.sub-title {
+		color: white;
+		font-size: 22px;
+	}
+	p.text {
+		color: white;
+		font-size: 18px;
+	}
+	p.time {
+		color: orange;
+		font-size: 16px;
+	}
+	i.text {
+		color: white;
+		font-size: 16px;
+	}
+	div.cell {
+		cursor: hand;
+		transition:background-color 0.3s linear;
+	}
+	div.cell:hover {
+		background-color: rgba(128, 128, 128, 0.6);
+	}
+	div.archive-cell {
+		padding-bottom: 16px;
+	}
+	div.gap {
+		height: 24px;
+	}
+	div.header {
+		height: 60px;
+	}
+	button.title {
+		font-size: 22px;
+		pointer-events: none;
+	}
+	a.text {
+		color: white;
+		font-size:20px;
+	}
+	a.tag {
+		line-height: 2.5em;
+		margin-right: 8px;
+	}
+</style>
+<body class="main">
+	
+<div class="box">
+	
+{{{_pjango_template_navigation_bar}}}
+	
+	<div class="col-md-12 column height-more-than-85">
+		<div class="col-md-12 column header">
+			<div class="height-10"></div>
+			<div class="col-md-4 column col-center height-100 corner-window shadow text-center">
+				<div class="height-30"></div>
+				<p class="title">我的项目列表</p>
+			</div>
+		</div>
+		<div class="col-md-8 col-md-offset-2 column">
+			<div class="col-md-12 column gap"></div>
+{{#_pjango_param_table_project}}
+			<div class="col-md-12 column">
+				<div class="col-md-12 column corner-window shadow cell" onclick="window.open('{{{_pjango_param_table_Project_URL}}}')">
+					<div class="col-md-12 column gap"></div>
+					<div class="col-md-12 column">
+						<p class="big-title"><i class="fa fa-fw fa-github"></i>{{_pjango_param_table_Project_TITLE}}</p>
+						<p class="sub-title">{{_pjango_param_table_Project_SUBTITLE}}</p>
+						<p class="title">
+							{{#_pjango_param_table_Project_TAGHTML}}
+							<a class="label {{{_pjango_param_table_PostsTag_LABEL}}} tag">{{{_pjango_param_table_PostsTag_TAG}}}</a>
+							{{/_pjango_param_table_Project_TAGHTML}}
+						</p>
+						<p class="text">{{_pjango_param_table_Project_MEMO}}</p>
+					</div>
+					<div class="col-md-12 column gap"></div>
+					<div class="col-md-12 column">
+						<i class="fa fa-fw fa-calendar text"></i>
+						<i class="text">发布于: {{_pjango_param_table_Project_DATE}}</i>
+					</div>
+					<div class="col-md-12 column gap"></div>
+	
+				</div>
+			</div>
+			<div class="col-md-12 column gap"></div>
+{{/_pjango_param_table_project}}
+
+		</div>
+		<div class="col-md-12 column height-10">
+			<div class="height-10"></div>
+			<div class="col-md-6 column col-center height-60 corner-window shadow text-center">
+			<div class="height-20"></div>
+					<a class="button button-plain button-border button-block end-button" onclick="toTop()">回到顶部</a>
+			</div>
+		</div>
+
+	</div>
+	
+{{{_pjango_template_footer_bar}}}
+</div>
+
+</body>
+</html>
+

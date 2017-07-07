@@ -20,6 +20,8 @@ Calatrava 则是对其的高度集成，它是已经完成的博客系统。
 ## 安装
 
 - 克隆此仓库。
+- 修改`AppDelegate.swift`中的`PJANGO_WORKSPACE`路径。
+- 按照下文中`准备工作`一节中修改`hosts`添加本地解析。
 - macOS: 使用下面的命令生成 Xcode 工程进行编译:
 
 ```bash
@@ -31,6 +33,10 @@ $ swift package generate-xcodeproj
 ```bash
 $ swift build
 ```
+
+- macOS中请使用管理员权限执行，否则无法使用80端口。
+- 打开浏览器，输入`calatravatest.com`进入博客。
+
 
 ## 效果预览
 

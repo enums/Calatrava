@@ -78,3 +78,4 @@ fastlane/screenshots
 fastlane/test_output
 Package.pins
 Calatrava.xcodeproj
+Workspace/runtime/calatrava.log

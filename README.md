@@ -17,6 +17,21 @@ Calatrava 则是对其的高度集成，它是已经完成的博客系统。
 - 基于 Pjango 的博客服务器程序。
 - 基于 Pjango 的可扩展插件集成。
 
+## 安装
+
+- 克隆此仓库。
+- macOS: 使用下面的命令生成 Xcode 工程进行编译:
+
+```bash
+$ swift package generate-xcodeproj
+```
+
+- Linux: 使用`Swift Package Manager`编译:
+
+```bash
+$ swift build
+```
+
 ## 效果预览
 
 参考: [我的博客](http://enumsblog.com)

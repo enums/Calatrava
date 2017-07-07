@@ -1,4 +1,4 @@
-# Calatrava(Developing)
+# Calatrava
 
 
 基于 [Pjango](https://github.com/enums/pjango) 的主题博客。使用`Swift3.x`开发，运行在`macOS`和`Linux`上。
@@ -22,6 +22,107 @@ Calatrava 则是对其的高度集成，它是已经完成的博客系统。
 参考: [我的博客](http://enumsblog.com)
 
 如果你喜欢这个效果，可以以 Star 的方式支持我。
+
+## 使用引导
+
+基于 [Pjango](https://github.com/enums/Pjango) 实现，Model 和 View 分离，具体请参考 Pjango 的文档。
+
+默认的设计下，Model 都有一分钟的内存缓存，可以修改各 Model 的`cacheTime`参数。
+
+更多设置可以直接看源码后修改对应的属性。
+
+### WorkSpace 结构
+
+默认的 WorkSpace 包含以下目录:
+
+- static：静态资源目录，发布后可通过 url 直接访问到静态资源。
+- templates：网页模板目录，包含未渲染的网页模板以及博文内容。
+- runtime：运行时目录，默认情况目录下仅产生日志文件。
+- filedb：文件数据驱动，默认情况下博客不关联任何数据库，数据以 json 文件方式存放在该目录下。
+
+### 准备工作
+
+修改 hosts，添加本地解析以方便调试。
+
+```
+127.0.0.1       www.calatravatest.com
+127.0.0.1       calatravatest.com
+127.0.0.1       posts.calatravatest.com
+127.0.0.1       project.calatravatest.com
+```
+
+`Global.swift`和`AppDelegate.swift`有部分参数需要根据实际情况修改，如路径和域名等。
+
+### 修改博客参数
+
+在默认使用文件数据驱动的情况下，在`Workspace/filedb/default/LocalConfig.json`修改对应参数即可。
+
+
+### 发布博文
+
+以下为 macOS 平台下使用 MacDown 编写博文的步骤：
+
+#### 编写博文内容
+
+使用 [MacDown](http://macdown.uranusjr.com) 编写内容并导出成 HTML。
+
+#### 转换成可用的 HTML
+
+克隆 [这个](https://github.com/enums/Calatrava-MacDown-Html-Transformation) 仓库，编译后二进制程序可自行保存。
+
+运行这个程序，参数为输入文件和输出文件路径，剔除导出的 HTML 中的样式部分。
+
+#### 推送模板和配图到对应目录
+
+将博文 HTML 推送至`Workspace/templates/posts`目录下。
+
+将配图等静态资源推送至`Workspace/static`目录下。
+
+编写时请注意静态资源的路径。本地编写时推荐将`.md`文稿临时放在`static`目录下，以配合写作时的静态资源路径和发布以后的 url 访问地址一直。
+
+#### 在数据库中插入博文记录
+
+在默认使用文件数据驱动的情况下，在`Workspace/filedb/default/posts.json`文件中加入相应记录即可。
+
+博文模型：
+
+```swift
+var pid = PCDataBaseField.init(name: "PID", type: .int)
+var title = PCDataBaseField.init(name: "TITLE", type: .string, length: 64)
+var date = PCDataBaseField.init(name: "DATE", type: .string, length: 16)
+var read = PCDataBaseField.init(name: "READ", type: .int)
+var love = PCDataBaseField.init(name: "LOVE", type: .int)
+var tag = PCDataBaseField.init(name: "TAG", type: .string, length: 64)
+```
+
+因此，按照模型的结构，json 结构：
+
+```json
+{
+  "objs" : [
+    [
+      "id，记录的额外字段，任意整数，不可重复",
+      "PID，博文id，整数，和博文 HTML 文件名一直。如PID = 17001，对应 HTML 文件为 17001.html",
+      "TITLE，博文标题",
+      "DATE，博文发布日期，YYYY-MM-dd HH:mm:ss",
+      "READ，阅读数量",
+      "LOVE，点赞数量",
+      "TAG，标签列表，以|分隔",
+    ]
+  ]
+}
+```
+
+### 添加标签、项目和建设历史等
+
+根据上面提到的规则，根据各自的模型代码直接修改对应的 json 文件记录即可。
+
+如果改用[Pjango-MySQL](https://github.com/enums/Pjango-MySQL)组件，直接改数据库记录即可。
+
+### 修改网页
+
+部分页面内容是直接渲染静态网页的，如`about.html`中的关于内容。因此这部分内容可以直接修改 HTML。
+
 
 ## 联系我
 

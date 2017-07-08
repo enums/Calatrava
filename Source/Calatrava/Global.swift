@@ -15,10 +15,6 @@ let WEBSITE_HOST = "calatravatest.com"
 let WEBSITE_HOST = "enumsblog.com"
 #endif
 
-var CONFIGURATION_PATH: String {
-    return "\(PJANGO_WORKSPACE_PATH)/configuration"
-}
-
 let logger = PCLog.init(tag: "Calatrava")
 
 //pid@ip

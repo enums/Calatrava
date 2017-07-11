@@ -21,6 +21,7 @@ Calatrava 则是对其的高度集成，它是已经完成的博客系统。
 
 - 克隆此仓库。
 - 修改`AppDelegate.swift`中的`PJANGO_WORKSPACE`路径。
+- 若遇到无法写入日志的错误，请手动新建日志的目录，路径同样位于`AppDelegate.swift`中。
 - 按照下文中`准备工作`一节中修改`hosts`添加本地解析。
 - macOS: 使用下面的命令生成 Xcode 工程进行编译:
 
@@ -34,7 +35,7 @@ $ swift package generate-xcodeproj
 $ swift build
 ```
 
-- macOS中请使用管理员权限执行，否则无法使用80端口。
+- macOS中请使用root用户执行，否则无法使用80端口。
 - 打开浏览器，输入`calatravatest.com`进入博客。
 
 

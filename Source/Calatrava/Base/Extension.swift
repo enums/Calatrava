@@ -57,7 +57,11 @@ extension Date {
 extension Int {
     
     static func rand(_ to: Int) -> Int {
-        return Int(arc4random()) % to
+        #if os(Linux)
+            return Int(random()) % to
+        #else
+            return Int(arc4random()) % to
+        #endif
     }
 }
 

@@ -208,6 +208,12 @@
 								</div>
 								<div class="col-md-12 column" style="height: 20px;"></div>
 								<div class="col-md-12 column">
+								    <label class="msg" for="verification">人机校验  <button class="button button-tiny button-plain button-border button-circle" onclick="getVerification()"><i class="fa fa-fw fa-refresh"></i></button></label>
+									<p class="text" id="verification_question"></p>
+								    <input type="text" class="form-control" id="verification" placeholder="请输入答案">
+								</div>
+								<div class="col-md-12 column" style="height: 20px;"></div>
+								<div class="col-md-12 column">
 									<a class="button button-block button-rounded button-primary end-button" onclick="message()">发表留言</a>
 								</div>
 								<div class="col-md-12 column end"></div>
@@ -246,10 +252,25 @@
 		var name = $("#name").val();
 		var email = $("#email").val();
 		var comment = $("#comment").val();
-		_message(name, email, comment, function() {
+		var v_a = $("#verification").val();
+		_message(name, email, comment, v_id, v_a, function() {
 			location.reload();
+		}, function() {
+			getVerification();
 		});
 	}
+	
+	var v_id = "";
+	
+	function getVerification() {
+		_getVerification(function(text) {
+			var strs = text.split("@");
+			$("#verification_question").text(strs[0]);
+			v_id = strs[1];
+		})
+	}
+	
+	getVerification();
 </script>
 
 </body>

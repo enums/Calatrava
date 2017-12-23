@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 var dateFormatter = { () -> DateFormatter in
     let that = DateFormatter.init()
     that.timeZone = TimeZone.init(secondsFromGMT: 8 * 3600)

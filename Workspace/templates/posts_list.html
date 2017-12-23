@@ -16,7 +16,7 @@
 <style>
 	p.title {
 		color: white;
-		font-size: 24px;
+		font-size: 22px;
 	}
 	p.text {
 		color: white;
@@ -25,6 +25,7 @@
 	p.time {
 		color: orange;
 		font-size: 16px;
+		font-weight: lighter;
 	}
 	i.text {
 		color: white;
@@ -47,12 +48,12 @@
 		height: 60px;
 	}
 	button.title {
-		font-size: 22px;
+		font-size: 20px;
 		pointer-events: none;
 	}
 	a.text {
 		color: white;
-		font-size:20px;
+		font-size:18px;
 	}
 	a.tag {
 		line-height: 2.5em;
@@ -135,7 +136,7 @@
 							{{/_pjango_param_table_Posts_TAGHTML}}
 							</p>
 						</div>
-						<div class="col-md-6 column pull-left">
+						<div class="col-md-5 column pull-left">
 							<i class="fa fa-fw fa-calendar text"></i>
 							<i class="text">发布于: {{_pjango_param_table_Posts_DATE}}</i>
 						</div>
@@ -144,7 +145,11 @@
 							<i class="text">阅读: {{_pjango_param_table_Posts_READ}}</i>
 					
 						</div>
-						<div class="col-md-3 column pull-left">
+						<div class="col-md-2 column pull-left">
+							<i class="fa fa-fw fa-comment text"></i>
+							<i class="text">评论: {{_pjango_param_table_Posts_COMMENT}}</i>
+						</div>
+						<div class="col-md-2 column pull-left">
 							<i class="fa fa-fw fa-heart text"></i>
 							<i class="text">喜欢: {{_pjango_param_table_Posts_LOVE}}</i>
 						</div>

@@ -35,6 +35,7 @@ class ProjectListView: PCListView {
 
     
     override var viewParam: PCViewParam? {
+        EventHooks.hookProject(req: currentRequest)
         
         let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? ""
         

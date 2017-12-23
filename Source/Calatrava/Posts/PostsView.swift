@@ -10,7 +10,7 @@ import Foundation
 import PerfectHTTP
 import Pjango
 
-class PostsView: PCDetailView {
+class PostsView: PCListView {
     
     override var templateName: String? {
         return "posts.html"
@@ -39,11 +39,21 @@ class PostsView: PCDetailView {
         return pjangoHttpRedirect(name: "error.404")
     }
     
+    override var listObjectSets: [String : [PCModel]]? {
+        guard var commentList = PostsCommentModel.queryObjects() as? [PostsCommentModel] else {
+            return nil
+        }
+        commentList = commentList.filter({ $0.pid.intValue == currentPosts?.pid.intValue })
+        return [
+            "_pjango_param_table_comment": commentList,
+        ]
+    }
+    
     override var viewParam: PCViewParam? {
         guard let posts = currentPosts else {
             return nil
         }
-        currentPosts = nil
+        EventHooks.hookPostsRead(req: currentRequest, pid: posts.pid.intValue)
         
         posts.read.intValue += 1
         PostsModel.updateObject(posts)
@@ -53,6 +63,7 @@ class PostsView: PCDetailView {
         let tag = posts.tagModel.map { $0.toViewParam() }
         let date = posts.date.strValue
         let read = posts.read.intValue
+        let comment = posts.commentsCount
         let love = posts.love.intValue
         
         let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? ""
@@ -71,6 +82,7 @@ class PostsView: PCDetailView {
             "_pjango_param_posts_tag": tag,
             "_pjango_param_posts_date": date,
             "_pjango_param_posts_read": read,
+            "_pjango_param_posts_comment": comment,
             "_pjango_param_posts_love": love,
             "_pjango_template_posts_text": PostsTextView.init(pid: posts.pid.value as! Int).getTemplate()
         ]

@@ -12,7 +12,11 @@ import Pjango
 func postsLoveHandle() -> PCUrlHandle {
     
     return pjangoHttpResponse { req, res in
-        guard let pid = Int(req.getUrlParam(key: "pid") ?? ""), let postsList = PostsModel.queryObjects() else {
+        guard let postsList = PostsModel.queryObjects() else {
+            pjangoHttpResponse("居然出错了！")(req, res)
+            return
+        }
+        guard let pid = Int(req.getUrlParam(key: "pid") ?? "") else {
             pjangoHttpResponse("AI娘无法识别你的请求哦！")(req, res)
             return
         }
@@ -30,13 +34,14 @@ func postsLoveHandle() -> PCUrlHandle {
             pjangoHttpResponse("今天您已经赞过这篇博文啦！")(req, res)
             return
         }
-        posts.love.intValue += 1
         guard PostsModel.updateObject(posts) else {
-            pjangoHttpResponse("好像哪里出问题了。")(req, res)
+            pjangoHttpResponse("居然出错了！")(req, res)
             return
         }
+        posts.love.intValue += 1
         postsLoveDict.insert(key)
         pjangoHttpResponse("已经收到你的赞啦！")(req, res)
+        EventHooks.hookPostsLove(req: req, pid: pid)
     }
 
 }

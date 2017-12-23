@@ -1,5 +1,5 @@
 //
-//  LoveCleanPlugin.swift
+//  CustomerCleanerPlugin.swift
 //  Calatrava
 //
 //  Created by 郑宇琦 on 2017/6/25.
@@ -9,7 +9,7 @@
 import Foundation
 import Pjango
 
-class LoveCleanPlugin: PCTimerPlugin {
+class DailyCleanPlugin: PCTimerPlugin {
     
     override var timerDelay: TimeInterval {
         return Date.tomorrow.timeIntervalSince1970 - Date.init().timeIntervalSince1970
@@ -21,9 +21,12 @@ class LoveCleanPlugin: PCTimerPlugin {
     
     override var task: PCTask? {
         return {
-            logger.info("[CustomerCleaner]: Clean love recoreds.")
+            logger.info("[DailyCleanPlugin]: Clean love recoreds.")
             postsLoveDict.removeAll()
+            logger.info("[DailyCleanPlugin]: Clean comment recoreds.")
+            postsCommentDailyDict.removeAll()
+            logger.info("[DailyCleanPlugin]: Clean message recoreds.")
+            messageDailyDict.removeAll()
         }
     }
 }
-

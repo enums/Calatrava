@@ -16,15 +16,18 @@ class AboutView: PCListView {
     }
     
     override var listObjectSets: [String : [PCModel]]? {
-        guard let objs = PostsHistoryModel.queryObjects() else {
+        guard let history = PostsHistoryModel.queryObjects() else {
             return nil
         }
+        let message = MessageModel.queryObjects() ?? [MessageModel]()
         return [
-            "_pjango_param_table_history": objs.reversed(),
+            "_pjango_param_table_history": history.reversed(),
+            "_pjango_param_table_message": message.reversed(),
         ]
     }
     
     override var viewParam: PCViewParam? {
+        EventHooks.hookAbout(req: currentRequest)
         
         let postsList = PostsModel.queryObjects() ?? []
         

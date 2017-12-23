@@ -58,33 +58,45 @@ function love(pid) {
 	})
 }
 
-function _comment(pid, name, email, comment, onSuccess) {
+function _comment(pid, name, email, comment, v_id, v_a, onSuccess, onFailed) {
 	var obj = {
 		pid: pid,
 		name: name,
 		email: email,
 		comment: comment,
+		v_id: v_id,
+		v_a: v_a,
 	};
 	postMsgToDo("/api/comment", JSON.stringify(obj), function(text) {
 		alert(text)
 		if (text == "发表成功！") {
 			onSuccess();
+		} else {
+			onFailed();
 		}
 	})
 }
 
-function _message(name, email, comment, onSuccess) {
+function _message(name, email, comment, v_id, v_a, onSuccess, onFailed) {
 	var obj = {
 		name: name,
 		email: email,
 		comment: comment,
+		v_id: v_id,
+		v_a: v_a,
 	};
 	postMsgToDo("/api/message", JSON.stringify(obj), function(text) {
 		alert(text)
 		if (text == "发表成功！") {
 			onSuccess();
+		} else {
+			onFailed();
 		}
 	})
+}
+
+function _getVerification(onSuccess) {
+	getMsgToDo("/api/verification", onSuccess)
 }
 
 

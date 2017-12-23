@@ -31,4 +31,8 @@ var messageLastTimeDict = Dictionary<String, TimeInterval>.init()
 //pid@ip
 var messageDailyDict = Dictionary<String, Int>.init()
 
+//pid@ip
+var verificationLastTimeDict = Dictionary<String, TimeInterval>.init()
+
+
 

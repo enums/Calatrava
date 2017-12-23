@@ -55,6 +55,7 @@ class AppDelegate: PjangoDelegate {
                 pjangoUrl("about", name: "about", handle: AboutView.asHandle()),
                 
                 pjangoUrl("api/message", name: "api.message", handle: messageHandle),
+                pjangoUrl("api/verification", name: "api.verification@index", handle: verificationHandle),
                 
                 //Old
                 pjangoUrl("post", name: "old.posts.1", handle: postsOldHandle),
@@ -70,6 +71,7 @@ class AppDelegate: PjangoDelegate {
                 pjangoUrl("api/love", name: "api.love", handle: postsLoveHandle),
                 pjangoUrl("api/comment", name: "api.comment", handle: postsCommentHandle),
                 
+                pjangoUrl("api/verification", name: "api.verification@posts", handle: verificationHandle),
             ],
             
             "project.\(WEBSITE_HOST)": [

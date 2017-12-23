@@ -53,3 +53,18 @@ extension Date {
         }
     }
 }
+
+extension Int {
+    
+    static func rand(_ to: Int) -> Int {
+        return Int(arc4random()) % to
+    }
+}
+
+extension Array {
+    
+    func rand() -> Element {
+        return self[Int.rand(self.count)]
+    }
+
+}

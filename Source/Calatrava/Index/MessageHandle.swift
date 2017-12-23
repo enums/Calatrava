@@ -21,6 +21,14 @@ func messageHandle() -> PCUrlHandle {
             pjangoHttpResponse("请把内容填写完整哦！")(req, res)
             return
         }
+        guard let v_id = json["v_id"].string, let v_a = json["v_a"].string else {
+            pjangoHttpResponse("人机校验失败啦！")(req, res)
+            return
+        }
+        guard VerificationManager.checkCode(identifier: v_id, answer: v_a) else {
+            pjangoHttpResponse("人机校验失败啦！")(req, res)
+            return
+        }
         guard let name = json["name"].string, let email = json["email"].string, let comment = json["comment"].string else {
             pjangoHttpResponse("请把内容填写完整哦！")(req, res)
             return

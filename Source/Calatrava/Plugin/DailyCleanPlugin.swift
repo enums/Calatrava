@@ -21,12 +21,11 @@ class DailyCleanPlugin: PCTimerPlugin {
     
     override var task: PCTask? {
         return {
-            logger.info("[DailyCleanPlugin]: Clean love recoreds.")
-            postsLoveDict.removeAll()
-            logger.info("[DailyCleanPlugin]: Clean comment recoreds.")
+            postsCommentLastTimeDict.removeAll()
             postsCommentDailyDict.removeAll()
-            logger.info("[DailyCleanPlugin]: Clean message recoreds.")
+            messageLastTimeDict.removeAll()
             messageDailyDict.removeAll()
+            verificationLastTimeDict.removeAll()
         }
     }
 }

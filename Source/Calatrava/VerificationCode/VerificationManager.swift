@@ -112,7 +112,11 @@ class VerificationManager {
     }
     
     static internal func rand(_ to: Int) -> Int {
-        return Int(arc4random() % UInt32(to))
+        #if os(Linux)
+            return Int(random()) % to
+        #else
+            return Int(arc4random()) % to
+        #endif
     }
         
     static internal func checkListIfNeed() {

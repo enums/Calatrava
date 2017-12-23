@@ -84,7 +84,7 @@ class PostsView: PCListView {
             "_pjango_param_posts_read": read,
             "_pjango_param_posts_comment": comment,
             "_pjango_param_posts_love": love,
-            "_pjango_template_posts_text": PostsTextView.init(pid: posts.pid.value as! Int).getTemplate()
+            "_pjango_template_posts_text": PostsTextView.init(pid: posts.pid.value as! Int).getTemplate(),
         ]
     }
 }

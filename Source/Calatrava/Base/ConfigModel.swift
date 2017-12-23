@@ -1,6 +1,6 @@
 //
 //  ConfigModel.swift
-//  Calatrava
+//  Pjango-Dev
 //
 //  Created by 郑宇琦 on 2017/7/1.
 //  Copyright © 2017年 郑宇琦. All rights reserved.
@@ -44,8 +44,8 @@ class ConfigModel: PCModel {
     static func getValueForKey(_ key: ConfigModelKey) -> String? {
         let values = (self.queryObjects() as? [ConfigModel])?.filter {
             ($0.key.value as! String) == key.rawValue
-            }.map {
-                $0.value.value as! String
+        }.map {
+            $0.value.value as! String
         }
         if values != nil, values!.count > 0 {
             return values![0]
@@ -78,12 +78,11 @@ class ConfigModel: PCModel {
             ConfigModelKey.counterPostsList.rawValue: "0",
             ConfigModelKey.counterPostsSearch.rawValue: "0",
         ].map {
-                let config = ConfigModel.init()
-                config.key.value = $0.key
-                config.value.value = $0.value
-                return config
+            let config = ConfigModel.init()
+            config.key.value = $0.key
+            config.value.value = $0.value
+            return config
         }
     }
     
 }
-

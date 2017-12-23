@@ -28,7 +28,8 @@ class PostsListView: PCListView {
                     return (posts.tag.value as! String).components(separatedBy: "|").contains(tag)
                 }
             }
-            if let keyword = req.getUrlParam(key: "keyword")?.lowercased() {
+            let keyword = req.getUrlParam(key: "keyword")?.lowercased()
+            if let keyword = keyword {
                 needHooks = true
                 postsList = postsList.filter {
                     let posts = $0 as! PostsModel
@@ -36,9 +37,10 @@ class PostsListView: PCListView {
                         (posts.date.value as! String).lowercased().contains(keyword)
                 }
             }
-            EventHooks.hookPostsList()
             if needHooks {
-                EventHooks.hookPostsSearch()
+                EventHooks.hookPostsSearch(req: currentRequest, keyword: keyword)
+            } else {
+                EventHooks.hookPostsList(req: currentRequest)
             }
         }
         postsList = postsList.reversed().map {
@@ -49,7 +51,7 @@ class PostsListView: PCListView {
         }
         
         return [
-            "_pjango_param_table_posts": postsList,
+            "_pjango_param_table_posts": postsList
         ]
 
     }
@@ -59,7 +61,8 @@ class PostsListView: PCListView {
             return nil
         }
         return [
-            "_pjango_param_table_Posts_TAGHTML": model.tagModel.map { $0.toViewParam() }
+            "_pjango_param_table_Posts_TAGHTML": model.tagModel.map { $0.toViewParam() },
+            "_pjango_param_table_Posts_COMMENT": model.commentsCount
         ]
     }
     

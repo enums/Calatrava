@@ -22,5 +22,5 @@ class NavigationBarView: PCDetailView {
     }
     
     static var html = NavigationBarView.meta.getTemplate()
-    
+
 }

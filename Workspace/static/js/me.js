@@ -58,4 +58,33 @@ function love(pid) {
 	})
 }
 
+function _comment(pid, name, email, comment, onSuccess) {
+	var obj = {
+		pid: pid,
+		name: name,
+		email: email,
+		comment: comment,
+	};
+	postMsgToDo("/api/comment", JSON.stringify(obj), function(text) {
+		alert(text)
+		if (text == "发表成功！") {
+			onSuccess();
+		}
+	})
+}
+
+function _message(name, email, comment, onSuccess) {
+	var obj = {
+		name: name,
+		email: email,
+		comment: comment,
+	};
+	postMsgToDo("/api/message", JSON.stringify(obj), function(text) {
+		alert(text)
+		if (text == "发表成功！") {
+			onSuccess();
+		}
+	})
+}
+
 

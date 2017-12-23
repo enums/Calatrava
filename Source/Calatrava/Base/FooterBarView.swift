@@ -1,5 +1,5 @@
 //
-//  FootBarView.swift
+//  FooterBarView.swift
 //  Calatrava
 //
 //  Created by 郑宇琦 on 2017/6/24.
@@ -17,4 +17,3 @@ class FooterBarView: PCDetailView {
     
     static var html = FooterBarView.meta.getTemplate()
 }
-

@@ -31,6 +31,14 @@ class PostsModel: PCModel {
             }
     }
     
+    var commentsCount: Int {
+        if let comments = PostsCommentModel.queryObjects()?.filter({ ($0 as! PostsCommentModel).pid.intValue == pid.intValue }) {
+            return comments.count
+        } else {
+            return 0
+        }
+    }
+    
     override func registerFields() -> [PCDataBaseField] {
         return [
             pid, title, date, read, love, tag

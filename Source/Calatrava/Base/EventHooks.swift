@@ -12,19 +12,46 @@ import Pjango
 
 class EventHooks {
     
-    static func hookIndex() {
+    static func hookIndex(req: HTTPRequest?) {
         addCountForKey(.counterIndex)
+        StatisticsManager.statisticsEvent(eventType: .visitIndex, req: req)
     }
     
-    static func hookPostsList() {
+    static func hookAbout(req: HTTPRequest?) {
+        StatisticsManager.statisticsEvent(eventType: .visitAbout, req: req)
+    }
+    
+    static func hookProject(req: HTTPRequest?) {
+        StatisticsManager.statisticsEvent(eventType: .visitProject, req: req)
+    }
+    
+    static func hookPostsList(req: HTTPRequest?) {
         addCountForKey(.counterPostsList)
+        StatisticsManager.statisticsEvent(eventType: .listPosts, req: req)
     }
     
-    static func hookPostsSearch() {
+    static func hookPostsSearch(req: HTTPRequest?, keyword: String?) {
         addCountForKey(.counterPostsSearch)
+        StatisticsManager.statisticsEvent(eventType: .searchPosts, param: keyword, req: req)
     }
     
-    static func addCountForKey(_ key: ConfigModelKey) {
+    static func hookPostsRead(req: HTTPRequest?, pid: Int) {
+        StatisticsManager.statisticsEvent(eventType: .readPosts, param: "\(pid)", req: req)
+    }
+
+    static func hookPostsLove(req: HTTPRequest?, pid: Int) {
+        StatisticsManager.statisticsEvent(eventType: .lovePosts, param: "\(pid)", req: req)
+    }
+    
+    static func hookPostsComment(req: HTTPRequest?, pid: Int) {
+        StatisticsManager.statisticsEvent(eventType: .commentPosts, param: "\(pid)", req: req)
+    }
+    
+    static func hookLeaveMessage(req: HTTPRequest?) {
+        StatisticsManager.statisticsEvent(eventType: .leaveMessage, req: req)
+    }
+
+    static internal func addCountForKey(_ key: ConfigModelKey) {
         if Int(ConfigModel.getValueForKey(key) ?? "") == nil {
             ConfigModel.setValueForKey(key, value: "0")
         }
@@ -33,4 +60,7 @@ class EventHooks {
         }
         ConfigModel.setValueForKey(key, value: "\(oldCounter + 1)")
     }
+    
+    
+    
 }

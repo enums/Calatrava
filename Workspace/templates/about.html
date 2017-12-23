@@ -20,7 +20,7 @@
 	}
 	p.title {
 		color: white;
-		font-size: 24px;
+		font-size: 22px;
 	}
 	p.text {
 		color: white;
@@ -36,6 +36,23 @@
 	div.gap {
 		height: 24px;
 	}
+	div.logo {
+		background-color: rgba(255, 255, 255, 0.8);
+		border-radius: 8px;
+	}
+	div.end {
+		height: 20px;
+	}
+	img.logo {
+		width: 100%;
+	}
+	img.donate {
+		width: 40%
+	}
+	label.msg {
+		font-size: 18px;
+		color: white;
+	}
 	div.header {
 		height: 60px;
 	}
@@ -43,9 +60,18 @@
 		font-size: 22px;
 		pointer-events: none;
 	}
-	img.donate {
-		height: 150px;
-		width: 150px;
+	i.date {
+		color: white;
+		font-size: 18px;
+	}
+	p.comment_author {
+		color: white;
+		font-size: 24px;
+		font-weight: bold;
+	}
+	p.comment {
+		color: white;
+		font-size: 20px;
 	}
 </style>
 <body class="main">
@@ -72,7 +98,10 @@
 							<button class="button button-primary button-plain button-rounded button-border button-primary title">关于博客</button>
 						</div>
 						<div class="gap"></div>
-						<p class="text"><i class="fa fa-fw fa-angle-right"></i>主人还没有写关于。</p>
+						<p class="text"><i class="fa fa-fw fa-angle-right"></i>博客名为 <a class="footer-link" href="https://github.com/enums/Calatrava">「Calatrava」</a>，现已开源。</p>
+						<p class="text"><i class="fa fa-fw fa-angle-right"></i>后台基于 <a class="footer-link" href="https://github.com/enums/Pjango">「Pjango」</a>，现已开源。</p>
+						<p class="text"><i class="fa fa-fw fa-angle-right"></i>我是 <a class="footer-link">Pjango</a> 和 <a class="footer-link">Calatrava</a> 的作者。</p>
+						<p class="text"><i class="fa fa-fw fa-angle-right"></i>开发博客出于兴趣，并保持专注。</p>
 						<div class="gap"></div>
 					</div>
 					<div class="col-md-12 column gap"></div>
@@ -83,15 +112,17 @@
 						<div class="text-center">
 							<button class="button button-primary button-plain button-rounded button-border button-primary title">一些数据</button>
 						</div>
-						<hr />
+						<div class="gap"></div>
+						<p class="text">自博文模块 2016年12月01日 上线起：</p>
 						<p class="text"><i class="fa fa-fw fa-angle-right"></i>总博文数量：<a class="footer-link">{{_pjango_param_counter_posts}}</a></p>
 						<p class="text"><i class="fa fa-fw fa-angle-right"></i>累计博文阅读：<a class="footer-link">{{_pjango_param_counter_read}}</a></p>
 						<p class="text"><i class="fa fa-fw fa-angle-right"></i>累计博文点赞：<a class="footer-link">{{_pjango_param_counter_love}}</a></p>
-						<hr />
+						<div class="gap"></div>
+						<p class="text">自计数模块 2017年07月01日 上线起：</p>
 						<p class="text"><i class="fa fa-fw fa-angle-right"></i>累计主页访问：<a class="footer-link">{{_pjango_param_counter_index}}</a></p>
 						<p class="text"><i class="fa fa-fw fa-angle-right"></i>累计博文索引：<a class="footer-link">{{_pjango_param_counter_list}}</a></p>
 						<p class="text"><i class="fa fa-fw fa-angle-right"></i>累计博文搜索：<a class="footer-link">{{_pjango_param_counter_search}}</a></p>
-						<hr />
+						<div class="gap"></div>
 					</div>
 					<div class="col-md-12 column gap"></div>
 				</div>
@@ -118,12 +149,79 @@
 					<div class="col-md-12 column corner-window shadow">
 						<div class="height-5"></div>
 						<div class="col-md-12 column">
-							<div class="text-center">
-								<img class="head img-circle" src="/img/head_128.png">
+							<div class="text-center logo">
+								<img class="logo" src="/img/Calatrava.png">
 							</div>
 							<hr />
-							<p class="title"><i class="fa fa-fw fa-angle-right"></i>主人还没有写关于内容。</p>
+						<p class="title"><i class="fa fa-fw fa-angle-right"></i>博客后台为 Swift 语言开发，基于 <a class="footer-link" target="_blank" href="https://github.com/enums/Pjango">「Pjango」</a>框架，现已开源。</p>
+						<p class="title"><i class="fa fa-fw fa-angle-right"></i>博客主题名为 <a class="footer-link" target="_blank" href="https://github.com/enums/Calatrava">「Calatrava」</a>，首个发布版本现已开源。</p>
 							<hr />
+							<p class="title text-center">关于我</p>
+							<hr />
+							<p class="title"><i class="fa fa-fw fa-angle-right"></i>我出生于“书藏古今港通天下”的浙江宁波。</p>
+							<p class="title"><i class="fa fa-fw fa-angle-right"></i>求学于“山水甲天下”的广西桂林。</p>
+							<p class="title"><i class="fa fa-fw fa-angle-right"></i>现居北京，就职于百度。</p>
+							<hr />
+							<p class="title"><i class="fa fa-fw fa-angle-right"></i>擅长 iOS、OpenGL，会一点 OpenCV。</p>
+							<p class="title"><i class="fa fa-fw fa-angle-right"></i>擅长 C/C++/OC、Swift，会一点 Java/Android/JNI、Python、Delphi。</p>
+							<p class="title"><i class="fa fa-fw fa-angle-right"></i>十余年的 HTML 咸鱼，不会 JSX，抄起 Bootstrap 就是干。</p>
+							<hr />
+							<p class="title"><i class="fa fa-fw fa-angle-right"></i>日语初学，二次元晚期，一个人宅的要死，又有撩妹恐惧症。</p>
+							<p class="title"><i class="fa fa-fw fa-angle-right"></i>Steam 玩家，主要玩儿「GTA 5」，还有「DARK SOULS 3」渡劫中。</p>
+							<p class="title"><i class="fa fa-fw fa-angle-right"></i>手游只玩儿「崩坏 3」，支持优秀国产游戏，从我做起。</p>
+							<hr />
+							<p class="title text-center">捐赠</p>
+							<hr />
+							<p class="title text-center">
+								<img class="donate" src="/img/donate-wechat.jpg">
+								<img class="donate" src="/img/donate-alipay.jpg">
+							</p>
+							<hr />
+							<p class="title text-center">友情链接</p>
+							<hr />
+
+							<p class="title text-center">
+								<a class="footer-link" target="_blank" href="https://bestswifter.com">「bestswifter」</a>
+								<a class="footer-link" target="_blank" href="https://halfrost.com">「halfrost」</a>
+								<a class="footer-link" target="_blank" href="http://desgard.com">「desgard」</a>
+								<a class="footer-link" target="_blank" href="https://www.eyrefree.org">「EyreFree」</a>
+								<a class="footer-link" target="_blank" href="http://i.mouto.org">「totoro」</a>
+							</p>
+							
+							<hr />
+							<p class="title text-center">留言板</p>
+							<hr />
+
+							<div class="col-md-12 column">
+								<div class="col-md-6 column">
+								    <label class="msg" for="name">昵称</label>
+								    <input type="text" class="form-control" id="name" placeholder="请输入名称">
+								</div>
+								<div class="col-md-6 column">
+								    <label class="msg" for="email">邮箱</label>
+								    <input type="text" class="form-control" id="email" placeholder="请输入邮箱">
+								</div>
+								<div class="col-md-12 column" style="height: 20px;"></div>
+								<div class="col-md-12 column">
+								    <label class="msg" for="name">留言</label>
+								    <textarea class="form-control" rows="4" id="comment" placeholder="请输入评论"></textarea>
+								</div>
+								<div class="col-md-12 column" style="height: 20px;"></div>
+								<div class="col-md-12 column">
+									<a class="button button-block button-rounded button-primary end-button" onclick="message()">发表留言</a>
+								</div>
+								<div class="col-md-12 column end"></div>
+							</div>
+							<div class="col-md-12 column">
+								<hr />
+{{#_pjango_param_table_message}}
+								<p class="comment_author">{{_pjango_param_table_Message_NAME}}</p>
+								<p class="comment">{{_pjango_param_table_Message_COMMENT}}</p>
+								<i class="date">发表于 {{_pjango_param_table_Message_DATE}} </i>
+								<hr />
+{{/_pjango_param_table_message}}
+							</div>
+
 						</div>
 					</div>
 					<div class="col-md-12 column gap"></div>
@@ -143,6 +241,16 @@
 	
 {{{_pjango_template_footer_bar}}}
 </div>
+<script>
+	function message() {
+		var name = $("#name").val();
+		var email = $("#email").val();
+		var comment = $("#comment").val();
+		_message(name, email, comment, function() {
+			location.reload();
+		});
+	}
+</script>
 
 </body>
 </html>

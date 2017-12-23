@@ -34,7 +34,7 @@
 		height: 240px;
 	}
 	div.end {
-		height: 320px;
+		height: 40px;
 	}
 	p.title {
 		font-size: 36px;
@@ -48,6 +48,14 @@
 	i.date {
 		color: grey;
 		font-size: 16px;
+		font-weight: lighter;
+	}
+	p.comment_author {
+		font-size: 20px;
+		font-weight: bold;
+	}
+	p.comment {
+		font-size: 18px;
 	}
 	a.end-button {
 		color: white;
@@ -77,15 +85,19 @@
 					<p class="text-center title">{{_pjango_param_posts_title}}</p>
 				</div>
 				<div class="col-md-12 column height-10">
-					<div class="col-md-4 column text-center pull-left">
+					<div class="col-md-3 column text-center pull-left">
 						<i class="fa fa-fw fa-calendar date"></i>
 						<i class="date">发布于: {{_pjango_param_posts_date}}</i>
 					</div>
-					<div class="col-md-4 column text-center pull-left">
+					<div class="col-md-3 column text-center pull-left">
 						<i class="fa fa-fw fa-coffee date"></i>
 						<i class="date">阅读: {{_pjango_param_posts_read}}</i>
 					</div>
-					<div class="col-md-4 column text-center pull-left">
+					<div class="col-md-3 column text-center pull-left">
+						<i class="fa fa-fw fa-comment date"></i>
+						<i class="date">评论: {{_pjango_param_posts_comment}}</i>
+					</div>
+					<div class="col-md-3 column text-center pull-left">
 						<i class="fa fa-fw fa-heart date"></i>
 						<i class="date">喜欢: {{_pjango_param_posts_love}}</i>
 					</div>
@@ -111,7 +123,7 @@
 			</div>
 			
 			<div class="text-gap"></div>
-			<div class="col-md-12 column end">
+			<div class="col-md-12 column">
 				<hr />
 				<div class="col-md-11 column col-center">
 					<p class="end"><i class="fa fa-fw fa-angle-right"></i>Thanks for reading.</p>
@@ -119,16 +131,43 @@
 				</div>
 				<hr />
 				<div class="col-md-11 column col-center">
-					<div class="col-md-3 column col-center">
+					<div class="col-md-3 column col-center" style="min-width: 240px">
 						<a class="button button-block button-rounded button-caution end-button" onclick="love({{_pjango_param_posts_pid}})">喜欢这篇博文</a>
 					</div>
 				</div>
 				<hr />
+				<div class="col-md-12 column archive-cell">
+{{#_pjango_param_table_comment}}
+					<p class="comment_author">{{_pjango_param_table_PostsComment_NAME}}</p>
+					<p class="comment">{{_pjango_param_table_PostsComment_COMMENT}}</p>
+					<i class="date">发表于 {{_pjango_param_table_PostsComment_DATE}} </i>
+					<hr />
+{{/_pjango_param_table_comment}}
+				</div>
+				<div class="col-md-12 column">
+					<div class="col-md-6 column">
+					    <label for="name">昵称</label>
+					    <input type="text" class="form-control" id="name" placeholder="请输入名称">
+					</div>
+					<div class="col-md-6 column">
+					    <label for="email">邮箱</label>
+					    <input type="text" class="form-control" id="email" placeholder="请输入邮箱">
+					</div>
+					<div class="col-md-12 column">
+					    <label for="name">评论</label>
+					    <textarea class="form-control" rows="4" id="comment" placeholder="请输入评论"></textarea>
+					</div>
+					<div class="col-md-12 column" style="height: 20px;"></div>
+					<div class="col-md-12 column">
+						<a class="button button-block button-rounded button-primary end-button" onclick="comment()">发表评论</a>
+					<hr />
+					</div>
+				</div>
 				<div class="col-md-12 column">
 					<a class="button button-block button-rounded button-primary end-button" onclick="toTop()">回到顶部</a>
-				</div>				
+				</div>
 			</div>
-
+			<div class="col-md-12 column end"></div>
 		</div>
 		<div class="col-md-12 column paper-end-gap"></div>
 
@@ -136,7 +175,17 @@
 	
 {{{_pjango_template_footer_bar}}}
 </div>
-
+<script>
+	function comment() {
+		var pid = {{_pjango_param_posts_pid}};
+		var name = $("#name").val();
+		var email = $("#email").val();
+		var comment = $("#comment").val();
+		_comment(pid, name, email, comment, function() {
+			location.reload();
+		});
+	}
+</script>
 </body>
 </html>
 

@@ -34,11 +34,11 @@ func postsLoveHandle() -> PCUrlHandle {
             pjangoHttpResponse("今天您已经赞过这篇博文啦！")(req, res)
             return
         }
+        posts.love.intValue += 1
         guard PostsModel.updateObject(posts) else {
             pjangoHttpResponse("居然出错了！")(req, res)
             return
         }
-        posts.love.intValue += 1
         postsLoveDict.insert(key)
         pjangoHttpResponse("已经收到你的赞啦！")(req, res)
         EventHooks.hookPostsLove(req: req, pid: pid)

@@ -52,15 +52,40 @@ function getMsgToChangeHTML(url, id) {
 	});
 } 
 
-function love(pid) {
+function _posts_love(pid) {
 	getMsgToDo("/api/love?pid=" + pid, function(text) {
 		alert(text)
 	})
 }
 
-function _comment(pid, name, email, comment, v_id, v_a, onSuccess, onFailed) {
+function _corpus_love(pid) {
+	getMsgToDo("/api/love?cpid=" + pid, function(text) {
+		alert(text)
+	})
+}
+
+function _posts_comment(pid, name, email, comment, v_id, v_a, onSuccess, onFailed) {
 	var obj = {
 		pid: pid,
+		name: name,
+		email: email,
+		comment: comment,
+		v_id: v_id,
+		v_a: v_a,
+	};
+	postMsgToDo("/api/comment", JSON.stringify(obj), function(text) {
+		alert(text)
+		if (text == "发表成功！") {
+			onSuccess();
+		} else {
+			onFailed();
+		}
+	})
+}
+
+function _corpus_comment(cpid, name, email, comment, v_id, v_a, onSuccess, onFailed) {
+	var obj = {
+		cpid: cpid,
 		name: name,
 		email: email,
 		comment: comment,

@@ -19,7 +19,7 @@ class AppDelegate: PjangoDelegate {
         // Pjango
         
         #if os(macOS)
-            PJANGO_WORKSPACE_PATH = "/Users/Enum/Developer/macOS/Calatrava/Workspace"
+            PJANGO_WORKSPACE_PATH = "/Users/Enum/Developer/Calatrava/Workspace"
         #else
             PJANGO_WORKSPACE_PATH = "/home/uftp/Calatrava-Blog/Workspace"
         #endif
@@ -68,10 +68,20 @@ class AppDelegate: PjangoDelegate {
                 pjangoUrl("posts/{pid}", name: "posts", handle: PostsView.asHandle()),
                 pjangoUrl("search", name: "search", handle: PostsSearchView.asHandle()),
                 
-                pjangoUrl("api/love", name: "api.love", handle: postsLoveHandle),
-                pjangoUrl("api/comment", name: "api.comment", handle: postsCommentHandle),
+                pjangoUrl("api/love", name: "api.love@posts", handle: postsLoveHandle),
+                pjangoUrl("api/comment", name: "api.comment@posts", handle: postsCommentHandle),
                 
                 pjangoUrl("api/verification", name: "api.verification@posts", handle: verificationHandle),
+            ],
+            
+            "corpus.\(WEBSITE_HOST)": [
+                pjangoUrl("list", name: "list", handle: CorpusListView.asHandle()),
+                pjangoUrl("list/{cid}", name: "corpus.list", handle: CorpusPostsListView.asHandle()),
+                pjangoUrl("corpus/{cpid}", name: "corpus.posts", handle: CorpusPostsView.asHandle()),
+                
+                pjangoUrl("api/love", name: "api.love@corpus", handle: corpusPostsLoveHandle),
+                pjangoUrl("api/comment", name: "api.comment@corpus", handle: corpusPostsCommentHandle),
+                pjangoUrl("api/verification", name: "api.verification@corpus", handle: verificationHandle),
             ],
             
             "project.\(WEBSITE_HOST)": [
@@ -113,6 +123,10 @@ class AppDelegate: PjangoDelegate {
             MessageModel.meta,
             
             VisitStatisticsModel.meta,
+            
+            CorpusModel.meta,
+            CorpusPostsModel.meta,
+            CorpusPostsCommentModel.meta,
         ]
     }
 

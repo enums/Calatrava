@@ -17,6 +17,11 @@ enum VisitStatisticsEventType: String {
     case readPosts = "READ_POSTS"
     case lovePosts = "LOVE_POSTS"
     case commentPosts = "COMMENT_POSTS"
+    case listCorpus = "LIST_CORPUS"
+    case listCorpusPosts = "LIST_CORPUS_POSTS"
+    case readCorpusPosts = "READ_CORPUS_POSTS"
+    case loveCorpusPosts = "LOVE_CORPUS_POSTS"
+    case commentCorpusPosts = "COMMENT_CORPUS_POSTS"
     case leaveMessage = "LEAVE_MESSAGE"
 }
 

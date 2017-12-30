@@ -2,7 +2,7 @@
 <head>
 	<meta charset="utf-8"> 
 	<meta name="viewport" content="user-scalable=no, width=720px, height=1280px"/>
-	<title>博文列表 | {{_pjango_param_title_message}}</title>
+	<title>{{_pjango_param_list_title}} | {{_pjango_param_title_message}}</title>
 	<link rel="stylesheet" href="/css/bootstrap.min.css">  
 	<link rel="stylesheet" href="/css/font-awesome.min.css"> 
 	<link rel="stylesheet" href="/css/buttons.css">  
@@ -84,7 +84,7 @@
 					<div class="col-md-12 column corner-window shadow">
 						<div class="gap"></div>
 						<div class="text-center">
-							<button class="button button-primary button-plain button-rounded button-border button-primary title">寄语</button>
+							<button class="button button-primary button-plain button-rounded button-border button-primary title">简介</button>
 						</div>
 						<div class="gap"></div>
 						<p class="title">{{{_pjango_param_message}}}</p>
@@ -95,81 +95,49 @@
 					<div class="col-md-12 column corner-window shadow">
 						<div class="gap"></div>
 						<div class="text-center">
-							<button class="button button-primary button-plain button-rounded button-border button-primary search" onclick="location='http://{{_pjango_url_posts_search}}'"><i class="fa fa-fw fa-search"></i>搜索博文</button>
-						</div>
-						<div class="gap"></div>
-					</div>
-					<div class="col-md-12 column gap"></div>
-				</div>
-				<div class="col-md-12 column">
-					<div class="col-md-12 column corner-window shadow">
-						<div class="gap"></div>
-						<div class="text-center">
-							<button class="button button-primary button-plain button-rounded button-border button-primary title">标签</button>
-						</div>
-						<div class="gap"></div>
-						<p class="title">
-							{{#_pjango_param_all_tags}}
-							<a href="/list?tag={{{_pjango_param_table_PostsTag_TAG}}}" class="label {{{_pjango_param_table_PostsTag_LABEL}}} tag">{{{_pjango_param_table_PostsTag_TAG}}}</a>
-							{{/_pjango_param_all_tags}}
-						</p>
-					</div>
-					<div class="col-md-12 column gap"></div>
-				</div>
-				<div class="col-md-12 column">
-					<div class="col-md-12 column corner-window shadow">
-						<div class="gap"></div>
-						<div class="text-center">
 							<button class="button button-primary button-plain button-rounded button-border button-primary title">归档</button>
 						</div>
 						<div class="gap"></div>
-{{#_pjango_param_table_posts}}
+{{#_pjango_param_table_corpus}}
 					<div class="col-md-12 column archive-cell">
-						<p class="time">{{_pjango_param_table_Posts_DATE}}</p>
-						<a class="text" href="http://{{{_pjango_url_posts_list}}}/posts/{{{_pjango_param_table_Posts_PID}}}">{{_pjango_param_table_Posts_TITLE}}</a>
+						<p class="time">{{_pjango_param_table_CorpusPosts_DATE}}</p>
+						<a class="text" href="http://{{{_pjango_url_corpus_posts_list}}}/posts/{{{_pjango_param_table_Posts_CID}}}">{{_pjango_param_table_CorpusPosts_TITLE}}</a>
 					</div>
-{{/_pjango_param_table_posts}}
+{{/_pjango_param_table_corpus}}
 
 					</div>
 				</div>
 			</div>
 			<div class="col-md-8 column">
 				<div class="gap"></div>
-{{#_pjango_param_table_posts}}
-				<div class="col-md-12 column" style="height: 180px;">
-					<div class="col-md-12 column height-90 corner-window shadow cell" onclick="location='http://{{{_pjango_url_posts_list}}}/posts/{{{_pjango_param_table_Posts_PID}}}'">
-						<div class="height-10"></div>
-						<div class="col-md-12 column height-30">
-							<p class="title">{{_pjango_param_table_Posts_TITLE}}</p>
-						</div>
-						<div class="col-md-12 column height-40">
-							<p class="title">
-							{{#_pjango_param_table_Posts_TAGHTML}}
-							<a href="/list?tag={{{_pjango_param_table_PostsTag_TAG}}}" class="label {{{_pjango_param_table_PostsTag_LABEL}}} tag">{{{_pjango_param_table_PostsTag_TAG}}}</a>
-							{{/_pjango_param_table_Posts_TAGHTML}}
-							</p>
+{{#_pjango_param_table_corpus}}
+				<div class="col-md-12 column" style="height: 140px;">
+					<div class="col-md-12 column height-90 corner-window shadow cell" onclick="location='http://{{{_pjango_url_corpus_posts_list}}}/corpus/{{{_pjango_param_table_CorpusPosts_CPID}}}'">
+						<div class="height-15"></div>
+						<div class="col-md-12 column height-60">
+							<p class="title">{{_pjango_param_table_CorpusPosts_TITLE}}</p>
 						</div>
 						<div class="col-md-5 column pull-left">
 							<i class="fa fa-fw fa-calendar text"></i>
-							<i class="text">发布于: {{_pjango_param_table_Posts_DATE}}</i>
+							<i class="text">发布于: {{_pjango_param_table_CorpusPosts_DATE}}</i>
 						</div>
 						<div class="col-md-3 column pull-left">
 							<i class="fa fa-fw fa-coffee text"></i>
-							<i class="text">阅读: {{_pjango_param_table_Posts_READ}}</i>
+							<i class="text">阅读: {{_pjango_param_table_CorpusPosts_READ}}</i>
 					
 						</div>
 						<div class="col-md-2 column pull-left">
 							<i class="fa fa-fw fa-comment text"></i>
-							<i class="text">评论: {{_pjango_param_table_Posts_COMMENT}}</i>
+							<i class="text">评论: {{_pjango_param_table_CorpusPosts_COMMENT}}</i>
 						</div>
 						<div class="col-md-2 column pull-left">
 							<i class="fa fa-fw fa-heart text"></i>
-							<i class="text">喜欢: {{_pjango_param_table_Posts_LOVE}}</i>
+							<i class="text">喜欢: {{_pjango_param_table_CorpusPosts_LOVE}}</i>
 						</div>
 		
 					</div>
 				</div>
-{{/_pjango_param_table_posts}}
+{{/_pjango_param_table_corpus}}
 
 			</div>
 		</div>

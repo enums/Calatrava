@@ -26,6 +26,15 @@ var postsCommentLastTimeDict = Dictionary<String, TimeInterval>.init()
 //pid@ip
 var postsCommentDailyDict = Dictionary<String, Int>.init()
 
+
+//cpid@ip
+var corpusPostsLoveDict = Set<String>.init()
+
+//cpid@ip
+var corpusPostsCommentLastTimeDict = Dictionary<String, TimeInterval>.init()
+//cpid@ip
+var corpusPostsCommentDailyDict = Dictionary<String, Int>.init()
+
 //pid@ip
 var messageLastTimeDict = Dictionary<String, TimeInterval>.init()
 //pid@ip

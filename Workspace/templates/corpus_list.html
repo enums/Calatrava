@@ -2,7 +2,7 @@
 <head>
 	<meta charset="utf-8"> 
 	<meta name="viewport" content="user-scalable=no, width=720px, height=1280px"/>
-	<title>我的项目列表 | {{_pjango_param_title_message}}</title>
+	<title>我的文集列表 | {{_pjango_param_title_message}}</title>
 	<link rel="stylesheet" href="/css/bootstrap.min.css">  
 	<link rel="stylesheet" href="/css/font-awesome.min.css"> 
 	<link rel="stylesheet" href="/css/buttons.css">  
@@ -78,36 +78,34 @@
 			<div class="height-10"></div>
 			<div class="col-md-4 column col-center height-100 corner-window shadow text-center">
 				<div class="height-30"></div>
-				<p class="title">我的项目列表</p>
+				<p class="title">我的文集列表</p>
 			</div>
 		</div>
 		<div class="col-md-8 col-md-offset-2 column">
 			<div class="col-md-12 column gap"></div>
-{{#_pjango_param_table_project}}
+{{#_pjango_param_table_corpus}}
 			<div class="col-md-12 column">
-				<div class="col-md-12 column corner-window shadow cell" onclick="window.open('{{{_pjango_param_table_Project_URL}}}')">
+				<div class="col-md-12 column corner-window shadow cell" onclick="location='http://corpus.{{{_pjango_param_host}}}/list/{{{_pjango_param_table_Corpus_CID}}}'">
 					<div class="col-md-12 column gap"></div>
 					<div class="col-md-12 column">
-						<p class="big-title"><i class="fa fa-fw fa-github"></i>{{_pjango_param_table_Project_TITLE}}</p>
-						<p class="sub-title">{{_pjango_param_table_Project_SUBTITLE}}</p>
-						<p class="title">
-							{{#_pjango_param_table_Project_TAGHTML}}
-							<a class="label {{{_pjango_param_table_PostsTag_LABEL}}} tag">{{{_pjango_param_table_PostsTag_TAG}}}</a>
-							{{/_pjango_param_table_Project_TAGHTML}}
-						</p>
-						<p class="text">{{_pjango_param_table_Project_MEMO}}</p>
+						<p class="big-title"><i class="fa fa-fw fa-book"></i> {{_pjango_param_table_Corpus_TITLE}}</p>
+						<p class="text">{{_pjango_param_table_Corpus_MEMO}}</p>
 					</div>
 					<div class="col-md-12 column gap"></div>
-					<div class="col-md-12 column">
+					<div class="col-md-6 column">
 						<i class="fa fa-fw fa-calendar text"></i>
-						<i class="text">发布于: {{_pjango_param_table_Project_DATE}}</i>
+						<i class="text">最后更新于: {{_pjango_param_table_Corpus_UPDATEDATE}}</i>
+					</div>
+					<div class="col-md-6 column">
+						<i class="fa fa-fw fa-calendar text"></i>
+						<i class="text">创建于: {{_pjango_param_table_Corpus_DATE}}</i>
 					</div>
 					<div class="col-md-12 column" style="height: 16px"></div>
 	
 				</div>
 			</div>
 			<div class="col-md-12 column gap"></div>
-{{/_pjango_param_table_project}}
+{{/_pjango_param_table_corpus}}
 
 		</div>
 		<div class="col-md-12 column" style="height: 100px;">

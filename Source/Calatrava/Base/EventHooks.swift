@@ -47,6 +47,27 @@ class EventHooks {
         StatisticsManager.statisticsEvent(eventType: .commentPosts, param: "\(pid)", req: req)
     }
     
+    static func hookCorpusList(req: HTTPRequest?) {
+        addCountForKey(.counterPostsList)
+        StatisticsManager.statisticsEvent(eventType: .listCorpus, req: req)
+    }
+    
+    static func hookCorpusPostsList(req: HTTPRequest?, cid: Int) {
+        StatisticsManager.statisticsEvent(eventType: .listCorpusPosts, param: "\(cid)", req: req)
+    }
+    
+    static func hookCorpusPostsRead(req: HTTPRequest?, cpid: Int) {
+        StatisticsManager.statisticsEvent(eventType: .readCorpusPosts, param: "\(cpid)", req: req)
+    }
+
+    static func hookCorpusPostsLove(req: HTTPRequest?, cpid: Int) {
+        StatisticsManager.statisticsEvent(eventType: .lovePosts, param: "\(cpid)", req: req)
+    }
+    
+    static func hookCorpusPostsComment(req: HTTPRequest?, cpid: Int) {
+        StatisticsManager.statisticsEvent(eventType: .commentPosts, param: "\(cpid)", req: req)
+    }
+    
     static func hookLeaveMessage(req: HTTPRequest?) {
         StatisticsManager.statisticsEvent(eventType: .leaveMessage, req: req)
     }

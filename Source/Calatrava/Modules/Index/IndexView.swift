@@ -31,6 +31,7 @@ class IndexView: PCDetailView {
             
             "_pjango_url_posts_posts_list": pjangoUrlReverse(host: "posts.\(WEBSITE_HOST)", name: "list")!,
             "_pjango_url_posts_project_list": pjangoUrlReverse(host: "project.\(WEBSITE_HOST)", name: "list")!,
+            "_pjango_url_posts_corpus_list": pjangoUrlReverse(host: "corpus.\(WEBSITE_HOST)", name: "list")!,
             "_pjango_url_posts_about": pjangoUrlReverse(host: "\(WEBSITE_HOST)", name: "about")!,
         ]
     }

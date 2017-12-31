@@ -98,6 +98,7 @@ func postsCommentHandle() -> PCUrlHandle {
         commentModel.pid.intValue = pid
         commentModel.floor.intValue = tmpPosts.commentsCount + 1
         commentModel.refer_floor.intValue = refer
+        commentModel.admin.intValue = 0
         commentModel.date.strValue = date
         commentModel.name.strValue = name
         commentModel.email.strValue = email

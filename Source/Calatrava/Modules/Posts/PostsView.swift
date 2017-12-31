@@ -46,7 +46,9 @@ class PostsView: PCListView {
         let hasRefer = model.refer_floor.intValue > 0
         if hasRefer, let refer = (PostsCommentModel.queryObjects() as? [PostsCommentModel])?.filter({ $0.pid.intValue == model.pid.intValue && $0.floor.intValue == model.refer_floor.intValue }).first {
             var fields: [String : Any] =  [
+                "_pjango_param_table_PostsComment_ISADMIN": model.admin.intValue == 1 ? 1 : 0,
                 "_pjango_param_table_PostsComment_HAVE_REFER": 1,
+                "_pjango_param_table_PostsComment_REFER_ISADMIN": refer.admin.intValue == 1 ? 1 : 0,
                 "_pjango_param_table_PostsComment_REFER_NAME": refer.name.strValue,
                 "_pjango_param_table_PostsComment_REFER_DATE": refer.date.strValue,
             ]
@@ -58,7 +60,9 @@ class PostsView: PCListView {
             return fields
         } else {
             return [
+                "_pjango_param_table_PostsComment_ISADMIN": model.admin.intValue == 1 ? 1 : 0,
                 "_pjango_param_table_PostsComment_HAVE_REFER": 0,
+                "_pjango_param_table_PostsComment_REFER_ISADMIN": 0,
             ]
         }
     }

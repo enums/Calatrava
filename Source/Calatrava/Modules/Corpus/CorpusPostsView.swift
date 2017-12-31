@@ -45,7 +45,9 @@ class CorpusPostsView: PCListView {
         let hasRefer = model.refer_floor.intValue > 0
         if hasRefer, let refer = (CorpusPostsCommentModel.queryObjects() as? [CorpusPostsCommentModel])?.filter({ $0.cpid.intValue == model.cpid.intValue && $0.floor.intValue == model.refer_floor.intValue }).first {
             var fields: [String : Any] =  [
+                "_pjango_param_table_CorpusPostsComment_ISADMIN": model.admin.intValue == 1 ? 1 : 0,
                 "_pjango_param_table_CorpusPostsComment_HAVE_REFER": 1,
+                "_pjango_param_table_CorpusPostsComment_REFER_ISADMIN": refer.admin.intValue == 1 ? 1 : 0,
                 "_pjango_param_table_CorpusPostsComment_REFER_NAME": refer.name.strValue,
                 "_pjango_param_table_CorpusPostsComment_REFER_DATE": refer.date.strValue,
                 ]
@@ -57,7 +59,9 @@ class CorpusPostsView: PCListView {
             return fields
         } else {
             return [
+                "_pjango_param_table_CorpusPostsComment_ISADMIN": model.admin.intValue == 1 ? 1 : 0,
                 "_pjango_param_table_CorpusPostsComment_HAVE_REFER": 0,
+                "_pjango_param_table_CorpusPostsComment_REFER_ISADMIN": 0,
             ]
         }
     }

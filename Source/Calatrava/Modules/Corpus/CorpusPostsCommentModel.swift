@@ -18,6 +18,7 @@ class CorpusPostsCommentModel: PCModel {
     var cpid = PCDataBaseField.init(name: "CPID", type: .int)
     var floor = PCDataBaseField.init(name: "FLOOR", type: .int)
     var refer_floor = PCDataBaseField.init(name: "REFER_FLOOR", type: .int)
+    var admin = PCDataBaseField.init(name: "ADMIN", type: .int)
     var date = PCDataBaseField.init(name: "DATE", type: .string, length: 20)
     var name = PCDataBaseField.init(name: "NAME", type: .string, length: 64)
     var email = PCDataBaseField.init(name: "EMAIL", type: .string, length: 64)
@@ -26,7 +27,7 @@ class CorpusPostsCommentModel: PCModel {
     
     override func registerFields() -> [PCDataBaseField] {
         return [
-            cpcid, cpid, floor, refer_floor, date, name, email, comment, fromIp
+            cpcid, cpid, floor, refer_floor, admin, date, name, email, comment, fromIp
         ]
     }
     

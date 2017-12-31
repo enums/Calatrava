@@ -150,14 +150,14 @@
 				<div class="col-md-12 column archive-cell">
 {{#_pjango_param_table_comment}}
 					<i class="date pull-right" id="comment_floor_{{{_pjango_param_table_PostsComment_FLOOR}}}">{{_pjango_param_table_PostsComment_FLOOR}} 楼</i>
-					<p class="comment_author">{{_pjango_param_table_PostsComment_NAME}}</p>
+					<p class="comment_author">{{#_pjango_param_table_PostsComment_ISADMIN}}<i class="fa fa-fw fa-star" style="color: red"></i>{{/_pjango_param_table_PostsComment_ISADMIN}}{{_pjango_param_table_PostsComment_NAME}}</p>
 {{#_pjango_param_table_PostsComment_HAVE_REFER}}
 					<p class="comment_refer">
 						<div class="col-md-12 comment_refer corner-window">
 							<i class="date">引用了以下评论：</i>
 							<div class="col-md-12 comment_refer_comment corner-window" onclick="location='#comment_floor_{{{_pjango_param_table_PostsComment_REFER_FLOOR}}}'">
 								<i class="date pull-right">{{_pjango_param_table_PostsComment_REFER_FLOOR}} 楼</i>
-								<p class="comment_author">{{_pjango_param_table_PostsComment_REFER_NAME}}</p>
+								<p class="comment_author">{{#_pjango_param_table_PostsComment_REFER_ISADMIN}}<i class="fa fa-fw fa-star" style="color: red"></i>{{/_pjango_param_table_PostsComment_REFER_ISADMIN}}{{_pjango_param_table_PostsComment_REFER_NAME}}</p>
 								<p class="comment">{{_pjango_param_table_PostsComment_REFER_COMMENT}}</p>
 								<i class="date">发表于 {{_pjango_param_table_PostsComment_REFER_DATE}} </i>
 							</div>

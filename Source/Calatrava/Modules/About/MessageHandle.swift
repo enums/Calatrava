@@ -70,6 +70,8 @@ func messageHandle() -> PCUrlHandle {
         messageModel.mid.strValue = "\(name)#\(date)@\(ip)"
         messageModel.date.strValue = date
         messageModel.name.strValue = name
+        messageModel.floor.intValue = (MessageModel.queryObjects()?.count ?? 0) + 1
+        messageModel.admin.intValue = 0
         messageModel.email.strValue = email
         messageModel.comment.strValue = comment
         messageModel.fromIp.strValue = ip;

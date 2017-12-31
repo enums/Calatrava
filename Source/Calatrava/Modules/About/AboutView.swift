@@ -15,6 +15,16 @@ class AboutView: PCListView {
         return "about.html"
     }
     
+    override func listUserField(inList list: String, forModel model: PCModel) -> PCViewParam? {
+        guard let model = model as? MessageModel else {
+            return nil
+        }
+        return [
+            "_pjango_param_table_Message_ISADMIN": model.admin.intValue == 1 ? 1 : 0
+            
+        ]
+    }
+    
     override var listObjectSets: [String : [PCModel]]? {
         guard let history = PostsHistoryModel.queryObjects() else {
             return nil

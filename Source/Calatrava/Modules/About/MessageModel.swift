@@ -15,6 +15,8 @@ class MessageModel: PCModel {
     }
     
     var mid = PCDataBaseField.init(name: "MID", type: .string, length: 128)
+    var floor = PCDataBaseField.init(name: "FLOOR", type: .int)
+    var admin = PCDataBaseField.init(name: "ADMIN", type: .int)
     var date = PCDataBaseField.init(name: "DATE", type: .string, length: 20)
     var name = PCDataBaseField.init(name: "NAME", type: .string, length: 64)
     var email = PCDataBaseField.init(name: "EMAIL", type: .string, length: 64)
@@ -23,7 +25,7 @@ class MessageModel: PCModel {
     
     override func registerFields() -> [PCDataBaseField] {
         return [
-            mid, date, name, email, comment, fromIp
+            mid, floor, admin, date, name, email, comment, fromIp
         ]
     }
     

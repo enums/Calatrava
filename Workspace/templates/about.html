@@ -221,7 +221,8 @@
 							<div class="col-md-12 column">
 								<hr />
 {{#_pjango_param_table_message}}
-								<p class="comment_author">{{_pjango_param_table_Message_NAME}}</p>
+								<i class="date pull-right">{{_pjango_param_table_Message_FLOOR}} 楼</i>
+								<p class="comment_author">{{#_pjango_param_table_Message_ISADMIN}}<i class="fa fa-fw fa-star" style="color: red"></i>{{/_pjango_param_table_Message_ISADMIN}}{{_pjango_param_table_Message_NAME}}</p>
 								<p class="comment">{{_pjango_param_table_Message_COMMENT}}</p>
 								<i class="date">发表于 {{_pjango_param_table_Message_DATE}} </i>
 								<hr />
@@ -235,11 +236,12 @@
 			</div>
 
 		</div>
-		<div class="col-md-12 column height-10">
-			<div class="height-10"></div>
-			<div class="col-md-6 column col-center height-60 corner-window shadow text-center">
-			<div class="height-20"></div>
-					<a class="button button-plain button-border button-block end-button" onclick="toTop()">回到顶部</a>
+		<div class="col-md-12 column" style="height: 100px;">
+			<div style="height: 20px;"></div>
+			<div class="col-md-6 column col-center corner-window shadow text-center">
+				<div style="height: 10px;"></div>
+				<a class="button button-plain button-border button-block end-button" onclick="toTop()">回到顶部</a>
+				<div style="height: 10px;"></div>
 			</div>
 		</div>
 

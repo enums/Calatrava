@@ -1,5 +1,5 @@
 //
-//  postsCommentHandle.swift
+//  PostsCommentHandle.swift
 //  Calatrava-Blog
 //
 //  Created by 郑宇琦 on 2017/12/20.
@@ -11,8 +11,26 @@ import SwiftyJSON
 
 func postsCommentHandle() -> PCUrlHandle {
     
+    func processRefer(comment: inout String, posts: PostsModel) -> Int {
+        guard let begin = comment.range(of: "!*<引用 ")?.upperBound else {
+            return 0
+        }
+        guard let end = comment.range(of: " 楼>*!")?.lowerBound, let endUpper = comment.range(of: " 楼>*!")?.upperBound else {
+            return 0
+        }
+        if let floor = Int(comment.substring(with: begin..<end)), floor <= posts.commentsCount {
+            comment = comment.substring(from: endUpper)
+            if comment.characters.first == "\n" {
+                comment = String(comment.characters.dropFirst())
+            }
+            return floor
+        } else {
+            return 0
+        }
+    }
+    
     return pjangoHttpResponse { req, res in
-        guard let postsList = PostsModel.queryObjects() else {
+        guard let postsList = PostsModel.queryObjects() as? [PostsModel] else {
             pjangoHttpResponse("居然出错了！")(req, res)
             return
         }
@@ -33,15 +51,11 @@ func postsCommentHandle() -> PCUrlHandle {
             pjangoHttpResponse("人机校验失败啦！")(req, res)
             return
         }
-        guard let pid = json["pid"].int, let name = json["name"].string, let email = json["email"].string, let comment = json["comment"].string else {
+        guard let pid = json["pid"].int, let name = json["name"].string, let email = json["email"].string, var comment = json["comment"].string else {
             pjangoHttpResponse("请把内容填写完整哦！")(req, res)
             return
         }
-        let tmpPosts = postsList.filter {
-            let posts = $0 as! PostsModel
-            return posts.pid.intValue == pid
-            }.first as? PostsModel
-        guard tmpPosts != nil else {
+        guard let tmpPosts = postsList.filter({ $0.pid.intValue == pid }).first else {
             pjangoHttpResponse("目标博文不存在！")(req, res)
             return
         }
@@ -53,6 +67,7 @@ func postsCommentHandle() -> PCUrlHandle {
             pjangoHttpResponse("邮箱地址不合法！")(req, res)
             return
         }
+        let refer = processRefer(comment: &comment, posts: tmpPosts)
         guard comment.characters.count > 2 else {
             pjangoHttpResponse("评论太短啦！")(req, res)
             return
@@ -81,6 +96,8 @@ func postsCommentHandle() -> PCUrlHandle {
         let commentModel = PostsCommentModel.init()
         commentModel.pcid.strValue = "\(pid)_\(name)#\(date)@\(ip)"
         commentModel.pid.intValue = pid
+        commentModel.floor.intValue = tmpPosts.commentsCount + 1
+        commentModel.refer_floor.intValue = refer
         commentModel.date.strValue = date
         commentModel.name.strValue = name
         commentModel.email.strValue = email
@@ -93,5 +110,4 @@ func postsCommentHandle() -> PCUrlHandle {
         pjangoHttpResponse("发表成功！")(req, res)
         EventHooks.hookPostsComment(req: req, pid: pid)
     }
-    
 }

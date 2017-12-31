@@ -11,8 +11,26 @@ import SwiftyJSON
 
 func corpusPostsCommentHandle() -> PCUrlHandle {
     
+    func processRefer(comment: inout String, posts: CorpusPostsModel) -> Int {
+        guard let begin = comment.range(of: "!*<引用 ")?.upperBound else {
+            return 0
+        }
+        guard let end = comment.range(of: " 楼>*!")?.lowerBound, let endUpper = comment.range(of: " 楼>*!")?.upperBound else {
+            return 0
+        }
+        if let floor = Int(comment.substring(with: begin..<end)), floor <= posts.commentsCount {
+            comment = comment.substring(from: endUpper)
+            if comment.characters.first == "\n" {
+                comment = String(comment.characters.dropFirst())
+            }
+            return floor
+        } else {
+            return 0
+        }
+    }
+    
     return pjangoHttpResponse { req, res in
-        guard let postsList = CorpusPostsModel.queryObjects() else {
+        guard let postsList = CorpusPostsModel.queryObjects() as? [CorpusPostsModel] else {
             pjangoHttpResponse("居然出错了！")(req, res)
             return
         }
@@ -33,15 +51,11 @@ func corpusPostsCommentHandle() -> PCUrlHandle {
             pjangoHttpResponse("人机校验失败啦！")(req, res)
             return
         }
-        guard let cpid = json["cpid"].int, let name = json["name"].string, let email = json["email"].string, let comment = json["comment"].string else {
+        guard let cpid = json["cpid"].int, let name = json["name"].string, let email = json["email"].string, var comment = json["comment"].string else {
             pjangoHttpResponse("请把内容填写完整哦！")(req, res)
             return
         }
-        let tmpPosts = postsList.filter {
-            let posts = $0 as! CorpusPostsModel
-            return posts.cpid.intValue == cpid
-            }.first as? CorpusPostsModel
-        guard tmpPosts != nil else {
+        guard let tmpPosts = postsList.filter({ $0.cpid.intValue == cpid }).first else {
             pjangoHttpResponse("目标博文不存在！")(req, res)
             return
         }
@@ -53,6 +67,7 @@ func corpusPostsCommentHandle() -> PCUrlHandle {
             pjangoHttpResponse("邮箱地址不合法！")(req, res)
             return
         }
+        let refer = processRefer(comment: &comment, posts: tmpPosts)
         guard comment.characters.count > 2 else {
             pjangoHttpResponse("评论太短啦！")(req, res)
             return
@@ -81,6 +96,8 @@ func corpusPostsCommentHandle() -> PCUrlHandle {
         let commentModel = CorpusPostsCommentModel.init()
         commentModel.cpcid.strValue = "\(cpid)_\(name)#\(date)@\(ip)"
         commentModel.cpid.intValue = cpid
+        commentModel.floor.intValue = tmpPosts.commentsCount + 1
+        commentModel.refer_floor.intValue = refer
         commentModel.date.strValue = date
         commentModel.name.strValue = name
         commentModel.email.strValue = email

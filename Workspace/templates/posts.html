@@ -33,6 +33,17 @@
 	div.author {
 		height: 240px;
 	}
+	div.comment_refer {
+		background-color: #efefef;
+	}
+	div.comment_refer_comment {
+		cursor: hand;
+		background-color: #e8e8e8;
+		width: 100%;
+	}
+	div.comment_refer_comment:hover {
+		background-color: #e1e1e1;
+	}
 	div.end {
 		height: 40px;
 	}
@@ -138,13 +149,29 @@
 				<hr />
 				<div class="col-md-12 column archive-cell">
 {{#_pjango_param_table_comment}}
+					<i class="date pull-right" id="comment_floor_{{{_pjango_param_table_PostsComment_FLOOR}}}">{{_pjango_param_table_PostsComment_FLOOR}} 楼</i>
 					<p class="comment_author">{{_pjango_param_table_PostsComment_NAME}}</p>
+{{#_pjango_param_table_PostsComment_HAVE_REFER}}
+					<p class="comment_refer">
+						<div class="col-md-12 comment_refer corner-window">
+							<i class="date">引用了以下评论：</i>
+							<div class="col-md-12 comment_refer_comment corner-window" onclick="location='#comment_floor_{{{_pjango_param_table_PostsComment_REFER_FLOOR}}}'">
+								<i class="date pull-right">{{_pjango_param_table_PostsComment_REFER_FLOOR}} 楼</i>
+								<p class="comment_author">{{_pjango_param_table_PostsComment_REFER_NAME}}</p>
+								<p class="comment">{{_pjango_param_table_PostsComment_REFER_COMMENT}}</p>
+								<i class="date">发表于 {{_pjango_param_table_PostsComment_REFER_DATE}} </i>
+							</div>
+							<div class="col-md-12" style="height: 20px"></div>
+						</div>
+					</p>
+{{/_pjango_param_table_PostsComment_HAVE_REFER}}
 					<p class="comment">{{_pjango_param_table_PostsComment_COMMENT}}</p>
 					<i class="date">发表于 {{_pjango_param_table_PostsComment_DATE}} </i>
+					<a class="button button-rounded button-small button-primary pull-right" onclick="setReferFloor({{{_pjango_param_table_PostsComment_FLOOR}}})">引用</a>
 					<hr />
 {{/_pjango_param_table_comment}}
 				</div>
-				<div class="col-md-12 column">
+				<div class="col-md-12 column" name="comment">
 					<div class="col-md-6 column">
 					    <label for="name">昵称</label>
 					    <input type="text" class="form-control" id="name" placeholder="请输入名称">
@@ -206,6 +233,10 @@
 			$("#verification_question").text(strs[0]);
 			v_id = strs[1];
 		})
+	}
+	
+	function setReferFloor(floor) {
+		_setReferFloor(floor);
 	}
 	
 	getVerification();

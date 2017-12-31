@@ -39,6 +39,30 @@ class PostsView: PCListView {
         return pjangoHttpRedirect(name: "error.404")
     }
     
+    override func listUserField(inList list: String, forModel model: PCModel) -> PCViewParam? {
+        guard let model = model as? PostsCommentModel else {
+            return nil
+        }
+        let hasRefer = model.refer_floor.intValue > 0
+        if hasRefer, let refer = (PostsCommentModel.queryObjects() as? [PostsCommentModel])?.filter({ $0.pid.intValue == model.pid.intValue && $0.floor.intValue == model.refer_floor.intValue }).first {
+            var fields: [String : Any] =  [
+                "_pjango_param_table_PostsComment_HAVE_REFER": 1,
+                "_pjango_param_table_PostsComment_REFER_NAME": refer.name.strValue,
+                "_pjango_param_table_PostsComment_REFER_DATE": refer.date.strValue,
+            ]
+            if refer.refer_floor.intValue > 0 {
+                fields["_pjango_param_table_PostsComment_REFER_COMMENT"] = "[引用 \(refer.refer_floor.intValue) 楼]\n" + refer.comment.strValue
+            } else {
+                fields["_pjango_param_table_PostsComment_REFER_COMMENT"] = refer.comment.strValue
+            }
+            return fields
+        } else {
+            return [
+                "_pjango_param_table_PostsComment_HAVE_REFER": 0,
+            ]
+        }
+    }
+    
     override var listObjectSets: [String : [PCModel]]? {
         guard var commentList = PostsCommentModel.queryObjects() as? [PostsCommentModel] else {
             return nil

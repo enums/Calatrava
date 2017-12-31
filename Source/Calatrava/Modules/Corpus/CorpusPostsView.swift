@@ -38,6 +38,30 @@ class CorpusPostsView: PCListView {
         return pjangoHttpRedirect(name: "error.404")
     }
     
+    override func listUserField(inList list: String, forModel model: PCModel) -> PCViewParam? {
+        guard let model = model as? CorpusPostsCommentModel else {
+            return nil
+        }
+        let hasRefer = model.refer_floor.intValue > 0
+        if hasRefer, let refer = (CorpusPostsCommentModel.queryObjects() as? [CorpusPostsCommentModel])?.filter({ $0.cpid.intValue == model.cpid.intValue && $0.floor.intValue == model.refer_floor.intValue }).first {
+            var fields: [String : Any] =  [
+                "_pjango_param_table_CorpusPostsComment_HAVE_REFER": 1,
+                "_pjango_param_table_CorpusPostsComment_REFER_NAME": refer.name.strValue,
+                "_pjango_param_table_CorpusPostsComment_REFER_DATE": refer.date.strValue,
+                ]
+            if refer.refer_floor.intValue > 0 {
+                fields["_pjango_param_table_CorpusPostsComment_REFER_COMMENT"] = "[引用 \(refer.refer_floor.intValue) 楼]\n" + refer.comment.strValue
+            } else {
+                fields["_pjango_param_table_CorpusPostsComment_REFER_COMMENT"] = refer.comment.strValue
+            }
+            return fields
+        } else {
+            return [
+                "_pjango_param_table_CorpusPostsComment_HAVE_REFER": 0,
+            ]
+        }
+    }
+    
     override var listObjectSets: [String : [PCModel]]? {
         guard var commentList = CorpusPostsCommentModel.queryObjects() as? [CorpusPostsCommentModel] else {
             return nil

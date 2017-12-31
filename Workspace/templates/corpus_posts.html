@@ -214,6 +214,8 @@
 		var v_a = $("#verification").val();
 		_corpus_comment(cpid, name, email, comment, v_id, v_a, function() {
 			location.reload();
+			setCookie("comment_name", name);
+			setCookie("comment_email", email);
 		}, function() {
 			getVerification();
 		});
@@ -234,6 +236,9 @@
 	}
 	
 	getVerification();
+	
+	$("#name").val(getCookie("comment_name"));
+	$("#email").val(getCookie("comment_email"));
 	
 </script>
 </body>

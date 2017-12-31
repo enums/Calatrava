@@ -254,6 +254,8 @@
 		var comment = $("#comment").val();
 		var v_a = $("#verification").val();
 		_message(name, email, comment, v_id, v_a, function() {
+			setCookie("comment_name", name);
+			setCookie("comment_email", email);
 			location.reload();
 		}, function() {
 			getVerification();
@@ -271,6 +273,10 @@
 	}
 	
 	getVerification();
+	
+	$("#name").val(getCookie("comment_name"));
+	$("#email").val(getCookie("comment_email"));
+	
 </script>
 
 </body>

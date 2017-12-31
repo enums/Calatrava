@@ -124,4 +124,8 @@ function _getVerification(onSuccess) {
 	getMsgToDo("/api/verification", onSuccess)
 }
 
+function _setReferFloor(floor) {
+	$("#comment").val("!*<引用 " + floor + " 楼>*!\n");
+	location = "#comment";
+}
 

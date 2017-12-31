@@ -16,6 +16,8 @@ class PostsCommentModel: PCModel {
     
     var pcid = PCDataBaseField.init(name: "PCID", type: .string, length: 128)
     var pid = PCDataBaseField.init(name: "PID", type: .int)
+    var floor = PCDataBaseField.init(name: "FLOOR", type: .int)
+    var refer_floor = PCDataBaseField.init(name: "REFER_FLOOR", type: .int)
     var date = PCDataBaseField.init(name: "DATE", type: .string, length: 20)
     var name = PCDataBaseField.init(name: "NAME", type: .string, length: 64)
     var email = PCDataBaseField.init(name: "EMAIL", type: .string, length: 64)
@@ -24,7 +26,7 @@ class PostsCommentModel: PCModel {
 
     override func registerFields() -> [PCDataBaseField] {
         return [
-            pcid, pid, date, name, email, comment, fromIp
+            pcid, pid, floor, refer_floor, date, name, email, comment, fromIp
         ]
     }
 

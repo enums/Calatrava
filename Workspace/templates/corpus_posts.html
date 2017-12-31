@@ -30,6 +30,17 @@
 	div.paper-end-gap {
 		height: 60px;
 	}
+	div.comment_refer {
+		background-color: #efefef;
+	}
+	div.comment_refer_comment {
+		cursor: hand;
+		background-color: #e8e8e8;
+		width: 100%;
+	}
+	div.comment_refer_comment:hover {
+		background-color: #e1e1e1;
+	}
 	div.author {
 		height: 240px;
 	}
@@ -132,9 +143,25 @@
 				<hr />
 				<div class="col-md-12 column archive-cell">
 {{#_pjango_param_table_comment}}
+					<i class="date pull-right" id="comment_floor_{{{_pjango_param_table_CorpusPostsComment_FLOOR}}}">{{_pjango_param_table_CorpusPostsComment_FLOOR}} 楼</i>
 					<p class="comment_author">{{_pjango_param_table_CorpusPostsComment_NAME}}</p>
+{{#_pjango_param_table_CorpusPostsComment_HAVE_REFER}}
+					<p class="comment_refer">
+						<div class="col-md-12 comment_refer corner-window">
+							<i class="date">引用了以下评论：</i>
+							<div class="col-md-12 comment_refer_comment corner-window" onclick="location='#comment_floor_{{{_pjango_param_table_CorpusPostsComment_REFER_FLOOR}}}'">
+								<i class="date pull-right">{{_pjango_param_table_CorpusPostsComment_REFER_FLOOR}} 楼</i>
+								<p class="comment_author">{{_pjango_param_table_CorpusPostsComment_REFER_NAME}}</p>
+								<p class="comment">{{_pjango_param_table_CorpusPostsComment_REFER_COMMENT}}</p>
+								<i class="date">发表于 {{_pjango_param_table_CorpusPostsComment_REFER_DATE}} </i>
+							</div>
+							<div class="col-md-12" style="height: 20px"></div>
+						</div>
+					</p>
+{{/_pjango_param_table_CorpusPostsComment_HAVE_REFER}}
 					<p class="comment">{{_pjango_param_table_CorpusPostsComment_COMMENT}}</p>
 					<i class="date">发表于 {{_pjango_param_table_CorpusPostsComment_DATE}} </i>
+					<a class="button button-rounded button-small button-primary pull-right" onclick="setReferFloor({{{_pjango_param_table_CorpusPostsComment_FLOOR}}})">引用</a>
 					<hr />
 {{/_pjango_param_table_comment}}
 				</div>
@@ -200,6 +227,10 @@
 			$("#verification_question").text(strs[0]);
 			v_id = strs[1];
 		})
+	}
+	
+	function setReferFloor(floor) {
+		_setReferFloor(floor);
 	}
 	
 	getVerification();

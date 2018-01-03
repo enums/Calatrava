@@ -19,9 +19,9 @@ func corpusPostsCommentHandle() -> PCUrlHandle {
             return 0
         }
         if let floor = Int(comment[begin..<end]), floor <= posts.commentsCount {
-            comment = String(comment[endUpper...])
-            if comment.first == "\n" {
-                comment = String(comment.dropFirst())
+            comment = comment.substring(from: endUpper)
+            if comment.characters.first == "\n" {
+                comment = String(comment.characters.dropFirst())
             }
             return floor
         } else {
@@ -59,16 +59,16 @@ func corpusPostsCommentHandle() -> PCUrlHandle {
             pjangoHttpResponse("目标博文不存在！")(req, res)
             return
         }
-        guard name.count > 2 else {
+        guard name.characters.count > 2 else {
             pjangoHttpResponse("昵称太短啦！")(req, res)
             return
         }
-        guard email.contains(string: "@"), email.contains(string: "."), email.count > 5 else {
+        guard email.contains(string: "@"), email.contains(string: "."), email.characters.count > 5 else {
             pjangoHttpResponse("邮箱地址不合法！")(req, res)
             return
         }
         let refer = processRefer(comment: &comment, posts: tmpPosts)
-        guard comment.count > 2 else {
+        guard comment.characters.count > 2 else {
             pjangoHttpResponse("评论太短啦！")(req, res)
             return
         }

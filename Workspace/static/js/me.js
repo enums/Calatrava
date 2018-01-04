@@ -131,7 +131,10 @@ function _setReferFloor(floor) {
 
 function setCookie(cname,cvalue)
 {
-  	document.cookie = cname + "=" + cvalue + ";";
+  	var d = new Date();
+  	var hours = 24 * 7 * 365;
+	d.setHours(d.getHours() + hours);
+	document.cookie = cname + "=" + cvalue + "; expires=" + d.toGMTString();
 }
  
 function getCookie(cname)

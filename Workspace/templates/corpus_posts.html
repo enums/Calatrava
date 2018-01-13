@@ -30,9 +30,6 @@
 	div.paper-end-gap {
 		height: 60px;
 	}
-	div.author {
-		height: 240px;
-	}
 	div.comment_refer {
 		background-color: #efefef;
 	}
@@ -43,6 +40,9 @@
 	}
 	div.comment_refer_comment:hover {
 		background-color: #e1e1e1;
+	}
+	div.author {
+		height: 240px;
 	}
 	div.end {
 		height: 40px;
@@ -118,13 +118,7 @@
 				<hr />
 				<div class="col-md-10 column col-center">
 					<p class="author"><i class="fa fa-fw fa-angle-right"></i>作者：<a style="color: #145d7e" href='http://{{_pjango_param_host}}'><i>{{_pjango_param_name}}</i></a></p>
-					<p class="author"><i class="fa fa-fw fa-angle-right"></i>原文链接：<a style="color: #145d7e" href='http://posts.{{_pjango_param_host}}/posts/{{_pjango_param_posts_pid}}'>http://posts.{{_pjango_param_host}}/posts/{{_pjango_param_posts_pid}}</a></p>
-					<p class="author"><i class="fa fa-fw fa-angle-right"></i> 
-						TAG: 
-						{{#_pjango_param_posts_tag}}
-						<a href="/list?tag={{{_pjango_param_table_PostsTag_TAG}}}" class="label {{{_pjango_param_table_PostsTag_LABEL}}} tag">{{{_pjango_param_table_PostsTag_TAG}}}</a>
-						{{/_pjango_param_posts_tag}}
-					</p>
+					<p class="author"><i class="fa fa-fw fa-angle-right"></i>原文链接：<a style="color: #145d7e" href='http://corpus.{{_pjango_param_host}}/corpus/{{_pjango_param_posts_cpid}}'>http://corpus.{{_pjango_param_host}}/corpus/{{_pjango_param_posts_cpid}}</a></p>
 				</div>
 				<hr />
 			</div>
@@ -143,35 +137,35 @@
 				<hr />
 				<div class="col-md-11 column col-center">
 					<div class="col-md-3 column col-center" style="min-width: 240px">
-						<a class="button button-block button-rounded button-caution end-button" onclick="love({{_pjango_param_posts_pid}})">喜欢这篇博文</a>
+						<a class="button button-block button-rounded button-caution end-button" onclick="love({{_pjango_param_posts_cpid}})">喜欢这篇文章</a>
 					</div>
 				</div>
 				<hr />
 				<div class="col-md-12 column archive-cell">
 {{#_pjango_param_table_comment}}
-					<i class="date pull-right" id="comment_floor_{{{_pjango_param_table_PostsComment_FLOOR}}}">{{_pjango_param_table_PostsComment_FLOOR}} 楼</i>
-					<p class="comment_author">{{#_pjango_param_table_PostsComment_ISADMIN}}<i class="fa fa-fw fa-star" style="color: red"></i>{{/_pjango_param_table_PostsComment_ISADMIN}}{{_pjango_param_table_PostsComment_NAME}}</p>
-{{#_pjango_param_table_PostsComment_HAVE_REFER}}
+					<i class="date pull-right" id="comment_floor_{{{_pjango_param_table_CorpusPostsComment_FLOOR}}}">{{_pjango_param_table_CorpusPostsComment_FLOOR}} 楼</i>
+					<p class="comment_author">{{#_pjango_param_table_CorpusPostsComment_ISADMIN}}<i class="fa fa-fw fa-star" style="color: red"></i>{{/_pjango_param_table_CorpusPostsComment_ISADMIN}}{{_pjango_param_table_CorpusPostsComment_NAME}}</p>
+{{#_pjango_param_table_CorpusPostsComment_HAVE_REFER}}
 					<p class="comment_refer">
 						<div class="col-md-12 comment_refer corner-window">
 							<i class="date">引用了以下评论：</i>
-							<div class="col-md-12 comment_refer_comment corner-window" onclick="location='#comment_floor_{{{_pjango_param_table_PostsComment_REFER_FLOOR}}}'">
-								<i class="date pull-right">{{_pjango_param_table_PostsComment_REFER_FLOOR}} 楼</i>
-								<p class="comment_author">{{#_pjango_param_table_PostsComment_REFER_ISADMIN}}<i class="fa fa-fw fa-star" style="color: red"></i>{{/_pjango_param_table_PostsComment_REFER_ISADMIN}}{{_pjango_param_table_PostsComment_REFER_NAME}}</p>
-								<p class="comment">{{_pjango_param_table_PostsComment_REFER_COMMENT}}</p>
-								<i class="date">发表于 {{_pjango_param_table_PostsComment_REFER_DATE}} </i>
+							<div class="col-md-12 comment_refer_comment corner-window" onclick="location='#comment_floor_{{{_pjango_param_table_CorpusPostsComment_REFER_FLOOR}}}'">
+								<i class="date pull-right">{{_pjango_param_table_CorpusPostsComment_REFER_FLOOR}} 楼</i>
+								<p class="comment_author">{{#_pjango_param_table_CorpusPostsComment_REFER_ISADMIN}}<i class="fa fa-fw fa-star" style="color: red"></i>{{/_pjango_param_table_CorpusPostsComment_REFER_ISADMIN}}{{_pjango_param_table_CorpusPostsComment_REFER_NAME}}</p>
+								<p class="comment">{{_pjango_param_table_CorpusPostsComment_REFER_COMMENT}}</p>
+								<i class="date">发表于 {{_pjango_param_table_CorpusPostsComment_REFER_DATE}} </i>
 							</div>
 							<div class="col-md-12" style="height: 20px"></div>
 						</div>
 					</p>
-{{/_pjango_param_table_PostsComment_HAVE_REFER}}
-					<p class="comment">{{_pjango_param_table_PostsComment_COMMENT}}</p>
-					<i class="date">发表于 {{_pjango_param_table_PostsComment_DATE}} </i>
-					<a class="button button-rounded button-small button-primary pull-right" onclick="setReferFloor({{{_pjango_param_table_PostsComment_FLOOR}}})">引用</a>
+{{/_pjango_param_table_CorpusPostsComment_HAVE_REFER}}
+					<p class="comment">{{_pjango_param_table_CorpusPostsComment_COMMENT}}</p>
+					<i class="date">发表于 {{_pjango_param_table_CorpusPostsComment_DATE}} </i>
+					<a class="button button-rounded button-small button-primary pull-right" onclick="setReferFloor({{{_pjango_param_table_CorpusPostsComment_FLOOR}}})">引用</a>
 					<hr />
 {{/_pjango_param_table_comment}}
 				</div>
-				<div class="col-md-12 column" name="comment">
+				<div class="col-md-12 column">
 					<div class="col-md-6 column">
 					    <label for="name">昵称</label>
 					    <input type="text" class="form-control" id="name" placeholder="请输入名称">
@@ -209,16 +203,16 @@
 </div>
 <script>
 	function love(pid) {
-		_posts_love(pid);
+		_corpus_love(pid);
 	}
 	
 	function comment() {
-		var pid = {{_pjango_param_posts_pid}};
+		var cpid = {{_pjango_param_posts_cpid}};
 		var name = $("#name").val();
 		var email = $("#email").val();
 		var comment = $("#comment").val();
 		var v_a = $("#verification").val();
-		_posts_comment(pid, name, email, comment, v_id, v_a, function() {
+		_corpus_comment(cpid, name, email, comment, v_id, v_a, function() {
 			location.reload();
 			setCookie("comment_name", name);
 			setCookie("comment_email", email);

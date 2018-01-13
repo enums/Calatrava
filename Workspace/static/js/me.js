@@ -52,10 +52,100 @@ function getMsgToChangeHTML(url, id) {
 	});
 } 
 
-function love(pid) {
+function _posts_love(pid) {
 	getMsgToDo("/api/love?pid=" + pid, function(text) {
 		alert(text)
 	})
 }
 
+function _corpus_love(pid) {
+	getMsgToDo("/api/love?cpid=" + pid, function(text) {
+		alert(text)
+	})
+}
+
+function _posts_comment(pid, name, email, comment, v_id, v_a, onSuccess, onFailed) {
+	var obj = {
+		pid: pid,
+		name: name,
+		email: email,
+		comment: comment,
+		v_id: v_id,
+		v_a: v_a,
+	};
+	postMsgToDo("/api/comment", JSON.stringify(obj), function(text) {
+		alert(text)
+		if (text == "发表成功！") {
+			onSuccess();
+		} else {
+			onFailed();
+		}
+	})
+}
+
+function _corpus_comment(cpid, name, email, comment, v_id, v_a, onSuccess, onFailed) {
+	var obj = {
+		cpid: cpid,
+		name: name,
+		email: email,
+		comment: comment,
+		v_id: v_id,
+		v_a: v_a,
+	};
+	postMsgToDo("/api/comment", JSON.stringify(obj), function(text) {
+		alert(text)
+		if (text == "发表成功！") {
+			onSuccess();
+		} else {
+			onFailed();
+		}
+	})
+}
+
+function _message(name, email, comment, v_id, v_a, onSuccess, onFailed) {
+	var obj = {
+		name: name,
+		email: email,
+		comment: comment,
+		v_id: v_id,
+		v_a: v_a,
+	};
+	postMsgToDo("/api/message", JSON.stringify(obj), function(text) {
+		alert(text)
+		if (text == "发表成功！") {
+			onSuccess();
+		} else {
+			onFailed();
+		}
+	})
+}
+
+function _getVerification(onSuccess) {
+	getMsgToDo("/api/verification", onSuccess)
+}
+
+function _setReferFloor(floor) {
+	$("#comment").val("!*<引用 " + floor + " 楼>*!\n");
+	location = "#comment";
+}
+
+function setCookie(cname,cvalue)
+{
+  	var d = new Date();
+  	var hours = 24 * 7 * 365;
+	d.setHours(d.getHours() + hours);
+	document.cookie = cname + "=" + cvalue + "; expires=" + d.toGMTString();
+}
+ 
+function getCookie(cname)
+{
+	var name = cname + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0; i<ca.length; i++) 
+	{
+		var c = ca[i].trim();
+		if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+	}
+	return "";
+}
 

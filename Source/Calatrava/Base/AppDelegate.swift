@@ -53,7 +53,9 @@ class AppDelegate: PjangoDelegate {
             WEBSITE_HOST: [
                 pjangoUrl("", name: "index", handle: IndexView.asHandle()),
                 pjangoUrl("about", name: "about", handle: AboutView.asHandle()),
-                
+
+                pjangoUrl("vpscurl", name: "vpscurl", handle: VPSCURLHandle),
+
                 pjangoUrl("api/message", name: "api.message", handle: messageHandle),
                 pjangoUrl("api/verification", name: "api.verification@index", handle: verificationHandle),
                 
@@ -127,6 +129,8 @@ class AppDelegate: PjangoDelegate {
             CorpusModel.meta,
             CorpusPostsModel.meta,
             CorpusPostsCommentModel.meta,
+            
+            InstagramUserModel.meta
         ]
     }
 
@@ -135,6 +139,7 @@ class AppDelegate: PjangoDelegate {
             PCLogFilterPlugin.meta,
             NotFoundFilterPlugin.meta,
             DailyCleanPlugin.meta,
+            InstagramTimerPlugin.meta,
         ]
     }
     

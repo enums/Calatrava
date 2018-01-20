@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftyJSON
+import PerfectLib
+import Pjango
 
 class InstagramMediaNode {
     
@@ -135,11 +137,7 @@ class InstagramInfo {
     
     func fetch() {
         while let url = nextURL() {
-            guard let html = VPSCURL.getString(url: url, clientIp: "Blog", clientPort: "0") else {
-                return
-            }
-            let json = JSON.parse(html)
-            guard json != JSON.null else {
+            guard let json = VPSCURL.instagramFetch(url: url, clientIp: "Blog", clientPort: "0") else {
                 return
             }
             let edgeJson = json["data"]["user"]["edge_owner_to_timeline_media"]
@@ -170,5 +168,46 @@ class InstagramInfo {
             return nil
         }
         return "https://www.instagram.com/graphql/query/?query_id=17888483320059182&variables=\(variablesStr)"
+    }
+}
+
+extension VPSCURL {
+    
+    static func instagramImageToVPSCURL(url: String) -> String? {
+        let param = [
+            "key": VPSCURLKey,
+            "action": InstagramCurlAction.image.rawValue,
+            "url": url,
+            ]
+        if let base64 = Array(url.utf8).digest(.md5)?.encode(.base64url), let filename = String.init(bytes: base64, encoding: .utf8) {
+            let path = "\(PJANGO_STATIC_URL)/img/instagram/\(filename).png"
+            let file = File.init(path)
+            if (file.exists) {
+                return "http://instagram.\(WEBSITE_HOST)/img/instagram/\(filename).png"
+            }
+        }
+        return toVPSCUR(base: "instagram.\(WEBSITE_HOST)/resource", param: param)
+    }
+    
+    // 包含频率控制，如果失败了就等待600秒继续。
+    fileprivate static func instagramFetch(url: String, clientIp: String, clientPort: String) -> JSON? {
+        var json = JSON.null
+        var isFirst = true
+        while json["status"].string != "ok" {
+            if (!isFirst) {
+                logger.info("[Instagram] Request Rate Limited Sleep Triggered!")
+                Thread.sleep(forTimeInterval: 600)
+                logger.info("[Instagram] Request Rate Retry!")
+            }
+            isFirst = false
+            guard let html = VPSCURL.getString(url: url, clientIp: "Blog", clientPort: "0") else {
+                return nil
+            }
+            json = JSON.parse(html)
+            guard json.type != .null else {
+                return nil
+            }
+        }
+        return json
     }
 }

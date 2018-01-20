@@ -11,14 +11,23 @@ import SwiftyJSON
 
 class InstagramTimerPlugin: PCTimerPlugin {
     
+    var isLoading = false
+    
     override var timerInterval: TimeInterval {
         return 60 * 30
     }
     
     override var task: PCTask? {
         return {
+            guard !self.isLoading else {
+                return
+            }
             guard let igs = InstagramUserModel.queryObjects() as? [InstagramUserModel] else {
                 return
+            }
+            self.isLoading = true
+            defer {
+                self.isLoading = false
             }
             var insFeed = [InstagramFeed].init()
             logger.info("[Instagram] Pull Start!")
@@ -27,8 +36,6 @@ class InstagramTimerPlugin: PCTimerPlugin {
                 guard let htmlBytes = VPSCURL.getBytes(url: url, clientIp: "Blog", clientPort: "0"), let html = String.init(bytes: htmlBytes, encoding: .ascii) else {
                     continue
                 }
-                // 频率控制
-                Thread.sleep(forTimeInterval: 1)
                 guard let info = self.buildInstagramInfo(html: html) else {
                     continue
                 }
@@ -42,7 +49,7 @@ class InstagramTimerPlugin: PCTimerPlugin {
                     user.updateDate.strValue = "从未"
                 }
                 InstagramUserModel.updateObject(user)
-//                info.fetch()
+                info.fetch()
                 info.mediaNodes.forEach({ (node) in
                     let feed = InstagramFeed.init(userUrl: url, info: info, node: node)
                     insFeed.append(feed)

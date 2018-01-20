@@ -42,13 +42,13 @@ class InstagramListView: PCListView {
             }
             if let id = currentRequest?.getUrlParam(key: "id"), id == user.iid.strValue {
                 return [
-                    "_pjango_param_table_InstagramUser_HEAD_SOURCE": VPSCURL.toVPSCUROrCacheForInsImage(url: user.head.strValue) ?? "http:///",
+                    "_pjango_param_table_InstagramUser_HEAD_SOURCE": VPSCURL.instagramImageToVPSCURL(url: user.head.strValue) ?? "http:///",
                     "_pjango_param_table_InstagramUser_WATCH_BUTTON_TEXT": "取消只看TA",
                     "_pjango_param_table_InstagramUser_WATCH_BUTTON_ID": "",
                 ]
             } else {
                 return [
-                    "_pjango_param_table_InstagramUser_HEAD_SOURCE": VPSCURL.toVPSCUROrCacheForInsImage(url: user.head.strValue) ?? "http:///",
+                    "_pjango_param_table_InstagramUser_HEAD_SOURCE": VPSCURL.instagramImageToVPSCURL(url: user.head.strValue) ?? "http:///",
                     "_pjango_param_table_InstagramUser_WATCH_BUTTON_TEXT": "只看TA",
                     "_pjango_param_table_InstagramUser_WATCH_BUTTON_ID": user.iid.strValue,
                 ]

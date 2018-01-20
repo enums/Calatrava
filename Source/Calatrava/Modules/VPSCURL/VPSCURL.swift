@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import PerfectLib
-import Pjango
 import Dispatch
 import SwiftyJSON
 import PerfectCURL
@@ -16,21 +14,6 @@ import cURL
 let VPSCURLKey = ""
 
 class VPSCURL {
-    static func toVPSCUROrCacheForInsImage(url: String) -> String? {
-        let param = [
-            "key": VPSCURLKey,
-            "action": InstagramCurlAction.image.rawValue,
-            "url": url,
-        ]
-        if let base64 = Array(url.utf8).digest(.md5)?.encode(.base64url), let filename = String.init(bytes: base64, encoding: .utf8) {
-            let path = "\(PJANGO_STATIC_URL)/img/instagram/\(filename).png"
-            let file = File.init(path)
-            if (file.exists) {
-                return "http://instagram.\(WEBSITE_HOST)/img/instagram/\(filename).png"
-            }
-        }
-        return toVPSCUR(base: "instagram.\(WEBSITE_HOST)/resource", param: param)
-    }
     
     static func toVPSCUR(base: String, param: Dictionary<String, String>) -> String? {
         let paramStr = JSON.init(param).description.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "")

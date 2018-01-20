@@ -28,15 +28,15 @@ class InstagramFeed: PCModel {
     var date = PCDataBaseField.init(name: "DATE", type: .string, length: 20)
     
     var headSource: String {
-        return VPSCURL.toVPSCUROrCacheForInsImage(url: head.strValue) ?? "http:///"
+        return VPSCURL.instagramImageToVPSCURL(url: head.strValue) ?? "http:///"
     }
     
     var imageSource: String {
-        return VPSCURL.toVPSCUROrCacheForInsImage(url: image.strValue) ?? "http:///"
+        return VPSCURL.instagramImageToVPSCURL(url: image.strValue) ?? "http:///"
     }
     
     var bigImageSource: String {
-        return VPSCURL.toVPSCUROrCacheForInsImage(url: big_image.strValue) ?? "http:///"
+        return VPSCURL.instagramImageToVPSCURL(url: big_image.strValue) ?? "http:///"
     }
     
     required init() { }

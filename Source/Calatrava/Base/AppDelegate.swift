@@ -50,11 +50,17 @@ class AppDelegate: PjangoDelegate {
                 pjangoUrl("404", name: "error.404", handle: ErrorNotFoundView.asHandle()),
             ],
             
+            "project.\(WEBSITE_HOST)": [
+                pjangoUrl("list", name: "list", handle: ProjectListView.asHandle()),
+            ],
+            
+            "playground.\(WEBSITE_HOST)": [
+                pjangoUrl("swift", name: "swift", handle: ErrorNotSupportView.asHandle()),
+            ],
+            
             WEBSITE_HOST: [
                 pjangoUrl("", name: "index", handle: IndexView.asHandle()),
                 pjangoUrl("about", name: "about", handle: AboutView.asHandle()),
-
-                pjangoUrl("vpscurl", name: "vpscurl", handle: VPSCURLHandle),
 
                 pjangoUrl("api/message", name: "api.message", handle: messageHandle),
                 pjangoUrl("api/verification", name: "api.verification@index", handle: verificationHandle),
@@ -86,15 +92,10 @@ class AppDelegate: PjangoDelegate {
                 pjangoUrl("api/verification", name: "api.verification@corpus", handle: verificationHandle),
             ],
             
-            "project.\(WEBSITE_HOST)": [
-                pjangoUrl("list", name: "list", handle: ProjectListView.asHandle()),
-            ],
-            
-            "playground.\(WEBSITE_HOST)": [
-                pjangoUrl("swift", name: "swift", handle: ErrorNotSupportView.asHandle()),
-                
-            ],
-            
+            "instagram.\(WEBSITE_HOST)": [
+                pjangoUrl("feed", name: "feed", handle: InstagramListView.asHandle()),
+                pjangoUrl("resource", name: "resource", handle: InstagramCurlHandle)
+            ]
         ]
     }
     

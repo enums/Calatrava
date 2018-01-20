@@ -12,8 +12,11 @@ class InstagramMediaNode {
     
     let typename: String
     let id: String
+    let caption: String
     let thumbnail_src: String
     let display_src: String
+    let comments_count: Int
+    let likes_count: Int
     let date: Int64
     
     init?(json: JSON) {
@@ -21,6 +24,17 @@ class InstagramMediaNode {
             return nil
         }
         guard let id = json["id"].string else {
+            return nil
+        }
+        var captionStr = json["caption"].string
+        if captionStr == nil {
+            if let edgesArray = json["edge_media_to_caption"]["edges"].array, edgesArray.count > 0 {
+                captionStr = edgesArray[0]["node"]["text"].string
+            } else {
+                captionStr = ""
+            }
+        }
+        guard let caption = captionStr else {
             return nil
         }
         guard let thumbnail_src = json["thumbnail_src"].string else {
@@ -43,10 +57,29 @@ class InstagramMediaNode {
             return nil
         }
         
+        var comments_count = json["comments"]["count"].int
+        if comments_count == nil {
+            comments_count = json["edge_media_to_comment"]["count"].int
+        }
+        guard let commentCount = comments_count else {
+            return nil
+        }
+        
+        var likes_count = json["likes"]["count"].int
+        if likes_count == nil {
+            likes_count = json["edge_media_preview_like"]["count"].int
+        }
+        guard let likeCount = likes_count else {
+            return nil
+        }
+        
         self.typename = typename
         self.id = id
+        self.caption = caption
         self.thumbnail_src = thumbnail_src
         self.display_src = display_src
+        self.comments_count = commentCount
+        self.likes_count = likeCount
         self.date = date
     }
 
@@ -55,6 +88,8 @@ class InstagramMediaNode {
 class InstagramInfo {
     
     let id: String
+    let username: String
+    let profile_pic_url: String
     let full_name: String
     let biography: String
     var mediaNodes: [InstagramMediaNode]
@@ -65,10 +100,16 @@ class InstagramInfo {
             return nil
         }
         let userJson = profilePageJson[0]["user"]
+        guard let username = userJson["username"].string else {
+            return nil
+        }
         guard let full_name = userJson["full_name"].string else {
             return nil
         }
         guard let biography = userJson["biography"].string else {
+            return nil
+        }
+        guard let profile_pic_url = userJson["profile_pic_url"].string else {
             return nil
         }
         guard let id = userJson["id"].string else {
@@ -84,24 +125,26 @@ class InstagramInfo {
         }
         
         self.id = id
+        self.username = username
+        self.profile_pic_url = profile_pic_url
         self.full_name = full_name
         self.biography = biography
         self.mediaNodes = nodes
         self.end_cursor = end_cursor
     }
     
-    func fetch(clientIp: String, clientPort: String) {
+    func fetch() {
         while let url = nextURL() {
-            guard let html = VPSCURL.postCURLRequest(url: url, clientIp: clientIp, clientPort: clientPort) else {
-                continue
+            guard let html = VPSCURL.getString(url: url, clientIp: "Blog", clientPort: "0") else {
+                return
             }
             let json = JSON.parse(html)
             guard json != JSON.null else {
-                continue
+                return
             }
             let edgeJson = json["data"]["user"]["edge_owner_to_timeline_media"]
             guard let nodesJson = edgeJson["edges"].array else {
-                continue
+                return
             }
             let nodes = nodesJson.flatMap { InstagramMediaNode.init(json: $0["node"]) }
             mediaNodes.append(contentsOf: nodes)

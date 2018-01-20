@@ -12,7 +12,7 @@ import SwiftyJSON
 class InstagramTimerPlugin: PCTimerPlugin {
     
     override var timerInterval: TimeInterval {
-        return 60 * 10
+        return 60 * 30
     }
     
     override var task: PCTask? {
@@ -20,20 +20,41 @@ class InstagramTimerPlugin: PCTimerPlugin {
             guard let igs = InstagramUserModel.queryObjects() as? [InstagramUserModel] else {
                 return
             }
-            let ip = "InstagramTimer"
-            let port = "null"
+            var insFeed = [InstagramFeed].init()
             logger.info("[Instagram] Pull Start!")
-            let urls = igs.map { $0.url.strValue }
-            for url in urls {
-                guard let html = VPSCURL.postCURLRequest(url: url, clientIp: ip, clientPort: port) else {
+            for user in igs {
+                let url = user.url.strValue
+                guard let htmlBytes = VPSCURL.getBytes(url: url, clientIp: "Blog", clientPort: "0"), let html = String.init(bytes: htmlBytes, encoding: .ascii) else {
                     continue
                 }
+                // 频率控制
+                Thread.sleep(forTimeInterval: 1)
                 guard let info = self.buildInstagramInfo(html: html) else {
                     continue
                 }
-                info.fetch(clientIp: ip, clientPort: port)
-                instagramDict[info.id] = info
+                user.name.strValue = info.username
+                user.full_name.strValue = info.full_name
+                user.head.strValue = info.profile_pic_url
+                user.bio.strValue = info.biography
+                if let first = info.mediaNodes.first {
+                    user.updateDate.strValue = Date.init(timeIntervalSince1970: TimeInterval(first.date)).stringValue
+                } else {
+                    user.updateDate.strValue = "从未"
+                }
+                InstagramUserModel.updateObject(user)
+//                info.fetch()
+                info.mediaNodes.forEach({ (node) in
+                    let feed = InstagramFeed.init(userUrl: url, info: info, node: node)
+                    insFeed.append(feed)
+                })
             }
+            insFeed.sort(by: { (feedA, feedB) -> Bool in
+                feedA.date.strValue > feedB.date.strValue
+            })
+            
+            instagramFeedLock.lock()
+            instagramFeed = insFeed
+            instagramFeedLock.unlock()
             logger.info("[Instagram] Pull Done!")
         }
     }

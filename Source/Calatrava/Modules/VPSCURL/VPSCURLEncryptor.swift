@@ -25,11 +25,11 @@ class VPSCURLEncryptor {
         return encoded
     }
     
-    static func decode(bytes: [UInt8]) -> String? {
+    static func decode(bytes: [UInt8]) -> [UInt8]? {
         guard let decoded = bytes.decrypt(cipher, key: key, iv: iv) else {
             return nil
         }
-        return String(validatingUTF8: decoded)
+        return decoded
     }
     
 }

@@ -20,6 +20,9 @@ enum ConfigModelKey: String {
     case titleMessage = "title_message"
     case postsListMessage = "posts_list_message"
     
+    case instagramMessage = "instagram_message"
+
+    
 }
 
 class ConfigModel: PCModel {

@@ -12,14 +12,14 @@ import Foundation
 var dateFormatter = { () -> DateFormatter in
     let that = DateFormatter.init()
     that.timeZone = TimeZone.init(secondsFromGMT: 8 * 3600)
-    that.dateFormat = "YYYY-MM-dd HH:mm:ss"
+    that.dateFormat = "yyyy-MM-dd HH:mm:ss"
     return that
 }()
 
 var dayFormatter = { () -> DateFormatter in
     let that = DateFormatter.init()
     that.timeZone = TimeZone.init(secondsFromGMT: 8 * 3600)
-    that.dateFormat = "YYYY-MM-dd"
+    that.dateFormat = "yyyy-MM-dd"
     return that
 }()
 

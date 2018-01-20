@@ -15,12 +15,17 @@ class InstagramUserModel: PCModel {
     }
     
     var iid = PCDataBaseField.init(name: "IID", type: .string, length: 64)
-    var url = PCDataBaseField.init(name: "URL", type: .string, length: 256)
+    var url = PCDataBaseField.init(name: "URL", type: .string, length: 1024)
     var memo = PCDataBaseField.init(name: "MEMO", type: .string, length: 1024)
+    var name = PCDataBaseField.init(name: "NAME", type: .string, length: 256)
+    var full_name = PCDataBaseField.init(name: "FULL_NAME", type: .string, length: 256)
+    var bio = PCDataBaseField.init(name: "BIO", type: .string, length: 1024)
+    var head = PCDataBaseField.init(name: "HEAD", type: .string, length: 1024)
+    var updateDate = PCDataBaseField.init(name: "UPDATE_DATE", type: .string, length: 20)
 
     override func registerFields() -> [PCDataBaseField] {
         return [
-            iid, url, memo
+            iid, url, memo, name, full_name, bio, head, updateDate
         ]
     }
     

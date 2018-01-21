@@ -13,7 +13,7 @@ import cURL
 
 class VPSSSCURL {
     
-    static func get(url: String) -> [UInt8] {
+    static func getBytes(url: String) -> [UInt8] {
         
         let curl = CURL(url: url)
         curl.setOption(CURLOPT_PROXYTYPE, int: Int(CURLPROXY_SOCKS5.rawValue))

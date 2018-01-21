@@ -135,7 +135,12 @@ class InstagramInfo {
         self.end_cursor = end_cursor
     }
     
-    func fetch() {
+    func fetch(to date: Int) {
+        let date = Int64(date)
+        mediaNodes = mediaNodes.filter { $0.date > date }
+        guard let last = mediaNodes.last, last.date > date else {
+            return
+        }
         while let url = nextURL() {
             guard let json = VPSCURL.instagramFetch(url: url, clientIp: "Blog", clientPort: "0") else {
                 return
@@ -144,8 +149,17 @@ class InstagramInfo {
             guard let nodesJson = edgeJson["edges"].array else {
                 return
             }
-            let nodes = nodesJson.flatMap { InstagramMediaNode.init(json: $0["node"]) }
-            mediaNodes.append(contentsOf: nodes)
+            var nodes = nodesJson.flatMap { InstagramMediaNode.init(json: $0["node"]) }
+            nodes.sort(by: { (nodeA, feedB) -> Bool in
+                nodeA.date > feedB.date
+            })
+            for node in nodes {
+                if node.date > date {
+                    mediaNodes.append(node)
+                } else {
+                    return
+                }
+            }
             if let end_cursor = edgeJson["page_info"]["end_cursor"].string {
                 self.end_cursor = end_cursor
             } else {

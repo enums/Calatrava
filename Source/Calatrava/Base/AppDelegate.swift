@@ -131,7 +131,8 @@ class AppDelegate: PjangoDelegate {
             CorpusPostsModel.meta,
             CorpusPostsCommentModel.meta,
             
-            InstagramUserModel.meta
+            InstagramUserModel.meta,
+            InstagramFeedModel.meta,
         ]
     }
 

@@ -14,7 +14,7 @@ class InstagramListView: PCListView {
         return "instagram_feed.html"
     }
     
-    var displayFeed: [InstagramFeed]?
+    var displayFeed: [InstagramFeedModel]?
     
     override var listObjectSets: [String : [PCModel]]? {
         defer {
@@ -28,7 +28,7 @@ class InstagramListView: PCListView {
     
     override func listUserField(inList list: String, forModel model: PCModel) -> PCViewParam? {
         if list == "_pjango_param_table_instagram_feed" {
-            guard let feed = model as? InstagramFeed else {
+            guard let feed = model as? InstagramFeedModel else {
                 return nil
             }
             return [
@@ -62,18 +62,23 @@ class InstagramListView: PCListView {
         guard let request = currentRequest else {
             return nil
         }
+        guard var filteredFeed = InstagramFeedModel.cacheFeed else {
+            return nil
+        }
+        filteredFeed.sort { (feedA, feedB) -> Bool in
+            feedA.date.strValue > feedB.date.strValue
+        }
         var page = 1
         if let pageParam = Int(request.getUrlParam(key: "page") ?? ""), pageParam > 0 {
             page = pageParam
         }
-        instagramFeedLock.lock()
-        var filteredFeed = instagramFeed
-        instagramFeedLock.unlock()
+        var id = ""
         if let idParam = request.getUrlParam(key: "id"), idParam != "" {
             filteredFeed = filteredFeed.filter { $0.id.strValue == idParam }
+            id = idParam
         }
         let eachPageFeedCount = 12
-        var insFeed = [InstagramFeed].init()
+        var insFeed = [InstagramFeedModel].init()
         let begin = eachPageFeedCount * (page - 1)
         let end = eachPageFeedCount * page - 1
         if (begin < filteredFeed.count) {
@@ -95,6 +100,7 @@ class InstagramListView: PCListView {
             
             "_pjango_param_message": instagramMessage,
             "_pjango_param_param_page": page,
+            "_pjango_param_param_id": id,
             "_pjango_param_param_page_total": max(0, filteredFeed.count - 1) / eachPageFeedCount + 1,
             "_pjango_param_param_total_count": filteredFeed.count,
         ]

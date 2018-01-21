@@ -43,8 +43,4 @@ var messageDailyDict = Dictionary<String, Int>.init()
 //pid@ip
 var verificationLastTimeDict = Dictionary<String, TimeInterval>.init()
 
-// instagram
-var instagramFeed = [InstagramFeed].init()
-let instagramFeedLock = NSLock.init()
-
 

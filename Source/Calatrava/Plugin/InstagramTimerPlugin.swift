@@ -14,7 +14,7 @@ class InstagramTimerPlugin: PCTimerPlugin {
     var isLoading = false
     
     override var timerInterval: TimeInterval {
-        return 60 * 30
+        return 60 * 10
     }
     
     override var task: PCTask? {
@@ -29,14 +29,13 @@ class InstagramTimerPlugin: PCTimerPlugin {
             defer {
                 self.isLoading = false
             }
-            var insFeed = [InstagramFeed].init()
             logger.info("[Instagram] Pull Start!")
             for user in igs {
                 let url = user.url.strValue
                 guard let htmlBytes = VPSCURL.getBytes(url: url, clientIp: "Blog", clientPort: "0"), let html = String.init(bytes: htmlBytes, encoding: .ascii) else {
                     continue
                 }
-                guard let info = self.buildInstagramInfo(html: html) else {
+                guard let info = self.buildInstagramInfo(html: html, to: user.updateDate.strValue) else {
                     continue
                 }
                 user.name.strValue = info.username
@@ -45,28 +44,19 @@ class InstagramTimerPlugin: PCTimerPlugin {
                 user.bio.strValue = info.biography
                 if let first = info.mediaNodes.first {
                     user.updateDate.strValue = Date.init(timeIntervalSince1970: TimeInterval(first.date)).stringValue
-                } else {
-                    user.updateDate.strValue = "从未"
                 }
                 InstagramUserModel.updateObject(user)
-                info.fetch()
-                info.mediaNodes.forEach({ (node) in
-                    let feed = InstagramFeed.init(userUrl: url, info: info, node: node)
-                    insFeed.append(feed)
-                })
+                info.mediaNodes.forEach {
+                    let node = InstagramFeedModel.init(userUrl: url, info: info, node: $0)
+                    InstagramFeedModel.insertObject(node)
+                }
             }
-            insFeed.sort(by: { (feedA, feedB) -> Bool in
-                feedA.date.strValue > feedB.date.strValue
-            })
-            
-            instagramFeedLock.lock()
-            instagramFeed = insFeed
-            instagramFeedLock.unlock()
+            InstagramFeedModel.recache()
             logger.info("[Instagram] Pull Done!")
         }
     }
     
-    open func buildInstagramInfo(html: String) -> InstagramInfo? {
+    open func buildInstagramInfo(html: String, to date: String) -> InstagramInfo? {
         guard let jsonBegin = html.range(of: "window._sharedData = ")?.upperBound else {
             return nil
         }
@@ -76,6 +66,10 @@ class InstagramTimerPlugin: PCTimerPlugin {
         let jsonRange = jsonBegin..<html.index(jsonEnd, offsetBy: 1)
         let subString = html.substring(with: jsonRange)
         let json = JSON.parse(subString)
-        return InstagramInfo.init(json: json)
+        guard let info = InstagramInfo.init(json: json) else {
+            return nil
+        }
+        info.fetch(to: Int(date.dateValue?.timeIntervalSince1970 ?? 0))
+        return info
     }
 }

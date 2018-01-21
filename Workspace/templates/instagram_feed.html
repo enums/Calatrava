@@ -138,6 +138,20 @@
 {{/_pjango_param_table_instagram_user}}
 					</div>
 				</div>
+				<div class="col-md-12 column">
+					<div class="gap"></div>
+					<div class="col-md-12 column corner-window shadow">
+						<div class="gap"></div>
+						<div class="text-center">
+							<button class="button button-primary button-plain button-rounded button-border button-primary title">声明</button>
+						</div>
+						<div class="gap"></div>
+						<p class="title">此页面数据全部来自于 Instagram 主页抓取。对此页面有任何疑问请及时邮件联系我。</p>
+						<p><a class="button button-plain button-border button-block end-button" onclick="window.open('mailto:blog@enumsblog.com')"><i class="fa fa-fw fa-envelope"></i> 联系我</a></p>
+
+					</div>
+					<div class="col-md-12 column gap"></div>
+				</div>
 			</div>
 			<div class="col-md-8 column">
 				<div class="gap"></div>
@@ -149,27 +163,17 @@
 							<img class="head img-circle" src="{{_pjango_param_table_InstagramFeed_HEAD_SOURCE}}">
 							<a class="link" target="_blank" style="color: white" href="{{_pjango_param_table_InstagramFeed_URL}}">{{_pjango_param_table_InstagramFeed_FULL_NAME}}</a>
 						</p>
-						<div>
-							<i class="fa fa-fw fa-calendar text"></i>
-							<i class="text">{{_pjango_param_table_InstagramFeed_DATE}}</i>
-						</div>
-						<div class="col-md-12 column" style="height: 10px;"></div>
 						<div class="col-md-12 column caption">
 							<p class="caption">{{_pjango_param_table_InstagramFeed_CAPTION}}</p>
 						</div>
 						<p class="image-container">
 							<a target="_blank" href="{{_pjango_param_table_InstagramFeed_BIG_IMAGE_SOURCE}}" ><img src="{{_pjango_param_table_InstagramFeed_IMAGE_SOURCE}}"></a>
 						</p>
+						<div>
+							<i class="fa fa-fw fa-calendar text"></i>
+							<i class="text">{{_pjango_param_table_InstagramFeed_DATE}}</i>
+						</div>
 						<div class="col-md-12 column" style="height: 10px;"></div>
-						<div class="col-md-6 column pull-left">
-							<i class="fa fa-fw fa-comment text"></i>
-							<i class="text">评论: {{_pjango_param_table_InstagramFeed_COMMENT}}</i>
-						</div>
-						<div class="col-md-6 column pull-left">
-							<i class="fa fa-fw fa-heart text"></i>
-							<i class="text">喜欢: {{_pjango_param_table_InstagramFeed_LOVE}}</i>
-						</div>
-						<div class="col-md-12 column" style="height: 20px;"></div>
 					</div>
 					<div class="col-md-12 column" style="height: 20px;"></div>
 				</div>
@@ -205,12 +209,17 @@
 <script>
 	var page = {{{_pjango_param_param_page}}};
 	var total = {{{_pjango_param_param_page_total}}};
+	var id = "{{{_pjango_param_param_id}}}";
 	
 	function prePage() {
 		if (page <= 1) {
 			alert("不能再往前翻页啦！");
 		} else {
-			location='http://{{_pjango_url_instagram_feed}}?page=' + (page - 1);
+			if (id != "") {
+				location='http://{{_pjango_url_instagram_feed}}?id=' + id + '&page=' + (page - 1);
+			} else {
+				location='http://{{_pjango_url_instagram_feed}}?page=' + (page - 1);
+			}
 		}
 	}
 	
@@ -218,7 +227,11 @@
 		if (page >= total) {
 			alert("不能再往后翻页啦！");
 		} else {
-			location='http://{{_pjango_url_instagram_feed}}?page=' + (page + 1);
+			if (id != "") {
+				location='http://{{_pjango_url_instagram_feed}}?id=' + id + '&page=' + (page + 1);
+			} else {
+				location='http://{{_pjango_url_instagram_feed}}?page=' + (page + 1);
+			}
 		}
 	}
 	

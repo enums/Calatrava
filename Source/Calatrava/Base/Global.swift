@@ -44,4 +44,3 @@ var messageDailyDict = Dictionary<String, Int>.init()
 var verificationLastTimeDict = Dictionary<String, TimeInterval>.init()
 
 
-

@@ -1,0 +1,248 @@
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="user-scalable=no, width=720px, height=1280px"/>
+	<title>Instagram | {{_pjango_param_title_message}}</title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">  
+	<link rel="stylesheet" href="/css/font-awesome.min.css"> 
+	<link rel="stylesheet" href="/css/buttons.css">  
+	<link rel="stylesheet" href="/css/height.css">  
+	<link rel="stylesheet" href="/css/me.css">  
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/buttons.js"></script>
+	<script src="/js/me.js"></script>
+</head>
+<style>
+	p.title {
+		color: white;
+		font-size: 22px;
+	}
+	p.text {
+		color: white;
+		font-size: 16px;
+	}
+	a.link {
+		cursor: hand;
+		color: orange;
+		font-size: 22px;
+	}
+	div.caption {
+		height: 0px;
+		padding-top: 1px;
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	p.caption {
+		color: white;
+		font-size: 22px;
+		padding-top: 8px;
+		padding-left: 8px;
+		padding-right: 8px;
+		padding-bottom: 8px;
+		background: rgba(0, 0, 0, 0.4);
+		border-radius: 8px;
+	}
+	i.text {
+		color: white;
+		font-size: 16px;
+	}
+	div.cell {
+		transition:background-color 0.3s linear;
+	}
+	div.cell:hover {
+		background-color: rgba(128, 128, 128, 0.6);
+	}
+	div.archive-cell {
+		padding-bottom: 16px;
+	}
+	div.gap {
+		height: 24px;
+	}
+	div.header {
+		height: 60px;
+	}
+	p.image-container {
+		width: 100%;
+		height: 0;
+		padding-bottom: 100%;
+		overflow: hidden;
+		background: rgba(255, 255, 255, 0.4);
+		border-radius: 8px;
+	}
+	p.image-container img {
+		width: 100%;
+		border-radius: 8px;
+	}
+	button.title {
+		font-size: 20px;
+		pointer-events: none;
+	}
+	button.search {
+		font-size: 20px;
+		width: 100%;
+	}
+	a.text {
+		color: white;
+		font-size:18px;
+	}
+	a.tag {
+		line-height: 2.5em;
+		margin-right: 8px;
+	}
+	img.head{
+		width: 48px;
+		height: 48px;
+		min-height: 48px;
+		max-height: 48px;
+	}
+</style>
+<body class="main">
+	
+<div class="box">
+	
+{{{_pjango_template_navigation_bar}}}
+	
+	<div class="col-md-12 column height-more-than-85">
+		<div class="col-md-offset-1 row clearfix">
+			<div class="col-md-3 column">
+				<div class="col-md-12 column">
+					<div class="gap"></div>
+					<div class="col-md-12 column corner-window shadow">
+						<div class="gap"></div>
+						<div class="text-center">
+							<button class="button button-primary button-plain button-rounded button-border button-primary title">寄语</button>
+						</div>
+						<div class="gap"></div>
+						<p class="title">{{{_pjango_param_message}}}</p>
+					</div>
+					<div class="col-md-12 column gap"></div>
+				</div>
+				<div class="col-md-12 column">
+					<div class="col-md-12 column corner-window shadow">
+						<div class="gap"></div>
+						<div class="text-center">
+							<button class="button button-primary button-plain button-rounded button-border button-primary title">来源</button>
+					</div>
+					<div class="gap"></div>
+{{#_pjango_param_table_instagram_user}}
+					<div class="col-md-12 column archive-cell">
+						<p class="text">
+							<img class="head img-circle" src="{{_pjango_param_table_InstagramUser_HEAD_SOURCE}}">
+							<a class="link text" target="_blank" style="color: white" href="{{_pjango_param_table_InstagramUser_URL}}">{{_pjango_param_table_InstagramUser_FULL_NAME}}</a>
+						</p>
+						<p class="text">{{_pjango_param_table_InstagramUser_BIO}}</p>
+						<p class="text">最后更新：{{_pjango_param_table_InstagramUser_UPDATE_DATE}}</p>
+						<p><a class="button button-plain button-border button-block end-button" onclick="onlyDisplay('{{{_pjango_param_table_InstagramUser_WATCH_BUTTON_ID}}}')">{{_pjango_param_table_InstagramUser_WATCH_BUTTON_TEXT}}</a></p>
+					</div>
+{{/_pjango_param_table_instagram_user}}
+					</div>
+				</div>
+				<div class="col-md-12 column">
+					<div class="gap"></div>
+					<div class="col-md-12 column corner-window shadow">
+						<div class="gap"></div>
+						<div class="text-center">
+							<button class="button button-primary button-plain button-rounded button-border button-primary title">声明</button>
+						</div>
+						<div class="gap"></div>
+						<p class="title">此页面数据全部来自于 Instagram 主页抓取。对此页面有任何疑问请及时邮件联系我。</p>
+						<p><a class="button button-plain button-border button-block end-button" onclick="window.open('mailto:blog@enumsblog.com')"><i class="fa fa-fw fa-envelope"></i> 联系我</a></p>
+
+					</div>
+					<div class="col-md-12 column gap"></div>
+				</div>
+			</div>
+			<div class="col-md-8 column">
+				<div class="gap"></div>
+{{#_pjango_param_table_instagram_feed}}
+				<div class="col-md-6 column">
+					<div class="col-md-12 column corner-window shadow cell">
+						<div class="col-md-12 column" style="height: 20px;"></div>
+						<p class="title">
+							<img class="head img-circle" src="{{_pjango_param_table_InstagramFeed_HEAD_SOURCE}}">
+							<a class="link" target="_blank" style="color: white" href="{{_pjango_param_table_InstagramFeed_URL}}">{{_pjango_param_table_InstagramFeed_FULL_NAME}}</a>
+						</p>
+						<div class="col-md-12 column caption">
+							<p class="caption">{{_pjango_param_table_InstagramFeed_CAPTION}}</p>
+						</div>
+						<p class="image-container">
+							<a target="_blank" href="{{_pjango_param_table_InstagramFeed_BIG_IMAGE_SOURCE}}" ><img src="{{_pjango_param_table_InstagramFeed_IMAGE_SOURCE}}"></a>
+						</p>
+						<div>
+							<i class="fa fa-fw fa-calendar text"></i>
+							<i class="text">{{_pjango_param_table_InstagramFeed_DATE}}</i>
+						</div>
+						<div class="col-md-12 column" style="height: 10px;"></div>
+					</div>
+					<div class="col-md-12 column" style="height: 20px;"></div>
+				</div>
+{{/_pjango_param_table_instagram_feed}}
+			</div>
+		</div>
+		<div class="col-md-12 column">
+			<div class="col-md-8 col-md-offset-2 column">
+				<div style="height: 20px;"></div>
+				<div class="col-md-4 column corner-window shadow text-center">
+					<div style="height: 10px;"></div>
+					<a class="button button-plain button-border button-block end-button" onclick="prePage()">上一页</a>
+					<div style="height: 10px;"></div>
+				</div>
+				<div class="col-md-4 column text-center">
+					<div class="col-md-12 column corner-window text-center" style="height: 60px">
+						<div style="height: 20px;"></div>
+							<p class="text">第 {{_pjango_param_param_page}} / {{_pjango_param_param_page_total}} 页，共 {{_pjango_param_param_total_count}} 条</p>
+					</div>
+				</div>
+				<div class="col-md-4 column corner-window shadow text-center">
+					<div style="height: 10px;"></div>
+					<a class="button button-plain button-border button-block end-button" onclick="nextPage()">下一页</a>
+					<div style="height: 10px;"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 column" style="height: 20px"></div>
+	</div>
+	
+{{{_pjango_template_footer_bar}}}
+</div>
+<script>
+	var page = {{{_pjango_param_param_page}}};
+	var total = {{{_pjango_param_param_page_total}}};
+	var id = "{{{_pjango_param_param_id}}}";
+	
+	function prePage() {
+		if (page <= 1) {
+			alert("不能再往前翻页啦！");
+		} else {
+			if (id != "") {
+				location='http://{{_pjango_url_instagram_feed}}?id=' + id + '&page=' + (page - 1);
+			} else {
+				location='http://{{_pjango_url_instagram_feed}}?page=' + (page - 1);
+			}
+		}
+	}
+	
+	function nextPage() {
+		if (page >= total) {
+			alert("不能再往后翻页啦！");
+		} else {
+			if (id != "") {
+				location='http://{{_pjango_url_instagram_feed}}?id=' + id + '&page=' + (page + 1);
+			} else {
+				location='http://{{_pjango_url_instagram_feed}}?page=' + (page + 1);
+			}
+		}
+	}
+	
+	function onlyDisplay(id) {
+		if (id == "") {
+			location='http://{{_pjango_url_instagram_feed}}';
+		} else {
+			location='http://{{_pjango_url_instagram_feed}}?id=' + id;
+		}
+	}
+</script>
+</body>
+</html>
+

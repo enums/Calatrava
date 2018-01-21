@@ -82,6 +82,9 @@ class EventHooks {
         ConfigModel.setValueForKey(key, value: "\(oldCounter + 1)")
     }
     
+    static func hookInstagram(req: HTTPRequest?) {
+        StatisticsManager.statisticsEvent(eventType: .visitInstagram, req: req)
+    }
     
     
 }

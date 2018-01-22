@@ -35,13 +35,15 @@ func InstagramCurlHandle() -> PCUrlHandle {
             pjangoHttpResponse("")(req, res)
             return
         }
+        let ip = req.remoteAddress.host
+        let port = "\(req.remoteAddress.port)"
         switch action {
         case .html:
             guard let url = json["url"].string else {
                 pjangoHttpResponse("")(req, res)
                 return
             }
-            guard let bytes = PostmanCURL.getBytes(url: url, clientIp: "Blog", clientPort: "0") else {
+            guard let bytes = PostmanCURL.getBytes(url: url, clientIp: ip, clientPort: port) else {
                 pjangoHttpResponse("")(req, res)
                 return
             }
@@ -51,7 +53,7 @@ func InstagramCurlHandle() -> PCUrlHandle {
                 pjangoHttpResponse("")(req, res)
                 return
             }
-            guard let bytes = PostmanCURL.getBytes(url: url, clientIp: "Blog", clientPort: "0") else {
+            guard let bytes = PostmanCURL.getBytes(url: url, clientIp: ip, clientPort: port) else {
                 pjangoHttpResponse("")(req, res)
                 return
             }

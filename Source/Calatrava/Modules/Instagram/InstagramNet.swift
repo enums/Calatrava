@@ -9,6 +9,7 @@ import Foundation
 import SwiftyJSON
 import PerfectLib
 import Pjango
+import Pjango_Postman
 
 class InstagramMediaNode {
     
@@ -142,7 +143,7 @@ class InstagramInfo {
             return
         }
         while let url = nextURL() {
-            guard let json = VPSCURL.instagramFetch(url: url, clientIp: "Blog", clientPort: "0") else {
+            guard let json = PostmanCURL.instagramFetch(url: url, clientIp: "Blog", clientPort: "0") else {
                 return
             }
             let edgeJson = json["data"]["user"]["edge_owner_to_timeline_media"]
@@ -185,11 +186,11 @@ class InstagramInfo {
     }
 }
 
-extension VPSCURL {
+extension PostmanCURL {
     
-    static func instagramImageToVPSCURL(url: String) -> String? {
+    static func instagramImageToPostmanURL(url: String) -> String? {
         let param = [
-            "key": VPSCURLKey,
+            "key": PostmanConfigModel.pKey,
             "action": InstagramCurlAction.image.rawValue,
             "url": url,
             ]
@@ -200,7 +201,7 @@ extension VPSCURL {
                 return "http://instagram.\(WEBSITE_HOST)/img/instagram/\(filename).png"
             }
         }
-        return toVPSCUR(base: "instagram.\(WEBSITE_HOST)/resource", param: param)
+        return toPostmanURL(base: "instagram.\(WEBSITE_HOST)/resource", param: param)
     }
     
     // 包含频率控制，如果失败了就等待600秒继续。
@@ -214,7 +215,7 @@ extension VPSCURL {
                 logger.info("[Instagram] Request Rate Retry!")
             }
             isFirst = false
-            guard let html = VPSCURL.getString(url: url, clientIp: "Blog", clientPort: "0") else {
+            guard let html = PostmanCURL.getString(url: url, clientIp: "Blog", clientPort: "0") else {
                 return nil
             }
             json = JSON.parse(html)

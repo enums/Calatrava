@@ -7,6 +7,7 @@
 
 import Foundation
 import Pjango
+import Pjango_Postman
 import SwiftyJSON
 
 class InstagramTimerPlugin: PCTimerPlugin {
@@ -32,7 +33,7 @@ class InstagramTimerPlugin: PCTimerPlugin {
             logger.info("[Instagram] Pull Start!")
             for user in igs {
                 let url = user.url.strValue
-                guard let htmlBytes = VPSCURL.getBytes(url: url, clientIp: "Blog", clientPort: "0"), let html = String.init(bytes: htmlBytes, encoding: .ascii) else {
+                guard let htmlBytes = PostmanCURL.getBytes(url: url, clientIp: "Blog", clientPort: "0"), let html = String.init(bytes: htmlBytes, encoding: .ascii) else {
                     continue
                 }
                 guard let info = self.buildInstagramInfo(html: html, to: user.updateDate.strValue) else {

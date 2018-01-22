@@ -10,6 +10,7 @@ import Foundation
 import PerfectHTTP
 import Pjango
 import Pjango_MySQL
+import Pjango_Postman
 
 
 class AppDelegate: PjangoDelegate {
@@ -107,11 +108,6 @@ class AppDelegate: PjangoDelegate {
             "HOST": "127.0.0.1",
             "PORT": UInt16(3306),
             ])
-        
-//        return PCFileDBDataBase.init(param: [
-//                "SCHEMA": "default",
-//                "PATH": "\(PJANGO_WORKSPACE_PATH)/filedb"
-//            ])
     }
     
     func registerModels() -> [PCModel]? {
@@ -133,6 +129,8 @@ class AppDelegate: PjangoDelegate {
             
             InstagramUserModel.meta,
             InstagramFeedModel.meta,
+            
+            PostmanConfigModel.meta,
         ]
     }
 

@@ -7,6 +7,7 @@
 
 import Foundation
 import Pjango
+import Pjango_Postman
 
 class InstagramFeedModel: PCModel {
     
@@ -26,15 +27,15 @@ class InstagramFeedModel: PCModel {
     var date = PCDataBaseField.init(name: "DATE", type: .string, length: 20)
     
     var headSource: String {
-        return VPSCURL.instagramImageToVPSCURL(url: head.strValue) ?? "http:///"
+        return PostmanCURL.instagramImageToPostmanURL(url: head.strValue) ?? "http:///"
     }
     
     var imageSource: String {
-        return VPSCURL.instagramImageToVPSCURL(url: image.strValue) ?? "http:///"
+        return PostmanCURL.instagramImageToPostmanURL(url: image.strValue) ?? "http:///"
     }
     
     var bigImageSource: String {
-        return VPSCURL.instagramImageToVPSCURL(url: big_image.strValue) ?? "http:///"
+        return PostmanCURL.instagramImageToPostmanURL(url: big_image.strValue) ?? "http:///"
     }
     
     static var cacheFeed: [InstagramFeedModel]? = InstagramFeedModel.queryObjects(ext: (true, "ORDER BY date DESC")) as? [InstagramFeedModel]

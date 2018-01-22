@@ -8,6 +8,7 @@
 import Foundation
 import PerfectLib
 import Pjango
+import Pjango_Postman
 import SwiftyJSON
 
 enum InstagramCurlAction: String {
@@ -17,7 +18,7 @@ enum InstagramCurlAction: String {
 
 func InstagramCurlHandle() -> PCUrlHandle {
     return { req, res in
-        guard let encodedStr = req.getUrlParam(key: "value"), let decodedData = encodedStr.decode(.base64url), let decryptedData = VPSCURLEncryptor.decode(bytes: decodedData), let paramStr = String.init(bytes: decryptedData, encoding: .utf8) else {
+        guard let encodedStr = req.getUrlParam(key: "value"), let decodedData = encodedStr.decode(.base64url), let decryptedData = PostmanEncryptor.decode(bytes: decodedData), let paramStr = String.init(bytes: decryptedData, encoding: .utf8) else {
             pjangoHttpResponse("")(req, res)
             return
         }
@@ -26,7 +27,7 @@ func InstagramCurlHandle() -> PCUrlHandle {
             pjangoHttpResponse("")(req, res)
             return
         }
-        guard json["key"].string == VPSCURLKey else {
+        guard json["key"].string == PostmanConfigModel.pKey else {
             pjangoHttpResponse("")(req, res)
             return
         }
@@ -40,7 +41,7 @@ func InstagramCurlHandle() -> PCUrlHandle {
                 pjangoHttpResponse("")(req, res)
                 return
             }
-            guard let bytes = VPSCURL.getBytes(url: url, clientIp: "Blog", clientPort: "0") else {
+            guard let bytes = PostmanCURL.getBytes(url: url, clientIp: "Blog", clientPort: "0") else {
                 pjangoHttpResponse("")(req, res)
                 return
             }
@@ -50,7 +51,7 @@ func InstagramCurlHandle() -> PCUrlHandle {
                 pjangoHttpResponse("")(req, res)
                 return
             }
-            guard let bytes = VPSCURL.getBytes(url: url, clientIp: "Blog", clientPort: "0") else {
+            guard let bytes = PostmanCURL.getBytes(url: url, clientIp: "Blog", clientPort: "0") else {
                 pjangoHttpResponse("")(req, res)
                 return
             }

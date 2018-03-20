@@ -102,7 +102,7 @@ class InstagramInfo {
         guard let profilePageJson = json["entry_data"]["ProfilePage"].array, profilePageJson.count > 0 else {
             return nil
         }
-        let userJson = profilePageJson[0]["user"]
+        let userJson = profilePageJson[0]["graphql"]["user"]
         guard let username = userJson["username"].string else {
             return nil
         }
@@ -118,11 +118,11 @@ class InstagramInfo {
         guard let id = userJson["id"].string else {
             return nil
         }
-        let mediaJson = userJson["media"]
-        guard let nodesJson = mediaJson["nodes"].array else {
+        let mediaJson = userJson["edge_owner_to_timeline_media"]
+        guard let nodesJson = mediaJson["edges"].array else {
             return nil
         }
-        let nodes = nodesJson.flatMap { InstagramMediaNode.init(json: $0) }
+        let nodes = nodesJson.flatMap { InstagramMediaNode.init(json: $0["node"]) }
         guard let end_cursor = mediaJson["page_info"]["end_cursor"].string else {
             return nil
         }

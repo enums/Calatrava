@@ -12,7 +12,7 @@ let package = Package(
         .Package(url: "https://github.com/PerfectlySoft/Perfect-CURL.git", majorVersion: 3, minor: 0),
         .Package(url: "https://github.com/enums/Pjango.git", majorVersion: 1, minor: 1),
         .Package(url: "https://github.com/enums/Pjango-MySQL.git", majorVersion: 1, minor: 1),
-        .Package(url: "https://github.com/enums/Pjango-Postman.git", majorVersion: 1, minor: 0),
+        .Package(url: "https://github.com/enums/Pjango-Postman.git", majorVersion: 1, minor: 1),
         .Package(url: "https://github.com/enums/SwiftyJSON.git", majorVersion: 4),
         ]
 )
@@ -29,7 +29,7 @@ let package = Package(
         .Package(url: "https://github.com/PerfectlySoft/Perfect-Crypto.git", majorVersion: 1, minor: 0),
         .Package(url: "https://github.com/enums/Pjango.git", majorVersion: 1, minor: 1),
         .Package(url: "https://github.com/enums/Pjango-MySQL.git", majorVersion: 1, minor: 1),
-        .Package(url: "https://github.com/enums/Pjango-Postman.git", majorVersion: 1, minor: 0),
+        .Package(url: "https://github.com/enums/Pjango-Postman.git", majorVersion: 1, minor: 1),
         .Package(url: "https://github.com/enums/SwiftyJSON.git", majorVersion: 4),
         ]
 )

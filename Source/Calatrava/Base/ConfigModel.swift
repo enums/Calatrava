@@ -21,7 +21,8 @@ enum ConfigModelKey: String {
     case postsListMessage = "posts_list_message"
     
     case instagramMessage = "instagram_message"
-
+    case bilibiliName = "bilibili_name"
+    case bilibiliMessage = "bilibili_message"
     
 }
 

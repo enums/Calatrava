@@ -86,5 +86,9 @@ class EventHooks {
         StatisticsManager.statisticsEvent(eventType: .visitInstagram, req: req)
     }
     
+    static func hookBilibili(req: HTTPRequest?) {
+        StatisticsManager.statisticsEvent(eventType: .visitBilibili, req: req)
+    }
+    
     
 }

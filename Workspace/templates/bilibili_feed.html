@@ -1,0 +1,281 @@
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="user-scalable=no, width=720px, height=1280px"/>
+	<title>Bilibili | {{_pjango_param_title_message}}</title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">  
+	<link rel="stylesheet" href="/css/font-awesome.min.css"> 
+	<link rel="stylesheet" href="/css/buttons.css">  
+	<link rel="stylesheet" href="/css/height.css">  
+	<link rel="stylesheet" href="/css/me.css">  
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/buttons.js"></script>
+	<script src="/js/me.js"></script>
+</head>
+<style>
+	p.title {
+		color: white;
+		font-size: 22px;
+	}
+	p.text {
+		color: white;
+		font-size: 16px;
+	}
+	a.link {
+		cursor: hand;
+		color: orange;
+		font-size: 22px;
+	}
+	div.caption {
+		height: 0px;
+		padding-top: 1px;
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	p.caption {
+		color: white;
+		font-size: 22px;
+		padding-top: 8px;
+		padding-left: 8px;
+		padding-right: 8px;
+		padding-bottom: 8px;
+		background: rgba(0, 0, 0, 0.8);
+		border-radius: 8px;
+	}
+	p.small-caption {
+		color: white;
+		font-size: 18px;
+		padding-top: 8px;
+		padding-left: 8px;
+		padding-right: 8px;
+		padding-bottom: 8px;
+		background: rgba(0, 0, 0, 0.6);
+		border-radius: 8px;
+	}
+	i.text {
+		color: white;
+		font-size: 16px;
+	}
+	div.cell {
+		transition:background-color 0.3s linear;
+	}
+	div.cell:hover {
+		background-color: rgba(128, 128, 128, 0.6);
+	}
+	div.archive-cell {
+		padding-bottom: 16px;
+	}
+	div.gap {
+		height: 24px;
+	}
+	div.header {
+		height: 60px;
+	}
+	p.img-container {
+		width: 100%;
+		height: 0;
+		padding-bottom: 62%;
+		overflow: hidden;
+		background: rgba(255, 255, 255, 0.4);
+		border-radius: 8px;
+		cursor: hand;
+	}
+	p.img-container img {
+		width: 100%;
+		border-radius: 8px;
+	}
+	button.title {
+		font-size: 20px;
+		pointer-events: none;
+	}
+	button.search {
+		font-size: 20px;
+		width: 100%;
+	}
+	a.text {
+		color: white;
+		font-size:18px;
+	}
+	a.tag {
+		line-height: 2.5em;
+		margin-right: 8px;
+	}
+	img.head{
+		width: 48px;
+		height: 48px;
+		min-height: 48px;
+		max-height: 48px;
+	}
+</style>
+<body class="main">
+	
+<div class="box">
+	
+{{{_pjango_template_navigation_bar}}}
+	
+	<div class="col-md-12 column height-more-than-85">
+		<div class="col-md-offset-1 row clearfix">
+			<div class="col-md-3 column">
+				<div class="col-md-12 column">
+					<div class="gap"></div>
+					<div class="col-md-12 column corner-window shadow">
+						<div class="gap"></div>
+						<div class="text-center">
+							<button class="button button-primary button-plain button-rounded button-border button-primary title">寄语</button>
+						</div>
+						<div class="gap"></div>
+						<p class="title">{{{_pjango_param_message}}}</p>
+					</div>
+					<div class="col-md-12 column gap"></div>
+				</div>
+				<div class="col-md-12 column">
+					<div class="col-md-12 column corner-window shadow">
+						<div class="gap"></div>
+						<div class="text-center">
+							<button class="button button-primary button-plain button-rounded button-border button-primary title">播单</button>
+						</div>
+					<div class="gap"></div>
+{{#_pjango_param_table_bilibili_list}}
+					<div class="col-md-12 column archive-cell">
+						<div class="col-md-12 column caption">
+							<p class="small-caption text-center">{{_pjango_param_table_BilibiliList_NAME}}</p>
+						</div>
+						<p class="img-container">
+							<a><img src="http://{{_pjango_param_table_BilibiliList_COVER_URL}}" onclick="onlyDisplay('{{{_pjango_param_table_BilibiliList_LIST_BUTTON_ID}}}')">
+						</p>
+						<p class="text">简介：{{_pjango_param_table_BilibiliList_MEMO}}</p>
+						<p class="text">视频数量：{{_pjango_param_table_BilibiliList_VIDEO_COUNT}}</p>
+						<p class="text">最后更新：{{_pjango_param_table_BilibiliList_UPDATE_DATE}}</p>
+						<p><a class="button button-plain button-border button-block end-button" onclick="onlyDisplay('{{{_pjango_param_table_BilibiliList_LIST_BUTTON_ID}}}')">{{_pjango_param_table_BilibiliList_LIST_BUTTON_TEXT}}</a></p>
+					</div>
+{{/_pjango_param_table_bilibili_list}}
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8 column">
+				<div class="gap"></div>
+{{#_pjango_param_table_bilibili_feed}}
+				<div class="col-md-6 column">
+					<div class="col-md-12 column corner-window shadow cell">
+						<div class="col-md-12 column" style="height: 20px;"></div>
+						<p class="title">
+							<img class="head img-circle" src="/img/bilibili/head.jpg">
+							<a class="link" target="_blank" style="color: white" href="https://space.bilibili.com/1135309/">{{_pjango_param_name}}</a>
+						</p>
+						<div class="col-md-12 column caption">
+							<p class="caption">{{_pjango_param_table_BilibiliFeed_LIST_NAME}} —— {{_pjango_param_table_BilibiliFeed_NAME}}</p>
+						</div>
+						<p class="img-container" id="player_container_{{_pjango_param_table_BilibiliFeed_BVID}}">
+							<img id="cover_{{_pjango_param_table_BilibiliFeed_BVID}}" src="http://{{_pjango_param_table_BilibiliFeed_COVER_URL}}" onclick="playVideoInCell('{{_pjango_param_table_BilibiliFeed_BVID}}', '{{_pjango_param_table_BilibiliFeed_URL}}')">
+						</p>
+						<p class="title">{{_pjango_param_table_BilibiliFeed_MEMO}}</p>
+						<div>
+							<i class="fa fa-fw fa-calendar text"></i>
+							<i class="text">{{_pjango_param_table_BilibiliFeed_DATE}}</i>
+						</div>
+						<div class="col-md-12 column" style="height: 10px;"></div>
+					</div>
+					<div class="col-md-12 column" style="height: 20px;"></div>
+				</div>
+{{/_pjango_param_table_bilibili_feed}}
+			</div>
+		</div>
+		<div class="col-md-12 column">
+			<div class="col-md-8 col-md-offset-2 column">
+				<div style="height: 20px;"></div>
+				<div class="col-md-4 column corner-window shadow text-center">
+					<div style="height: 10px;"></div>
+					<a class="button button-plain button-border button-block end-button" onclick="prePage()">上一页</a>
+					<div style="height: 10px;"></div>
+				</div>
+				<div class="col-md-4 column text-center">
+					<div class="col-md-12 column corner-window text-center" style="height: 60px">
+						<div style="height: 20px;"></div>
+							<p class="text">第 {{_pjango_param_param_page}} / {{_pjango_param_param_page_total}} 页，共 {{_pjango_param_param_total_count}} 条</p>
+					</div>
+				</div>
+				<div class="col-md-4 column corner-window shadow text-center">
+					<div style="height: 10px;"></div>
+					<a class="button button-plain button-border button-block end-button" onclick="nextPage()">下一页</a>
+					<div style="height: 10px;"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 column" style="height: 20px"></div>
+	</div>
+	
+{{{_pjango_template_footer_bar}}}
+</div>
+<script>
+	var page = {{{_pjango_param_param_page}}};
+	var total = {{{_pjango_param_param_page_total}}};
+	var id = "{{{_pjango_param_param_id}}}";
+	var playingId = "";
+	var playingVideo = "";
+	
+	function prePage() {
+		if (page <= 1) {
+			alert("不能再往前翻页啦！");
+		} else {
+			if (id != "") {
+				location='http://{{_pjango_url_bilibili_feed}}?id=' + id + '&page=' + (page - 1);
+			} else {
+				location='http://{{_pjango_url_bilibili_feed}}?page=' + (page - 1);
+			}
+		}
+	}
+	
+	function nextPage() {
+		if (page >= total) {
+			alert("不能再往后翻页啦！");
+		} else {
+			if (id != "") {
+				location='http://{{_pjango_url_bilibili_feed}}?id=' + id + '&page=' + (page + 1);
+			} else {
+				location='http://{{_pjango_url_bilibili_feed}}?page=' + (page + 1);
+			}
+		}
+	}
+	
+	function onlyDisplay(id) {
+		if (id == "") {
+			location='http://{{_pjango_url_bilibili_feed}}';
+		} else {
+			location='http://{{_pjango_url_bilibili_feed}}?id=' + id;
+		}
+	}
+	
+	function playVideoInCell(cellId, video) {
+		if (playingId != '') {
+			removePlayer();
+		}
+		addPlayer(cellId, video);
+	}
+	
+	function removePlayer() {
+		$('#player_' + playingId).remove();
+		$('#cover_' + playingId).show();
+		playingId = '';
+		playingVideo = '';
+	}
+	
+	function addPlayer(cellId, video) {
+		var height = $('#cover_' + cellId).height();
+		$('#cover_' + cellId).hide();
+		$('#player_container_' + cellId).append('<iframe id="player_' + cellId  + '" src="' + video + '" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width: 100%; height: ' + height +';"> </iframe>');
+		playingId = cellId;
+		playingVideo = video;
+	}
+	
+	window.onresize = function() {
+		if (playingId != 'null') {
+			var height = $('#player_' + playingId).width() * 0.625;
+			$('#player_' + playingId).height(height);
+		}
+	}
+	
+</script>
+</body>
+</html>
+

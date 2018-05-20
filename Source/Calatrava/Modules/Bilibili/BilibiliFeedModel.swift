@@ -17,6 +17,7 @@ class BilibiliFeedModel: PCModel {
     var bvid = PCDataBaseField.init(name: "BVID", type: .int)
     var blid = PCDataBaseField.init(name: "BLID", type: .int)
     var url = PCDataBaseField.init(name: "URL", type: .string, length: 1024)
+    var player = PCDataBaseField.init(name: "PLAYER", type: .string, length: 1024)
     var name = PCDataBaseField.init(name: "NAME", type: .string, length: 256, notNull: true, defaultValue: "null")
     var memo = PCDataBaseField.init(name: "MEMO", type: .string, length: 1024)
     var cover = PCDataBaseField.init(name: "COVER", type: .string, length: 1024, notNull: true, defaultValue: "null")
@@ -24,7 +25,7 @@ class BilibiliFeedModel: PCModel {
     
     override func registerFields() -> [PCDataBaseField] {
         return [
-            bvid, blid, url, name, memo, cover, date
+            bvid, blid, url, player, name, memo, cover, date
         ]
     }
     

@@ -24,6 +24,7 @@ enum VisitStatisticsEventType: String {
     case commentCorpusPosts = "COMMENT_CORPUS_POSTS"
     case leaveMessage = "LEAVE_MESSAGE"
     case visitInstagram = "VISIT_INSTAGRAM"
+    case visitBilibili = "VISIT_BILIBILI"
 }
 
 class VisitStatisticsModel: PCModel {

@@ -96,6 +96,10 @@ class AppDelegate: PjangoDelegate {
             "instagram.\(WEBSITE_HOST)": [
                 pjangoUrl("feed", name: "feed", handle: InstagramListView.asHandle()),
                 pjangoUrl("resource", name: "resource", handle: InstagramCurlHandle)
+            ],
+            
+            "bilibili.\(WEBSITE_HOST)": [
+                pjangoUrl("feed", name: "feed", handle: BilibiliListView.asHandle()),
             ]
         ]
     }
@@ -131,6 +135,9 @@ class AppDelegate: PjangoDelegate {
             InstagramFeedModel.meta,
             
             PostmanConfigModel.meta,
+            
+            BilibiliListModel.meta,
+            BilibiliFeedModel.meta,
         ]
     }
 

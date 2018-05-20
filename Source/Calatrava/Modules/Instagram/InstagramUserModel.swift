@@ -21,7 +21,7 @@ class InstagramUserModel: PCModel {
     var full_name = PCDataBaseField.init(name: "FULL_NAME", type: .string, length: 256, notNull: true, defaultValue: "null")
     var bio = PCDataBaseField.init(name: "BIO", type: .string, length: 1024, notNull: true, defaultValue: "null")
     var head = PCDataBaseField.init(name: "HEAD", type: .string, length: 1024, notNull: true, defaultValue: "http:///")
-    var updateDate = PCDataBaseField.init(name: "UPDATE_DATE", type: .string, length: 20, notNull: true, defaultValue: "1970-01-01 08:00:00")
+    var updateDate = PCDataBaseField.init(name: "UPDATE_DATE", type: .string, length: 20, notNull: true, defaultValue: "1970-01-01 08:00")
 
     override func registerFields() -> [PCDataBaseField] {
         return [

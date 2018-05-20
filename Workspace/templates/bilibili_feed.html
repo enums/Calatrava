@@ -24,7 +24,7 @@
 	}
 	a.link {
 		cursor: hand;
-		color: orange;
+		color: white;
 		font-size: 22px;
 	}
 	div.caption {
@@ -79,7 +79,6 @@
 		overflow: hidden;
 		background: rgba(255, 255, 255, 0.4);
 		border-radius: 8px;
-		cursor: hand;
 	}
 	p.img-container img {
 		width: 100%;
@@ -142,7 +141,7 @@
 							<p class="small-caption text-center">{{_pjango_param_table_BilibiliList_NAME}}</p>
 						</div>
 						<p class="img-container">
-							<a><img src="http://{{_pjango_param_table_BilibiliList_COVER_URL}}" onclick="onlyDisplay('{{{_pjango_param_table_BilibiliList_LIST_BUTTON_ID}}}')">
+							<img src="http://{{_pjango_param_table_BilibiliList_COVER_URL}}">
 						</p>
 						<p class="text">简介：{{_pjango_param_table_BilibiliList_MEMO}}</p>
 						<p class="text">视频数量：{{_pjango_param_table_BilibiliList_VIDEO_COUNT}}</p>
@@ -161,13 +160,13 @@
 						<div class="col-md-12 column" style="height: 20px;"></div>
 						<p class="title">
 							<img class="head img-circle" src="/img/bilibili/head.jpg">
-							<a class="link" target="_blank" style="color: white" href="https://space.bilibili.com/1135309/">{{_pjango_param_name}}</a>
+							<a class="link" target="_blank" href="https://space.bilibili.com/1135309/">{{_pjango_param_name}}</a>
 						</p>
 						<div class="col-md-12 column caption">
-							<p class="caption">{{_pjango_param_table_BilibiliFeed_LIST_NAME}} —— {{_pjango_param_table_BilibiliFeed_NAME}}</p>
+							<p class="caption"><a class="link" target="_blank" href="{{_pjango_param_table_BilibiliFeed_URL}}">{{_pjango_param_table_BilibiliFeed_LIST_NAME}} —— {{_pjango_param_table_BilibiliFeed_NAME}}</a></p>
 						</div>
 						<p class="img-container" id="player_container_{{_pjango_param_table_BilibiliFeed_BVID}}">
-							<img id="cover_{{_pjango_param_table_BilibiliFeed_BVID}}" src="http://{{_pjango_param_table_BilibiliFeed_COVER_URL}}" onclick="playVideoInCell('{{_pjango_param_table_BilibiliFeed_BVID}}', '{{_pjango_param_table_BilibiliFeed_URL}}')">
+							<img style="cursor: hand;" id="cover_{{_pjango_param_table_BilibiliFeed_BVID}}" src="http://{{_pjango_param_table_BilibiliFeed_COVER_URL}}" onclick="playVideoInCell('{{_pjango_param_table_BilibiliFeed_BVID}}', '{{_pjango_param_table_BilibiliFeed_PLAYER}}')">
 						</p>
 						<p class="title">{{_pjango_param_table_BilibiliFeed_MEMO}}</p>
 						<div>

@@ -60,7 +60,7 @@ class BilibiliListView: PCListView {
             }
             let videos = (BilibiliFeedModel.queryObjects() as! [BilibiliFeedModel]).filter { $0.blid.intValue == list.blid.intValue }
             let videoCount = videos.count
-            let lastUpdate = videos.last?.date.strValue ?? "1970-01-01 08:00:00"
+            let lastUpdate = videos.last?.date.strValue ?? "1970-01-01 08:00"
             return [
                 "_pjango_param_table_BilibiliList_COVER_URL": coverUrl,
                 "_pjango_param_table_BilibiliList_VIDEO_COUNT": "\(videoCount)",
@@ -91,7 +91,7 @@ class BilibiliListView: PCListView {
         if let pageParam = Int(request.getUrlParam(key: "page") ?? ""), pageParam > 0 {
             page = pageParam
         }
-        let eachPageFeedCount = 6
+        let eachPageFeedCount = 5
         let begin = eachPageFeedCount * (page - 1)
         let end = eachPageFeedCount * page - 1
         var bilibiliFeed = [BilibiliFeedModel].init()

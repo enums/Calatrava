@@ -29,10 +29,13 @@ class IndexView: PCDetailView {
             "_pjango_param_name": name,
             "_pjango_param_message": indexMessage,
             
-            "_pjango_url_posts_posts_list": pjangoUrlReverse(host: "posts.\(WEBSITE_HOST)", name: "list")!,
-            "_pjango_url_posts_project_list": pjangoUrlReverse(host: "project.\(WEBSITE_HOST)", name: "list")!,
-            "_pjango_url_posts_corpus_list": pjangoUrlReverse(host: "corpus.\(WEBSITE_HOST)", name: "list")!,
-            "_pjango_url_posts_about": pjangoUrlReverse(host: "\(WEBSITE_HOST)", name: "about")!,
+            "_pjango_url_posts_posts_list": pjangoUrlReverse(host: "posts.\(WEBSITE_HOST)", name: "list") ?? "",
+            "_pjango_url_posts_project_list": pjangoUrlReverse(host: "project.\(WEBSITE_HOST)", name: "list") ?? "",
+            "_pjango_url_posts_corpus_list": pjangoUrlReverse(host: "corpus.\(WEBSITE_HOST)", name: "list") ?? "",
+            "_pjango_url_posts_about": pjangoUrlReverse(host: "\(WEBSITE_HOST)", name: "about") ?? "",
+            "_pjango_url_update": pjangoUrlReverse(host: "\(WEBSITE_HOST)", name: "update") ?? "",
+            "_pjango_url_instagram_feed": pjangoUrlReverse(host: "instagram.\(WEBSITE_HOST)", name: "feed") ?? "",
+            "_pjango_url_bilibili_feed": pjangoUrlReverse(host: "bilibili.\(WEBSITE_HOST)", name: "feed") ?? "",
         ]
     }
 }

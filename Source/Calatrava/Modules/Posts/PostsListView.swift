@@ -16,23 +16,22 @@ class PostsListView: PCListView {
     }
     
     override var listObjectSets: [String : [PCModel]]? {
-        guard var postsList = PostsModel.queryObjects() else {
+        guard var postsList = PostsModel.queryObjects() as? [PostsModel] else {
             return nil
         }
+        postsList.sort(by: { return $0.date.strValue < $1.date.strValue })
         if let req = currentRequest {
             var needHooks = false
             if let tag = req.getUrlParam(key: "tag") {
                 needHooks = true
-                postsList = postsList.filter {
-                    let posts = $0 as! PostsModel
+                postsList = postsList.filter { posts in
                     return (posts.tag.value as! String).components(separatedBy: "|").contains(tag)
                 }
             }
             let keyword = req.getUrlParam(key: "keyword")?.lowercased()
             if let keyword = keyword {
                 needHooks = true
-                postsList = postsList.filter {
-                    let posts = $0 as! PostsModel
+                postsList = postsList.filter { posts in
                     return (posts.title.value as! String).lowercased().contains(keyword) ||
                         (posts.date.value as! String).lowercased().contains(keyword)
                 }
@@ -43,8 +42,7 @@ class PostsListView: PCListView {
                 EventHooks.hookPostsList(req: currentRequest)
             }
         }
-        postsList = postsList.reversed().map {
-            let posts = $0 as! PostsModel
+        postsList = postsList.reversed().map { posts in
             posts.date.value = posts.date.strValue.components(separatedBy: " ")[0]
 
             return posts

@@ -76,6 +76,7 @@ class AppDelegate: PjangoDelegate {
                 pjangoUrl("list", name: "list", handle: PostsListView.asHandle()),
                 pjangoUrl("posts/{pid}", name: "posts", handle: PostsView.asHandle()),
                 pjangoUrl("search", name: "search", handle: PostsSearchView.asHandle()),
+                pjangoUrl("archive", handle: PostsArchiveView.asHandle()),
                 
                 pjangoUrl("api/love", name: "api.love@posts", handle: postsLoveHandle),
                 pjangoUrl("api/comment", name: "api.comment@posts", handle: postsCommentHandle),
@@ -94,11 +95,17 @@ class AppDelegate: PjangoDelegate {
             ],
             
             "instagram.\(WEBSITE_HOST)": [
+                pjangoUrl("list", name: "list", handle: InstagramListView.asHandle()),
+                pjangoUrl("resource", name: "resource", handle: InstagramCurlHandle),
+                
+                // old
                 pjangoUrl("feed", name: "feed", handle: InstagramListView.asHandle()),
-                pjangoUrl("resource", name: "resource", handle: InstagramCurlHandle)
             ],
             
             "bilibili.\(WEBSITE_HOST)": [
+                pjangoUrl("list", name: "list", handle: BilibiliListView.asHandle()),
+                
+                // old
                 pjangoUrl("feed", name: "feed", handle: BilibiliListView.asHandle()),
             ]
         ]

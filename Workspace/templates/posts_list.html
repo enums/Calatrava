@@ -2,7 +2,7 @@
 <head>
 	<meta charset="utf-8"> 
 	<meta name="viewport" content="user-scalable=no, width=720px, height=1280px"/>
-	<title>博文列表 | {{_pjango_param_title_message}}</title>
+	<title>技术博文列表 | {{_pjango_param_title_message}}</title>
 	<link rel="stylesheet" href="/css/bootstrap.min.css">  
 	<link rel="stylesheet" href="/css/font-awesome.min.css"> 
 	<link rel="stylesheet" href="/css/buttons.css">  
@@ -120,17 +120,11 @@
 					<div class="col-md-12 column corner-window shadow">
 						<div class="gap"></div>
 						<div class="text-center">
-							<button class="button button-primary button-plain button-rounded button-border button-primary title">归档</button>
+							<button class="button button-primary button-plain button-rounded button-border button-primary search" onclick="location='http://{{_pjango_url_posts_archive}}'"><i class="fa fa-fw fa-archive"></i>博文归档</button>
 						</div>
 						<div class="gap"></div>
-{{#_pjango_param_table_posts}}
-					<div class="col-md-12 column archive-cell">
-						<p class="time">{{_pjango_param_table_Posts_DATE}}</p>
-						<a class="text" href="http://{{{_pjango_url_posts_list}}}/posts/{{{_pjango_param_table_Posts_PID}}}">{{_pjango_param_table_Posts_TITLE}}</a>
 					</div>
-{{/_pjango_param_table_posts}}
-
-					</div>
+					<div class="col-md-12 column gap"></div>
 				</div>
 			</div>
 			<div class="col-md-8 column">
@@ -173,20 +167,68 @@
 
 			</div>
 		</div>
-		<div class="col-md-12 column" style="height: 100px;">
-			<div style="height: 20px;"></div>
-			<div class="col-md-6 column col-center corner-window shadow text-center">
-				<div style="height: 10px;"></div>
-				<a class="button button-plain button-border button-block end-button" onclick="toTop()">回到顶部</a>
-				<div style="height: 10px;"></div>
+		<div class="col-md-12 column">
+			<div class="col-md-8 col-md-offset-2 column">
+				<div style="height: 20px;"></div>
+				<div class="col-md-4 column corner-window shadow text-center">
+					<div style="height: 10px;"></div>
+					<a class="button button-plain button-border button-block end-button" onclick="prePage()">上一页</a>
+					<div style="height: 10px;"></div>
+				</div>
+				<div class="col-md-4 column text-center">
+					<div class="col-md-12 column corner-window text-center" style="height: 60px">
+						<div style="height: 20px;"></div>
+							<p class="text">第 {{_pjango_param_param_page}} / {{_pjango_param_param_page_total}} 页，共 {{_pjango_param_param_total_count}} 条</p>
+					</div>
+				</div>
+				<div class="col-md-4 column corner-window shadow text-center">
+					<div style="height: 10px;"></div>
+					<a class="button button-plain button-border button-block end-button" onclick="nextPage()">下一页</a>
+					<div style="height: 10px;"></div>
+				</div>
 			</div>
 		</div>
-
+		<div class="col-md-12 column" style="height: 20px"></div>
 	</div>
 	
 {{{_pjango_template_footer_bar}}}
 </div>
-
+<script>
+	var page = {{{_pjango_param_param_page}}};
+	var total = {{{_pjango_param_param_page_total}}};
+	var tag = "{{{_pjango_param_param_tag}}}";
+	var keyword = "{{{_pjango_param_param_keyword}}}";
+	
+	function prePage() {
+		if (page <= 1) {
+			alert("不能再往前翻页啦！");
+		} else {
+			var l = 'http://{{_pjango_url_posts_list}}/list?page=' + (page - 1);
+			if (tag != "") {
+				l = l + '&tag=' + tag;
+			}
+			if (keyword != "") {
+				l = l + '&keyword=' + keyword;
+			}
+			location = l;
+		}
+	}
+	
+	function nextPage() {
+		if (page >= total) {
+			alert("不能再往后翻页啦！");
+		} else {
+			var l = 'http://{{_pjango_url_posts_list}}/list?page=' + (page + 1);
+			if (tag != "") {
+				l = l + '&tag=' + tag;
+			}
+			if (keyword != "") {
+				l = l + '&keyword=' + keyword;
+			}
+			location = l;
+		}
+	}
+</script>
 </body>
 </html>
 

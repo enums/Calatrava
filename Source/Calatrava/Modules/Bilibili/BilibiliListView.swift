@@ -11,7 +11,7 @@ import Pjango
 class BilibiliListView: PCListView {
     
     override var templateName: String? {
-        return "bilibili_feed.html"
+        return "bilibili_list.html"
     }
     
     var displayFeed: [BilibiliFeedModel]?
@@ -20,9 +20,11 @@ class BilibiliListView: PCListView {
         defer {
             displayFeed = nil
         }
+        var list = BilibiliListModel.queryObjects() as? [BilibiliListModel]
+        list?.sort(by: { $0.0.updateDate > $0.1.updateDate });
         return [
             "_pjango_param_table_bilibili_feed": displayFeed ?? [],
-            "_pjango_param_table_bilibili_list": BilibiliListModel.queryObjects()?.reversed() ?? []
+            "_pjango_param_table_bilibili_list": list ?? []
         ]
     }
     
@@ -111,7 +113,7 @@ class BilibiliListView: PCListView {
             "_pjango_template_navigation_bar": NavigationBarView.html,
             "_pjango_template_footer_bar": FooterBarView.html,
             "_pjango_param_title_message": titleMessage,
-            "_pjango_url_bilibili_feed": "bilibili.\(WEBSITE_HOST)/feed",
+            "_pjango_url_bilibili_list": "bilibili.\(WEBSITE_HOST)/list",
 
             "_pjango_param_param_id": id,
             "_pjango_param_name": bilibiliName,

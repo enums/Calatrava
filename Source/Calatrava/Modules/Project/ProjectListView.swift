@@ -37,7 +37,7 @@ class ProjectListView: PCListView {
     override var viewParam: PCViewParam? {
         EventHooks.hookProject(req: currentRequest)
         
-        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? ""
+        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? "null"
         
         return [
             "_pjango_template_navigation_bar": NavigationBarView.html,

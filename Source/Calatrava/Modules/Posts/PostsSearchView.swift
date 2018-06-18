@@ -17,7 +17,7 @@ class PostsSearchView: PCDetailView {
     
     override var viewParam: PCViewParam? {
         
-        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? ""
+        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? "null"
         let allTags = PostsTagModel.queryObjects()?.map { $0.toViewParam() } ?? []
 
         return [

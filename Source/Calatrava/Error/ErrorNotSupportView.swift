@@ -19,7 +19,7 @@ class ErrorNotSupportView: PCDetailView {
         return [
             "_pjango_template_navigation_bar": NavigationBarView.html,
             "_pjango_template_footer_bar": FooterBarView.html,
-            "_pjango_param_title_message": ConfigModel.getValueForKey(.titleMessage) ?? "",
+            "_pjango_param_title_message": ConfigModel.getValueForKey(.titleMessage) ?? "null",
             
             "_pjango_param_website_host": WEBSITE_HOST,
         ]

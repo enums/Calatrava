@@ -44,7 +44,7 @@ class BilibiliListView: PCListView {
             let listName = fromList?.name.strValue
             return [
                 "_pjango_param_table_BilibiliFeed_COVER_URL": coverUrl,
-                "_pjango_param_table_BilibiliFeed_LIST_NAME": listName ?? ""
+                "_pjango_param_table_BilibiliFeed_LIST_NAME": listName ?? "null"
             ]
         } else if list == "_pjango_param_table_bilibili_list" {
             guard let list = model as? BilibiliListModel else {
@@ -103,9 +103,9 @@ class BilibiliListView: PCListView {
         }
         displayFeed = bilibiliFeed
         
-        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? ""
-        let bilibiliName = ConfigModel.getValueForKey(.bilibiliName) ?? ""
-        let bilibiliMessage = ConfigModel.getValueForKey(.bilibiliMessage) ?? ""
+        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? "null"
+        let bilibiliName = ConfigModel.getValueForKey(.bilibiliName) ?? "null"
+        let bilibiliMessage = ConfigModel.getValueForKey(.bilibiliMessage) ?? "null"
 
         EventHooks.hookBilibili(req: request)
 

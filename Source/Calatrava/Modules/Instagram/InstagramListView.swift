@@ -88,8 +88,8 @@ class InstagramListView: PCListView {
         }
         displayFeed = insFeed
         
-        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? ""
-        let instagramMessage = ConfigModel.getValueForKey(.instagramMessage) ?? ""
+        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? "null"
+        let instagramMessage = ConfigModel.getValueForKey(.instagramMessage) ?? "null"
         
         EventHooks.hookInstagram(req: request)
         

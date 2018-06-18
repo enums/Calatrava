@@ -75,6 +75,10 @@ class EventHooks {
     static func hookLeaveMessage(req: HTTPRequest?) {
         StatisticsManager.statisticsEvent(eventType: .leaveMessage, req: req)
     }
+    
+    static func hookBlogUpdate(req: HTTPRequest?) {
+        StatisticsManager.statisticsEvent(eventType: .blogUpdate, req: req)
+    }
 
     static internal func addCountForKey(_ key: ConfigModelKey) {
         if Int(ConfigModel.getValueForKey(key) ?? "") == nil {

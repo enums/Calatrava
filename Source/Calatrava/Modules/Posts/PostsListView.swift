@@ -88,8 +88,8 @@ class PostsListView: PCListView {
         }
         displayPosts = posts
 
-        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? ""
-        let postsListMessage = ConfigModel.getValueForKey(.postsListMessage) ?? ""
+        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? "null"
+        let postsListMessage = ConfigModel.getValueForKey(.postsListMessage) ?? "null"
         let allTags = PostsTagModel.queryObjects()?.map { $0.toViewParam() } ?? []
         
         return [

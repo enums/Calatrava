@@ -18,9 +18,9 @@ class IndexView: PCDetailView {
     override var viewParam: PCViewParam? {
         EventHooks.hookIndex(req: currentRequest)
         
-        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? ""
-        let name = ConfigModel.getValueForKey(.name) ?? ""
-        let indexMessage = ConfigModel.getValueForKey(.indexMessage) ?? ""
+        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? "null"
+        let name = ConfigModel.getValueForKey(.name) ?? "null"
+        let indexMessage = ConfigModel.getValueForKey(.indexMessage) ?? "null"
 
         return [
             "_pjango_template_navigation_bar": NavigationBarView.html,

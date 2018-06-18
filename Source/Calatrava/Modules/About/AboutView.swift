@@ -53,7 +53,7 @@ class AboutView: PCListView {
             $0 + $1.love.intValue
         }
         
-        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? ""
+        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? "null"
         
         let counterIndex = Int(ConfigModel.getValueForKey(.counterIndex) ?? "0") ?? 0
         let counterList = Int(ConfigModel.getValueForKey(.counterPostsList) ?? "0") ?? 0

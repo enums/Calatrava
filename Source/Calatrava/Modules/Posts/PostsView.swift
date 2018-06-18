@@ -94,8 +94,8 @@ class PostsView: PCListView {
         let comment = posts.commentsCount
         let love = posts.love.intValue
         
-        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? ""
-        let name = ConfigModel.getValueForKey(.name) ?? ""
+        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? "null"
+        let name = ConfigModel.getValueForKey(.name) ?? "null"
         
         return [
             "_pjango_template_navigation_bar": NavigationBarView.html,

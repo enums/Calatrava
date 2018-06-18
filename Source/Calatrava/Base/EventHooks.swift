@@ -47,6 +47,10 @@ class EventHooks {
         StatisticsManager.statisticsEvent(eventType: .commentPosts, param: "\(pid)", req: req)
     }
     
+    static func hookPostsArchive(req: HTTPRequest?) {
+        StatisticsManager.statisticsEvent(eventType: .archivePosts, req: req)
+    }
+    
     static func hookCorpusList(req: HTTPRequest?) {
         addCountForKey(.counterPostsList)
         StatisticsManager.statisticsEvent(eventType: .listCorpus, req: req)
@@ -70,6 +74,10 @@ class EventHooks {
     
     static func hookLeaveMessage(req: HTTPRequest?) {
         StatisticsManager.statisticsEvent(eventType: .leaveMessage, req: req)
+    }
+    
+    static func hookBlogUpdate(req: HTTPRequest?) {
+        StatisticsManager.statisticsEvent(eventType: .blogUpdate, req: req)
     }
 
     static internal func addCountForKey(_ key: ConfigModelKey) {

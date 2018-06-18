@@ -39,7 +39,7 @@ class CorpusListView: PCListView {
     override var viewParam: PCViewParam? {
         EventHooks.hookCorpusList(req: currentRequest)
         
-        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? ""
+        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? "null"
         
         return [
             "_pjango_template_navigation_bar": NavigationBarView.html,

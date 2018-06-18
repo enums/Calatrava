@@ -1,0 +1,186 @@
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="user-scalable=no, width=720px, height=1280px"/>
+	<title>博客动态聚合 | {{_pjango_param_title_message}}</title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">  
+	<link rel="stylesheet" href="/css/font-awesome.min.css"> 
+	<link rel="stylesheet" href="/css/buttons.css">  
+	<link rel="stylesheet" href="/css/height.css">  
+	<link rel="stylesheet" href="/css/me.css">  
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/buttons.js"></script>
+	<script src="/js/me.js"></script>
+</head>
+<style>
+	p.title {
+		color: white;
+		font-size: 22px;
+	}
+	p.text {
+		color: white;
+		font-size: 16px;
+	}
+	a.link {
+		cursor: hand;
+		color: white;
+		font-size: 22px;
+	}
+	div.caption {
+		height: 0px;
+		padding-top: 1px;
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	p.caption {
+		color: white;
+		font-size: 22px;
+		padding-top: 8px;
+		padding-left: 8px;
+		padding-right: 8px;
+		padding-bottom: 8px;
+		background: rgba(0, 0, 0, 0.8);
+		border-radius: 8px;
+	}
+	p.small-caption {
+		color: white;
+		font-size: 18px;
+		padding-top: 8px;
+		padding-left: 8px;
+		padding-right: 8px;
+		padding-bottom: 8px;
+		background: rgba(0, 0, 0, 0.6);
+		border-radius: 8px;
+	}
+	i.text {
+		color: white;
+		font-size: 16px;
+	}
+	div.cell {
+		transition:background-color 0.3s linear;
+	}
+	div.cell:hover {
+		background-color: rgba(128, 128, 128, 0.6);
+	}
+	div.archive-cell {
+		padding-bottom: 16px;
+	}
+	div.gap {
+		height: 24px;
+	}
+	div.header {
+		height: 60px;
+	}
+	p.image-container {
+		width: 100%;
+		height: 0;
+		padding-bottom: 100%;
+		overflow: hidden;
+		background: rgba(255, 255, 255, 0.4);
+		border-radius: 8px;
+	}
+	p.image-container img {
+		width: 100%;
+		border-radius: 8px;
+	}
+	button.title {
+		font-size: 20px;
+		pointer-events: none;
+	}
+	button.search {
+		font-size: 20px;
+		width: 100%;
+	}
+	a.title {
+		color: white;
+		font-size:22px;
+	}
+	a.text {
+		color: white;
+		font-size:18px;
+	}
+	a.tag {
+		line-height: 2.5em;
+		margin-right: 8px;
+	}
+	a.link {
+		color: orange;
+	}
+	img.head{
+		width: 48px;
+		height: 48px;
+		min-height: 48px;
+		max-height: 48px;
+	}
+</style>
+<body class="main">
+	
+<div class="box">
+	
+{{{_pjango_template_navigation_bar}}}
+	
+	<div class="col-md-12 column height-more-than-85">
+		<div class="col-md-10 col-md-offset-1 column">
+			<div class="col-md-6 column">
+				<div class="col-md-12 column gap"></div>
+{{#_pjango_param_table_update_1}}
+				{{{_pjango_param_table_update_HTML}}}
+{{/_pjango_param_table_update_1}}
+			</div>
+			<div class="col-md-6 column">
+				<div class="col-md-12 column gap"></div>
+{{#_pjango_param_table_update_2}}
+				{{{_pjango_param_table_update_HTML}}}
+{{/_pjango_param_table_update_2}}
+			</div>
+		</div>
+		<div class="col-md-12 column">
+			<div class="col-md-8 col-md-offset-2 column">
+				<div style="height: 20px;"></div>
+				<div class="col-md-4 column corner-window shadow text-center">
+					<div style="height: 10px;"></div>
+					<a class="button button-plain button-border button-block end-button" onclick="prePage()">上一页</a>
+					<div style="height: 10px;"></div>
+				</div>
+				<div class="col-md-4 column text-center">
+					<div class="col-md-12 column corner-window text-center" style="height: 60px">
+						<div style="height: 20px;"></div>
+							<p class="text">第 {{_pjango_param_param_page}} / {{_pjango_param_param_page_total}} 页，共 {{_pjango_param_param_total_count}} 条</p>
+					</div>
+				</div>
+				<div class="col-md-4 column corner-window shadow text-center">
+					<div style="height: 10px;"></div>
+					<a class="button button-plain button-border button-block end-button" onclick="nextPage()">下一页</a>
+					<div style="height: 10px;"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 column" style="height: 20px"></div>
+	</div>
+	
+{{{_pjango_template_footer_bar}}}
+</div>
+<script>
+	var page = {{{_pjango_param_param_page}}};
+	var total = {{{_pjango_param_param_page_total}}};
+	
+	function prePage() {
+		if (page <= 1) {
+			alert("不能再往前翻页啦！");
+		} else {
+			location = 'http://{{_pjango_url_update}}?page=' + (page - 1);
+		}
+	}
+	
+	function nextPage() {
+		if (page >= total) {
+			alert("不能再往后翻页啦！");
+		} else {
+			location = 'http://{{_pjango_url_update}}?page=' + (page + 1);
+		}
+	}
+</script>
+</body>
+</html>
+

@@ -12,7 +12,7 @@ import Pjango_Postman
 class InstagramListView: PCListView {
     
     override var templateName: String? {
-        return "instagram_feed.html"
+        return "instagram_list.html"
     }
     
     var displayFeed: [InstagramFeedModel]?
@@ -88,8 +88,8 @@ class InstagramListView: PCListView {
         }
         displayFeed = insFeed
         
-        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? ""
-        let instagramMessage = ConfigModel.getValueForKey(.instagramMessage) ?? ""
+        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? "null"
+        let instagramMessage = ConfigModel.getValueForKey(.instagramMessage) ?? "null"
         
         EventHooks.hookInstagram(req: request)
         
@@ -97,7 +97,7 @@ class InstagramListView: PCListView {
             "_pjango_template_navigation_bar": NavigationBarView.html,
             "_pjango_template_footer_bar": FooterBarView.html,
             "_pjango_param_title_message": titleMessage,
-            "_pjango_url_instagram_feed": "instagram.\(WEBSITE_HOST)/feed",
+            "_pjango_url_instagram_list": "instagram.\(WEBSITE_HOST)/list",
             
             "_pjango_param_message": instagramMessage,
             "_pjango_param_param_page": page,

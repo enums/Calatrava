@@ -51,12 +51,12 @@ class CorpusPostsListView: PCListView {
     override var viewParam: PCViewParam? {
         EventHooks.hookCorpusPostsList(req: currentRequest, cid: currentCID ?? -1)
 
-        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? ""
+        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? "null"
         let corpusModel = (CorpusModel.queryObjects() as? [CorpusModel])?.filter {
             $0.cid.intValue == currentCID
         }.first
-        let postsListMessage = corpusModel?.memo.strValue ?? ""
-        let postsListTitle = corpusModel?.title.strValue ?? ""
+        let postsListMessage = corpusModel?.memo.strValue ?? "null"
+        let postsListTitle = corpusModel?.title.strValue ?? "null"
 
         return [
             "_pjango_template_navigation_bar": NavigationBarView.html,

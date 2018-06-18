@@ -15,7 +15,7 @@ class ErrorNotFoundView: PCDetailView {
         return "error_404.html"
     }
     
-    let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? ""
+    let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? "null"
 
     override var viewParam: PCViewParam? {
         return [

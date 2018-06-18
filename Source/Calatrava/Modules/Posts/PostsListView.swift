@@ -15,43 +15,11 @@ class PostsListView: PCListView {
         return "posts_list.html"
     }
     
+    var displayPosts: [PostsModel]?
+    
     override var listObjectSets: [String : [PCModel]]? {
-        guard var postsList = PostsModel.queryObjects() else {
-            return nil
-        }
-        if let req = currentRequest {
-            var needHooks = false
-            if let tag = req.getUrlParam(key: "tag") {
-                needHooks = true
-                postsList = postsList.filter {
-                    let posts = $0 as! PostsModel
-                    return (posts.tag.value as! String).components(separatedBy: "|").contains(tag)
-                }
-            }
-            let keyword = req.getUrlParam(key: "keyword")?.lowercased()
-            if let keyword = keyword {
-                needHooks = true
-                postsList = postsList.filter {
-                    let posts = $0 as! PostsModel
-                    return (posts.title.value as! String).lowercased().contains(keyword) ||
-                        (posts.date.value as! String).lowercased().contains(keyword)
-                }
-            }
-            if needHooks {
-                EventHooks.hookPostsSearch(req: currentRequest, keyword: keyword)
-            } else {
-                EventHooks.hookPostsList(req: currentRequest)
-            }
-        }
-        postsList = postsList.reversed().map {
-            let posts = $0 as! PostsModel
-            posts.date.value = posts.date.strValue.components(separatedBy: " ")[0]
-
-            return posts
-        }
-        
         return [
-            "_pjango_param_table_posts": postsList
+            "_pjango_param_table_posts": displayPosts ?? []
         ]
 
     }
@@ -69,22 +37,59 @@ class PostsListView: PCListView {
     
     override var viewParam: PCViewParam? {
         var listTitle = "博文列表"
-        if let req = currentRequest {
-            let tag = req.getUrlParam(key: "tag")
-            let keyword = req.getUrlParam(key: "keyword")
-            if tag == nil, keyword == nil {
-                listTitle = "全部博文"
-            } else if let tag = tag, keyword == nil {
-                listTitle = "标签是 `\(tag)` 的博文"
-            } else if tag == nil, let keyword = keyword {
-                listTitle = "包含 `\(keyword)` 关键字的博文"
-            } else if let tag = tag, let keyword = keyword {
-                listTitle = "标签是 `\(tag)` 且包含 `\(keyword)` 关键字的博文"
-            }
+        guard let req = currentRequest, var postsList = PostsModel.queryObjects() as? [PostsModel] else {
+            return nil;
+        }
+        postsList.sort(by: { return $0.date.strValue > $1.date.strValue })
+        
+        let tag = req.getUrlParam(key: "tag")
+        let keyword = req.getUrlParam(key: "keyword")
+        if tag == nil, keyword == nil {
+            listTitle = "全部博文"
+        } else if let tag = tag, keyword == nil {
+            listTitle = "标签是 `\(tag)` 的博文"
+        } else if tag == nil, let keyword = keyword {
+            listTitle = "包含 `\(keyword)` 关键字的博文"
+        } else if let tag = tag, let keyword = keyword {
+            listTitle = "标签是 `\(tag)` 且包含 `\(keyword)` 关键字的博文"
         }
         
-        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? ""
-        let postsListMessage = ConfigModel.getValueForKey(.postsListMessage) ?? ""
+        var needHooks = false
+        if let tag = tag {
+            needHooks = true
+            postsList = postsList.filter { posts in
+                return (posts.tag.value as! String).components(separatedBy: "|").contains(tag)
+            }
+        }
+        if let keyword = keyword?.lowercased() {
+            needHooks = true
+            postsList = postsList.filter { posts in
+                return (posts.title.value as! String).lowercased().contains(keyword) ||
+                    (posts.date.value as! String).lowercased().contains(keyword)
+            }
+        }
+        if needHooks {
+            EventHooks.hookPostsSearch(req: currentRequest, keyword: keyword)
+        } else {
+            EventHooks.hookPostsList(req: currentRequest)
+        }
+        
+        var page = 1
+        if let pageParam = Int(req.getUrlParam(key: "page") ?? ""), pageParam > 0 {
+            page = pageParam
+        }
+        let eachPageFeedCount = 12
+        let begin = eachPageFeedCount * (page - 1)
+        let end = eachPageFeedCount * page - 1
+        var posts = [PostsModel].init()
+        if (begin < postsList.count) {
+            let trueEnd = min(postsList.count - 1, end)
+            posts = Array(postsList[begin..<(trueEnd + 1)])
+        }
+        displayPosts = posts
+
+        let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? "null"
+        let postsListMessage = ConfigModel.getValueForKey(.postsListMessage) ?? "null"
         let allTags = PostsTagModel.queryObjects()?.map { $0.toViewParam() } ?? []
         
         return [
@@ -94,10 +99,17 @@ class PostsListView: PCListView {
             
             "_pjango_url_posts_list": "posts.\(WEBSITE_HOST)",
             "_pjango_url_posts_search": "posts.\(WEBSITE_HOST)/search",
+            "_pjango_url_posts_archive": "posts.\(WEBSITE_HOST)/archive",
             
             "_pjango_param_message": postsListMessage,
             "_pjango_param_list_title": listTitle,
-            "_pjango_param_all_tags": allTags
+            "_pjango_param_all_tags": allTags,
+            "_pjango_param_param_page": page,
+            "_pjango_param_param_page_total": max(0, postsList.count - 1) / eachPageFeedCount + 1,
+            "_pjango_param_param_total_count": postsList.count,
+            "_pjango_param_param_tag": tag ?? "",
+            "_pjango_param_param_keyword": keyword ?? "",
+
         ]
     }
 }

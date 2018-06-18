@@ -64,8 +64,21 @@ class UpdateListView: PCListView {
     }
     
     override var listObjectSets: [String : [PCModel]]? {
+        guard let updates = displayUpdates else {
+            return nil
+        }
+        var list1 = [UpdateModel]()
+        var list2 = [UpdateModel]()
+        for i in 0..<updates.count {
+            if i % 2 == 0 {
+                list1.append(updates[i])
+            } else {
+                list2.append(updates[i])
+            }
+        }
         return [
-            "_pjango_param_table_update": displayUpdates ?? []
+            "_pjango_param_table_update_1": list1,
+            "_pjango_param_table_update_2": list2
         ]
     }
     

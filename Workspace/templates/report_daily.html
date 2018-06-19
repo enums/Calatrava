@@ -1,0 +1,357 @@
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="user-scalable=no, width=720px, height=1280px"/>
+	<title>数据日报 | {{_pjango_param_title_message}}</title>
+	<link rel="icon" href="/img/favicon.png" type="image/png">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">  
+	<link rel="stylesheet" href="/css/font-awesome.min.css"> 
+	<link rel="stylesheet" href="/css/buttons.css">  
+	<link rel="stylesheet" href="/css/height.css">  
+	<link rel="stylesheet" href="/css/me.css">  
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/buttons.js"></script>
+	<script src="/js/echarts.min.js"></script>
+	<script src="/js/me.js"></script>
+</head>
+<style>
+	p.title {
+		color: white;
+		font-size: 22px;
+	}
+	p.text {
+		color: white;
+		font-size: 16px;
+	}
+	a.link {
+		cursor: hand;
+		color: white;
+		font-size: 22px;
+	}
+	div.caption {
+		height: 0px;
+		padding-top: 1px;
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	p.caption {
+		color: white;
+		font-size: 22px;
+		padding-top: 8px;
+		padding-left: 8px;
+		padding-right: 8px;
+		padding-bottom: 8px;
+		background: rgba(0, 0, 0, 0.8);
+		border-radius: 8px;
+	}
+	p.small-caption {
+		color: white;
+		font-size: 18px;
+		padding-top: 8px;
+		padding-left: 8px;
+		padding-right: 8px;
+		padding-bottom: 8px;
+		background: rgba(0, 0, 0, 0.6);
+		border-radius: 8px;
+	}
+	i.text {
+		color: white;
+		font-size: 16px;
+	}
+	div.cell {
+		transition:background-color 0.3s linear;
+	}
+	div.chart {
+		height: 400px;
+	}
+	div.dark {
+		background: rgba(0, 0, 0, 0.4);
+		border-radius: 8px;
+	}
+	div.archive-cell {
+		padding-bottom: 16px;
+	}
+	div.gap {
+		height: 24px;
+	}
+	div.header {
+		height: 60px;
+	}
+	p.img-container {
+		width: 100%;
+		height: 0;
+		padding-bottom: 62%;
+		overflow: hidden;
+		background: rgba(255, 255, 255, 0.4);
+		border-radius: 8px;
+	}
+	p.img-container img {
+		width: 100%;
+		border-radius: 8px;
+	}
+	button.title {
+		font-size: 20px;
+		pointer-events: none;
+	}
+	button.search {
+		font-size: 20px;
+		width: 100%;
+	}
+	a.text {
+		color: white;
+		font-size:18px;
+	}
+	a.tag {
+		line-height: 2.5em;
+		margin-right: 8px;
+	}
+	img.head{
+		width: 48px;
+		height: 48px;
+		min-height: 48px;
+		max-height: 48px;
+	}
+	input.search {
+		color: white;
+		background-color: transparent;
+	}
+	button.search {
+		color: white;
+		background-color: transparent;
+	}
+</style>
+<body class="main">
+	
+<div class="box">
+	
+{{{_pjango_template_navigation_bar}}}
+	
+	<div class="col-md-12 column height-more-than-85">
+		<div class="col-md-offset-1 row clearfix">
+			<div class="col-md-3 column">
+				<div class="col-md-12 column">
+					<div class="gap"></div>
+					<div class="col-md-12 column corner-window shadow">
+						<div class="gap"></div>
+						<div class="text-center">
+							<button class="button button-primary button-plain button-rounded button-border button-primary title">寄语</button>
+						</div>
+						<div class="gap"></div>
+						<p class="title">{{_pjango_param_message}}</p>
+					</div>
+					<div class="col-md-12 column gap"></div>
+				</div>
+				<div class="col-md-12 column">
+					<div class="gap"></div>
+					<div class="col-md-12 column corner-window shadow">
+						<div class="gap"></div>
+						<div class="text-center">
+							<button class="button button-primary button-plain button-rounded button-border button-primary title">近期</button>
+						</div>
+					<div class="gap"></div>
+{{#_pjango_param_table_close_date}}
+					<div class="col-md-12 column archive-cell">
+						<a class="text" href="http://{{{_pjango_url_report_daily}}}/{{{_pjango_param_table_close_date_DATE}}}" style="color: {{_pjango_param_table_close_date_COLOR}}">数据日报：{{_pjango_param_table_close_date_DATE}}</a>
+					</div>
+{{/_pjango_param_table_close_date}}
+						<div class="gap"></div>
+					</div>
+					<div class="col-md-12 column gap"></div>
+				</div>
+				<div class="col-md-12 column">
+					<div class="gap"></div>
+					<div class="col-md-12 column corner-window shadow">
+						<div class="gap"></div>
+						<div class="text-center">
+							<button class="button button-primary button-plain button-rounded button-border button-primary title">跳转</button>
+						</div>
+						<div class="gap"></div>
+		                <div class="input-group input-group-lg col-md-12 column">
+		                    <input id="go_input" type="text" class="form-control search" placeholder="Date. e.g., 2018-03-20" onkeydown='if(event.keyCode==13) go()'>
+		                    <span class="input-group-btn button-dropdown-plain">
+		                        <button class="btn btn-default search" onclick="go()">Go</button>
+		                    </span>
+		                </div>
+						<div class="gap"></div>
+					</div>
+					<div class="col-md-12 column gap"></div>
+				</div>
+			</div>
+			<div class="col-md-8 column">
+				<div class="gap"></div>
+				
+				<div class="col-md-12 column">
+					<div class="col-md-12 column corner-window shadow cell">
+						<div class="col-md-12 column" style="height: 20px;"></div>
+						<div class="col-md-12 column dark">
+						<div class="col-md-12 column" style="height: 8px;"></div>
+							<p class="title text-center">日访问统计：{{_pjango_param_date}}</p>
+						</div>
+						<div class="col-md-12 column" style="height: 20px;"></div>
+						<div class="col-md-12 column dark">
+							<div class="col-md-12 column" style="height: 20px;"></div>
+							<div class="col-md-12 column chart" id="chart_daily_pv"></div>
+						</div>
+						<div class="col-md-12 column" style="height: 20px;"></div>
+					</div>
+					<div class="col-md-12 column" style="height: 20px;"></div>
+				</div>
+				
+				<div class="col-md-12 column">
+					<div class="col-md-12 column corner-window shadow cell">
+						<div class="col-md-12 column" style="height: 20px;"></div>
+						<p class="title">
+						<div class="col-md-12 column dark">
+						<div class="col-md-12 column" style="height: 8px;"></div>
+							<p class="title text-center">日阅读统计：{{_pjango_param_date}}</p>
+						</div>
+						<div class="col-md-12 column" style="height: 20px;"></div>
+						<div class="col-md-12 column dark">
+							<div class="col-md-12 column" style="height: 20px;"></div>
+							<div class="col-md-12 column chart" id="chart_daily_read"></div>
+						</div>
+						<div class="col-md-12 column" style="height: 20px;"></div>
+					</div>
+					<div class="col-md-12 column" style="height: 20px;"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 column" style="height: 20px"></div>
+		<div class="col-md-12 column" style="height: 100px;">
+			<div style="height: 20px;"></div>
+			<div class="col-md-6 column col-center corner-window shadow text-center">
+				<div style="height: 10px;"></div>
+				<a class="button button-plain button-border button-block end-button" onclick="toTop()">回到顶部</a>
+				<div style="height: 10px;"></div>
+			</div>
+		</div>
+	</div>
+	
+{{{_pjango_template_footer_bar}}}
+</div>
+<script>
+	
+	function go() {
+		var text = document.getElementById('go_input').value;
+		if (text == '') {
+			location = 'http://{{_pjango_url_report_daily}}/today'
+		} else {
+			location = 'http://{{_pjango_url_report_daily}}/' + text
+		}
+	}
+	
+	// 日访问
+	{
+		var chart = echarts.init(document.getElementById('chart_daily_pv'), 'dark');
+		var data = {
+			{{{_pjango_chart_daily_pv_data}}}
+		};
+		
+		option = {
+			backgroundColor: 'rgba(0, 0, 0, 0)',
+			tooltip: {
+				trigger: 'item',
+				formatter: "{a} <br/>{b} : {c} ({d}%)"
+			},
+			legend: {
+				type: 'scroll',
+				orient: 'vertical',
+				right: 10,
+				top: 20,
+				bottom: 20,
+				data: data.legendData,
+			},
+			series : [
+				{
+					name: '行为',
+					type: 'pie',
+					radius : '55%',
+					center: ['40%', '50%'],
+					data: data.seriesData,
+					itemStyle: {
+						emphasis: {
+							shadowBlur: 10,
+							shadowOffsetX: 0,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					},
+					label: {
+						normal: {
+							formatter: '{b} : {c} ({d}%)\n',
+						}
+					},
+				}
+			]
+		};
+		chart.setOption(option);
+	}
+	
+	// 日阅读
+	{
+		var chart = echarts.init(document.getElementById('chart_daily_read'), 'dark');
+		var data = {
+			{{{_pjango_chart_daily_read_data}}}
+		};
+		option = {
+			backgroundColor: 'rgba(0, 0, 0, 0)',
+			tooltip: {
+				trigger: 'item',
+				formatter: "{a} <br/>{b}: {c} ({d}%)"
+			},
+			legend: {
+				show: false,
+				data: data.legendData,
+			},
+			series: [
+				{
+					name:'文章阅读',
+					type:'pie',
+					selectedMode: 'single',
+					radius: [0, '30%'],
+					label: {
+						normal: {
+							formatter: '{b}\n{c} ({d}%)',
+							position: 'inner',
+						},
+					},
+					labelLine: {
+						normal: {
+							show: false
+						}
+					},
+					data: data.insideSeriesData
+				},
+				{
+					name:'文章阅读',
+					type:'pie',
+					radius: ['40%', '55%'],
+					label: {
+						normal: {
+							formatter: '{b} : {c} ({d}%)\n',
+						},
+					},
+					data: data.outsideSeriesData
+				}
+			]
+		};
+		chart.setOption(option);
+		chart.on('click', function (params) {
+			var title = params.name;
+			var splited = title.split('_');
+			if (splited.length != 2) {
+				return;
+			}
+			var type = splited[0];
+			var id = splited[1];
+			if (type == '阅读博文') {
+				window.open('http://{{_pjango_url_posts}}/posts/' + id);
+			} else if (type == '阅读文集文章') {
+				window.open('http://{{_pjango_url_corpus}}/corpus/' + id);
+			}
+		});
+	}
+</script>
+</body>
+</html>
+

@@ -34,6 +34,7 @@ class IndexView: PCDetailView {
             "_pjango_url_posts_corpus_list": pjangoUrlReverse(host: "corpus.\(WEBSITE_HOST)", name: "list") ?? "",
             "_pjango_url_posts_about": pjangoUrlReverse(host: "\(WEBSITE_HOST)", name: "about") ?? "",
             "_pjango_url_update": pjangoUrlReverse(host: "\(WEBSITE_HOST)", name: "update") ?? "",
+            "_pjango_url_report": "\(WEBSITE_HOST)",
             "_pjango_url_instagram_list": pjangoUrlReverse(host: "instagram.\(WEBSITE_HOST)", name: "list") ?? "",
             "_pjango_url_bilibili_list": pjangoUrlReverse(host: "bilibili.\(WEBSITE_HOST)", name: "list") ?? "",
         ]

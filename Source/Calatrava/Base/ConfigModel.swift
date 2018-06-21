@@ -24,6 +24,8 @@ enum ConfigModelKey: String {
     case bilibiliName = "bilibili_name"
     case bilibiliMessage = "bilibili_message"
     
+    case reportDailyMessage = "report_daily_message"
+    case reportTotalMessage = "report_total_message"
 }
 
 class ConfigModel: PCModel {

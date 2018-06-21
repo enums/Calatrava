@@ -37,10 +37,9 @@ class PostsListView: PCListView {
     
     override var viewParam: PCViewParam? {
         var listTitle = "博文列表"
-        guard let req = currentRequest, var postsList = PostsModel.queryObjects() as? [PostsModel] else {
+        guard let req = currentRequest, var postsList = PostsModel.queryObjects(ext: (true, "ORDER BY date DESC")) as? [PostsModel] else {
             return nil;
         }
-        postsList.sort(by: { return $0.date.strValue > $1.date.strValue })
         
         let tag = req.getUrlParam(key: "tag")
         let keyword = req.getUrlParam(key: "keyword")

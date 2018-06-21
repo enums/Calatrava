@@ -27,9 +27,11 @@ class UpdateCorpusView: PCDetailView {
     
     override var viewParam: PCViewParam? {
         let corpus = ((CorpusModel.queryObjects() as? [CorpusModel])?.filter { $0.cid.intValue == model.cid.intValue })?.first
+        let corpusTitle = corpus?.title.strValue ?? "null"
+        
         return [
             "_pjango_param_title": model.title.strValue,
-            "_pjango_param_corpus_title": corpus?.title.strValue ?? "null",
+            "_pjango_param_corpus_title": corpusTitle,
             "_pjango_param_cid": model.cid.intValue,
             "_pjango_param_cpid": model.cpid.intValue,
             "_pjango_param_date": model.date.strValue,

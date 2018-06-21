@@ -19,7 +19,7 @@ class PostsArchiveView: PCListView {
         guard var postsList = PostsModel.queryObjects(ext: (true, "ORDER BY date DESC")) as? [PostsModel] else {
             return nil
         }
-        postsList = postsList.reversed().map { posts in
+        postsList = postsList.map { posts in
             posts.date.value = posts.date.strValue.components(separatedBy: " ")[0]
             
             return posts

@@ -63,7 +63,8 @@ class AppDelegate: PjangoDelegate {
                 pjangoUrl("", name: "index", handle: IndexView.asHandle()),
                 pjangoUrl("about", name: "about", handle: AboutView.asHandle()),
                 pjangoUrl("update", name: "update", handle: UpdateListView.asHandle()),
-                pjangoUrl("report/daily/{date}", name: "report.daily", handle: DailyReportView.asHandle()),
+                pjangoUrl("report/daily/{date}", name: "report.daily", handle: ReportDailyView.asHandle()),
+                pjangoUrl("report/total/{opt}", name: "report.total", handle: ReportTotalView.asHandle()),
 
                 pjangoUrl("api/message", name: "api.message", handle: messageHandle),
                 pjangoUrl("api/verification", name: "api.verification@index", handle: verificationHandle),
@@ -147,6 +148,8 @@ class AppDelegate: PjangoDelegate {
             
             BilibiliListModel.meta,
             BilibiliFeedModel.meta,
+            
+            ReportDailyModel.meta,
         ]
     }
 
@@ -156,6 +159,7 @@ class AppDelegate: PjangoDelegate {
             NotFoundFilterPlugin.meta,
             DailyCleanPlugin.meta,
             InstagramTimerPlugin.meta,
+            ReportUpdatePlugin.meta,
         ]
     }
     

@@ -34,16 +34,20 @@ class UpdateBilibiliView: PCDetailView {
         }
         let coverUrl = "bilibili.\(WEBSITE_HOST)/img/bilibili/\(coverName)"
         let list = ((BilibiliListModel.queryObjects() as? [BilibiliListModel])?.filter { $0.blid.intValue == model.blid.intValue })?.first
+        
+        let name = ConfigModel.getValueForKey(.bilibiliName) ?? "null"
+        let listTitle = list?.name.strValue ?? "null"
+        
         return [
-            "_pjango_param_name": ConfigModel.getValueForKey(.bilibiliName) ?? "null",
+            "_pjango_param_name": name,
             "_pjango_param_title": model.name.strValue,
-            "_pjango_param_list_title": list?.name.strValue ?? "null",
+            "_pjango_param_list_title": listTitle,
             "_pjango_param_image": coverUrl,
             "_pjango_param_url": model.url.strValue,
             "_pjango_param_blid": model.blid.intValue,
             "_pjango_param_memo": model.memo.strValue,
             "_pjango_param_date": model.date.strValue,
-            
+
             "_pjango_url_bilibili": "bilibili.\(WEBSITE_HOST)"
         ]
     }

@@ -2,7 +2,7 @@
 <head>
 	<meta charset="utf-8"> 
 	<meta name="viewport" content="user-scalable=no, width=720px, height=1280px"/>
-	<title>数据日报 | {{_pjango_param_title_message}}</title>
+	<title>数据每日报告 | {{_pjango_param_title_message}}</title>
 	<link rel="icon" href="/img/favicon.png" type="image/png">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">  
 	<link rel="stylesheet" href="/css/font-awesome.min.css"> 
@@ -143,7 +143,6 @@
 					<div class="col-md-12 column gap"></div>
 				</div>
 				<div class="col-md-12 column">
-					<div class="gap"></div>
 					<div class="col-md-12 column corner-window shadow">
 						<div class="gap"></div>
 						<div class="text-center">
@@ -152,7 +151,7 @@
 					<div class="gap"></div>
 {{#_pjango_param_table_close_date}}
 					<div class="col-md-12 column archive-cell">
-						<a class="text" href="http://{{{_pjango_url_report_daily}}}/{{{_pjango_param_table_close_date_DATE}}}" style="color: {{_pjango_param_table_close_date_COLOR}}">数据日报：{{_pjango_param_table_close_date_DATE}}</a>
+						<a class="text" href="http://{{{_pjango_url_report_daily}}}/{{{_pjango_param_table_close_date_DATE}}}" style="color: {{_pjango_param_table_close_date_COLOR}}"><i class="fa fa-fw fa-angle-right"></i>数据日报：{{_pjango_param_table_close_date_DATE}}</a>
 					</div>
 {{/_pjango_param_table_close_date}}
 						<div class="gap"></div>
@@ -160,12 +159,7 @@
 					<div class="col-md-12 column gap"></div>
 				</div>
 				<div class="col-md-12 column">
-					<div class="gap"></div>
 					<div class="col-md-12 column corner-window shadow">
-						<div class="gap"></div>
-						<div class="text-center">
-							<button class="button button-primary button-plain button-rounded button-border button-primary title">跳转</button>
-						</div>
 						<div class="gap"></div>
 		                <div class="input-group input-group-lg col-md-12 column">
 		                    <input id="go_input" type="text" class="form-control search" placeholder="Date. e.g., 2018-03-20" onkeydown='if(event.keyCode==13) go()'>
@@ -173,6 +167,14 @@
 		                        <button class="btn btn-default search" onclick="go()">Go</button>
 		                    </span>
 		                </div>
+						<div class="gap"></div>
+					</div>
+					<div class="col-md-12 column gap"></div>
+					<div class="col-md-12 column corner-window shadow">
+						<div class="gap"></div>
+						<div class="col-md-12 column archive-cell">
+							<a class="text" href="http://{{{_pjango_url_report_total}}}/all"><i class="fa fa-fw fa-angle-right"></i>前往统计数据报告</a>
+						</div>
 						<div class="gap"></div>
 					</div>
 					<div class="col-md-12 column gap"></div>
@@ -195,7 +197,7 @@
 						</div>
 						<div class="col-md-12 column" style="height: 20px;"></div>
 					</div>
-					<div class="col-md-12 column" style="height: 20px;"></div>
+					<div class="col-md-12 column gap"></div>
 				</div>
 				
 				<div class="col-md-12 column">
@@ -204,16 +206,16 @@
 						<p class="title">
 						<div class="col-md-12 column dark">
 						<div class="col-md-12 column" style="height: 8px;"></div>
-							<p class="title text-center">日阅读统计：{{_pjango_param_date}}</p>
+							<p class="title text-center">日文章阅读统计：{{_pjango_param_date}}</p>
 						</div>
 						<div class="col-md-12 column" style="height: 20px;"></div>
 						<div class="col-md-12 column dark">
 							<div class="col-md-12 column" style="height: 20px;"></div>
-							<div class="col-md-12 column chart" id="chart_daily_read"></div>
+							<div class="col-md-12 column chart" style="height: 600px" id="chart_daily_read"></div>
 						</div>
 						<div class="col-md-12 column" style="height: 20px;"></div>
 					</div>
-					<div class="col-md-12 column" style="height: 20px;"></div>
+					<div class="col-md-12 column gap"></div>
 				</div>
 			</div>
 		</div>
@@ -243,7 +245,7 @@
 	
 	// 日访问
 	{
-		var chart = echarts.init(document.getElementById('chart_daily_pv'), 'dark');
+		var chart_daily_pv_chart = echarts.init(document.getElementById('chart_daily_pv'), 'dark');
 		var data = {
 			{{{_pjango_chart_daily_pv_data}}}
 		};
@@ -260,6 +262,7 @@
 				right: 10,
 				top: 20,
 				bottom: 20,
+				show: false,
 				data: data.legendData,
 			},
 			series : [
@@ -267,7 +270,7 @@
 					name: '行为',
 					type: 'pie',
 					radius : '55%',
-					center: ['40%', '50%'],
+					center: ['50%', '50%'],
 					data: data.seriesData,
 					itemStyle: {
 						emphasis: {
@@ -284,12 +287,13 @@
 				}
 			]
 		};
-		chart.setOption(option);
+		chart_daily_pv_chart.setOption(option);
+		window.addEventListener("resize", function () { chart_daily_pv_chart.resize(); });
 	}
 	
 	// 日阅读
 	{
-		var chart = echarts.init(document.getElementById('chart_daily_read'), 'dark');
+		var chart_daily_read_chart = echarts.init(document.getElementById('chart_daily_read'), 'dark');
 		var data = {
 			{{{_pjango_chart_daily_read_data}}}
 		};
@@ -300,6 +304,11 @@
 				formatter: "{a} <br/>{b}: {c} ({d}%)"
 			},
 			legend: {
+				type: 'scroll',
+				orient: 'vertical',
+				right: 10,
+				top: 20,
+				bottom: 20,
 				show: false,
 				data: data.legendData,
 			},
@@ -308,7 +317,7 @@
 					name:'文章阅读',
 					type:'pie',
 					selectedMode: 'single',
-					radius: [0, '30%'],
+					radius: [0, '20%'],
 					label: {
 						normal: {
 							formatter: '{b}\n{c} ({d}%)',
@@ -325,7 +334,7 @@
 				{
 					name:'文章阅读',
 					type:'pie',
-					radius: ['40%', '55%'],
+					radius: ['30%', '45%'],
 					label: {
 						normal: {
 							formatter: '{b} : {c} ({d}%)\n',
@@ -335,8 +344,9 @@
 				}
 			]
 		};
-		chart.setOption(option);
-		chart.on('click', function (params) {
+		chart_daily_read_chart.setOption(option);
+		window.addEventListener("resize", function () { chart_daily_read_chart.resize(); });
+		chart_daily_read_chart.on('click', function (params) {
 			var title = params.name;
 			var splited = title.split('_');
 			if (splited.length != 2) {

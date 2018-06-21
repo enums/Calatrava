@@ -30,6 +30,7 @@ class UpdateInstagramView: PCDetailView {
             "_pjango_param_author_name": model.name.strValue,
             "_pjango_param_author_fullname": model.full_name.strValue,
             "_pjango_param_author_head": model.headSource,
+            "_pjango_param_author_url": model.url.strValue,
             "_pjango_param_image": model.imageSource,
             "_pjango_param_image_origin": model.bigImageSource,
             "_pjango_param_caption": model.caption.strValue,

@@ -1,0 +1,695 @@
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="user-scalable=no, width=720px, height=1280px"/>
+	<title>数据统计报告 | {{_pjango_param_title_message}}</title>
+	<link rel="icon" href="/img/favicon.png" type="image/png">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">  
+	<link rel="stylesheet" href="/css/font-awesome.min.css"> 
+	<link rel="stylesheet" href="/css/buttons.css">  
+	<link rel="stylesheet" href="/css/height.css">  
+	<link rel="stylesheet" href="/css/me.css">  
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/buttons.js"></script>
+	<script src="/js/echarts.min.js"></script>
+	<script src="/js/me.js"></script>
+</head>
+<style>
+	p.title {
+		color: white;
+		font-size: 22px;
+	}
+	p.text {
+		color: white;
+		font-size: 16px;
+	}
+	a.link {
+		cursor: hand;
+		color: white;
+		font-size: 22px;
+	}
+	div.caption {
+		height: 0px;
+		padding-top: 1px;
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	p.caption {
+		color: white;
+		font-size: 22px;
+		padding-top: 8px;
+		padding-left: 8px;
+		padding-right: 8px;
+		padding-bottom: 8px;
+		background: rgba(0, 0, 0, 0.8);
+		border-radius: 8px;
+	}
+	p.small-caption {
+		color: white;
+		font-size: 18px;
+		padding-top: 8px;
+		padding-left: 8px;
+		padding-right: 8px;
+		padding-bottom: 8px;
+		background: rgba(0, 0, 0, 0.6);
+		border-radius: 8px;
+	}
+	i.text {
+		color: white;
+		font-size: 16px;
+	}
+	div.cell {
+		transition:background-color 0.3s linear;
+	}
+	div.chart {
+		height: 400px;
+	}
+	div.dark {
+		background: rgba(0, 0, 0, 0.4);
+		border-radius: 8px;
+	}
+	div.archive-cell {
+		padding-bottom: 16px;
+	}
+	div.gap {
+		height: 24px;
+	}
+	div.header {
+		height: 60px;
+	}
+	p.img-container {
+		width: 100%;
+		height: 0;
+		padding-bottom: 62%;
+		overflow: hidden;
+		background: rgba(255, 255, 255, 0.4);
+		border-radius: 8px;
+	}
+	p.img-container img {
+		width: 100%;
+		border-radius: 8px;
+	}
+	button.title {
+		font-size: 20px;
+		pointer-events: none;
+	}
+	button.search {
+		font-size: 20px;
+		width: 100%;
+	}
+	a.text {
+		color: white;
+		font-size:18px;
+	}
+	a.tag {
+		line-height: 2.5em;
+		margin-right: 8px;
+	}
+	img.head{
+		width: 48px;
+		height: 48px;
+		min-height: 48px;
+		max-height: 48px;
+	}
+	input.search {
+		color: white;
+		background-color: transparent;
+	}
+	button.search {
+		color: white;
+		background-color: transparent;
+	}
+</style>
+<body class="main">
+	
+<div class="box">
+	
+{{{_pjango_template_navigation_bar}}}
+	
+	<div class="col-md-12 column height-more-than-85">
+		<div class="col-md-offset-1 row clearfix">
+			<div class="col-md-3 column">
+				<div class="col-md-12 column">
+					<div class="gap"></div>
+					<div class="col-md-12 column corner-window shadow">
+						<div class="gap"></div>
+						<div class="text-center">
+							<button class="button button-primary button-plain button-rounded button-border button-primary title">寄语</button>
+						</div>
+						<div class="gap"></div>
+						<p class="title">{{_pjango_param_message}}</p>
+					</div>
+					<div class="col-md-12 column gap"></div>
+				</div>
+				<div class="col-md-12 column">
+					<div class="col-md-12 column corner-window shadow">
+						<div class="gap"></div>
+						<div class="text-center">
+							<button class="button button-primary button-plain button-rounded button-border button-primary title">时间</button>
+						</div>
+						<div class="gap"></div>
+						<div class="col-md-12 column archive-cell">
+							<a class="text" href="http://{{{_pjango_url_report_total}}}/all" style="color: {{_pjango_param_color_all}}"><i class="fa fa-fw fa-angle-right"></i>日访问统计：全部时间</a>
+						</div>
+						<div class="col-md-12 column archive-cell">
+							<a class="text" href="http://{{{_pjango_url_report_total}}}/week" style="color: {{_pjango_param_color_week}}"><i class="fa fa-fw fa-angle-right"></i>日访问统计：最近一周</a>
+						</div>
+						<div class="col-md-12 column archive-cell">
+							<a class="text" href="http://{{{_pjango_url_report_total}}}/month_1" style="color: {{_pjango_param_color_month_1}}"><i class="fa fa-fw fa-angle-right"></i>日访问统计：最近一个月</a>
+						</div>
+						<div class="col-md-12 column archive-cell">
+							<a class="text" href="http://{{{_pjango_url_report_total}}}/month_3" style="color: {{_pjango_param_color_month_3}}"><i class="fa fa-fw fa-angle-right"></i>日访问统计：最近三个月</a>
+						</div>
+						<div class="gap"></div>
+					</div>
+					<div class="col-md-12 column gap"></div>
+				</div>
+				<div class="col-md-12 column">
+					<div class="col-md-12 column corner-window shadow">
+						<div class="gap"></div>
+						<div class="text-center">
+							<button class="button button-primary button-plain button-rounded button-border button-primary title">其他</button>
+						</div>
+						<div class="gap"></div>
+						<p class="text">自博文模块 2016年12月01日 上线起：</p>
+						<p class="text"><i class="fa fa-fw fa-angle-right"></i>总博文数量：<a class="footer-link">{{_pjango_param_counter_posts}}</a></p>
+						<p class="text"><i class="fa fa-fw fa-angle-right"></i>累计文章阅读：<a class="footer-link">{{_pjango_param_counter_read}}</a></p>
+						<p class="text"><i class="fa fa-fw fa-angle-right"></i>累计文章点赞：<a class="footer-link">{{_pjango_param_counter_love}}</a></p>
+						<div class="gap"></div>
+						<p class="text">自计数模块 2017年07月01日 上线起：</p>
+						<p class="text"><i class="fa fa-fw fa-angle-right"></i>累计主页访问：<a class="footer-link">{{_pjango_param_counter_index}}</a></p>
+						<p class="text"><i class="fa fa-fw fa-angle-right"></i>累计文章索引：<a class="footer-link">{{_pjango_param_counter_list}}</a></p>
+						<p class="text"><i class="fa fa-fw fa-angle-right"></i>累计文章搜索：<a class="footer-link">{{_pjango_param_counter_search}}</a></p>
+						<div class="gap"></div>
+					</div>
+					<div class="col-md-12 column gap"></div>
+					<div class="col-md-12 column corner-window shadow">
+						<div class="gap"></div>
+						<div class="col-md-12 column archive-cell">
+							<a class="text" href="http://{{{_pjango_url_report_daily}}}/today"><i class="fa fa-fw fa-angle-right"></i>前往每日数据报告</a>
+						</div>
+						<div class="gap"></div>
+					</div>
+					<div class="col-md-12 column gap"></div>
+				</div>
+			</div>
+			<div class="col-md-8 column">
+				<div class="gap"></div>
+				
+				<div class="col-md-12 column">
+					<div class="col-md-12 column corner-window shadow cell">
+						<div class="col-md-12 column" style="height: 20px;"></div>
+						<div class="col-md-12 column dark">
+						<div class="col-md-12 column" style="height: 8px;"></div>
+							<p class="title text-center">日访问量统计：自 {{_pjango_param_char_begin_date}}</p>
+						</div>
+						<div class="col-md-12 column" style="height: 20px;"></div>
+						<div class="col-md-12 column dark">
+							<div class="col-md-12 column" style="height: 20px;"></div>
+							<div class="col-md-12 column chart" id="chart_daily_pv"></div>
+						</div>
+						<div class="col-md-12 column" style="height: 20px;"></div>
+					</div>
+					<div class="col-md-12 column gap"></div>
+				</div>
+				
+				<div class="col-md-12 column">
+					<div class="col-md-12 column corner-window shadow cell">
+						<div class="col-md-12 column" style="height: 20px;"></div>
+						<div class="col-md-12 column dark">
+						<div class="col-md-12 column" style="height: 8px;"></div>
+							<p class="title text-center">日首页访问量统计：自 {{_pjango_param_char_begin_date}}</p>
+						</div>
+						<div class="col-md-12 column" style="height: 20px;"></div>
+						<div class="col-md-12 column dark">
+							<div class="col-md-12 column" style="height: 20px;"></div>
+							<div class="col-md-12 column chart" id="chart_daily_index_pv"></div>
+						</div>
+						<div class="col-md-12 column" style="height: 20px;"></div>
+					</div>
+					<div class="col-md-12 column gap"></div>
+				</div>
+				
+				<div class="col-md-12 column">
+					<div class="col-md-12 column corner-window shadow cell">
+						<div class="col-md-12 column" style="height: 20px;"></div>
+						<div class="col-md-12 column dark">
+						<div class="col-md-12 column" style="height: 8px;"></div>
+							<p class="title text-center">日文章阅读量统计：自 {{_pjango_param_char_begin_date}}</p>
+						</div>
+						<div class="col-md-12 column" style="height: 20px;"></div>
+						<div class="col-md-12 column dark">
+							<div class="col-md-12 column" style="height: 20px;"></div>
+							<div class="col-md-12 column chart" id="chart_daily_read"></div>
+						</div>
+						<div class="col-md-12 column" style="height: 20px;"></div>
+					</div>
+					<div class="col-md-12 column gap"></div>
+				</div>
+				
+				<div class="col-md-12 column">
+					<div class="col-md-12 column corner-window shadow cell">
+						<div class="col-md-12 column" style="height: 20px;"></div>
+						<p class="title">
+						<div class="col-md-12 column dark">
+						<div class="col-md-12 column" style="height: 8px;"></div>
+							<p class="title text-center">总网站访问量成分</p>
+						</div>
+						<div class="col-md-12 column" style="height: 20px;"></div>
+						<div class="col-md-12 column dark">
+							<div class="col-md-12 column" style="height: 20px;"></div>
+							<div class="col-md-12 column chart" id="chart_total_pv"></div>
+						</div>
+						<div class="col-md-12 column" style="height: 20px;"></div>
+					</div>
+					<div class="col-md-12 column gap"></div>
+				</div>
+				
+				<div class="col-md-12 column">
+					<div class="col-md-12 column corner-window shadow cell">
+						<div class="col-md-12 column" style="height: 20px;"></div>
+						<div class="col-md-12 column dark">
+						<div class="col-md-12 column" style="height: 8px;"></div>
+							<p class="title text-center">总文章阅读量成分</p>
+						</div>
+						<div class="col-md-12 column" style="height: 20px;"></div>
+						<div class="col-md-12 column dark">
+							<div class="col-md-12 column" style="height: 20px;"></div>
+							<div class="col-md-12 column chart" style="height: 1800px" id="chart_total_read"></div>
+						</div>
+						<div class="col-md-12 column" style="height: 20px;"></div>
+					</div>
+					<div class="col-md-12 column gap"></div>
+				</div>
+				
+				
+			</div>
+		</div>
+		<div class="col-md-12 column" style="height: 20px"></div>
+		<div class="col-md-12 column" style="height: 100px;">
+			<div style="height: 20px;"></div>
+			<div class="col-md-6 column col-center corner-window shadow text-center">
+				<div style="height: 10px;"></div>
+				<a class="button button-plain button-border button-block end-button" onclick="toTop()">回到顶部</a>
+				<div style="height: 10px;"></div>
+			</div>
+		</div>
+	</div>
+	
+{{{_pjango_template_footer_bar}}}
+</div>
+<script>
+	
+	// 总pv
+	{
+		var chart_daily_pv_chart = echarts.init(document.getElementById('chart_daily_pv'), 'dark');
+		var data = {{{_pjango_chart_daily_pv_data}}};
+	    option = {
+	        backgroundColor: 'rgba(0, 0, 0, 0)',
+	        tooltip: {
+	            trigger: 'axis'
+	        },
+	        xAxis: {
+	            data: data.map(function (item) {
+	                return item[0];
+	            }),
+	        },
+	        yAxis: {
+		        max: function(value) {
+				    return Math.min(value.max, 4000);
+				},
+	            splitLine: {
+	                show: false
+	            }
+	        },
+	        dataZoom: [{
+	            startValue: '{{{_pjango_param_char_begin_date}}}'
+	        }, {
+	            type: 'inside'
+	        }],
+	        visualMap: {
+	            top: 10,
+	            right: 10,
+	            show: false,
+	            pieces: [{
+	                gt: -1,
+	                lte: 500,
+	                color: '#cc0033'
+	            }, {
+	                gt: 500,
+	                lte: 1000,
+	                color: '#ff9933'
+	            }, {
+	                gt: 1000,
+	                lte: 1500,
+	                color: '#ffde33'
+	            }, {
+	                gt: 1500,
+	                lte: 2000,
+	                color: '#096'
+	            }],
+	            outOfRange: {
+	                color: '#0B6'
+	            }
+	        },
+	        series: {
+	            name: '总访问',
+	            type: 'line',
+	            data: data.map(function (item) {
+	                return item[1];
+	            }),
+	            markLine: {
+	                silent: true,
+	                data: [{
+	                    yAxis: 500
+	                }, {
+	                    yAxis: 1000
+	                }, {
+	                    yAxis: 1500
+	                }, {
+	                    yAxis: 2000
+	                }, {
+	                    yAxis: 2500
+	                }, {
+	                    yAxis: 3000
+	                }, {
+	                    yAxis: 3500
+	                }, {
+	                    yAxis: 4000
+	                }, {
+	                    yAxis: 4500
+	                }, {
+	                    yAxis: 5000
+	                }]
+	            }
+	        }
+	    };
+		chart_daily_pv_chart.setOption(option);
+		window.addEventListener("resize", function () { chart_daily_pv_chart.resize(); });
+		chart_daily_pv_chart.on('click', function (params) {
+			var date = params.name;
+			window.open('http://{{_pjango_url_report_daily}}/' + date);
+		});
+	}
+	// 首页pv
+	{
+		var chart_daily_index_pv_chart = echarts.init(document.getElementById('chart_daily_index_pv'), 'dark');
+		var data = {{{_pjango_chart_daily_index_pv_data}}};
+	    option = {
+	        backgroundColor: 'rgba(0, 0, 0, 0)',
+	        tooltip: {
+	            trigger: 'axis'
+	        },
+	        xAxis: {
+	            data: data.map(function (item) {
+	                return item[0];
+	            }),
+	        },
+	        yAxis: {
+		        max: function(value) {
+				    return Math.min(value.max, 500);
+				},
+	            splitLine: {
+	                show: false
+	            }
+	        },
+	        dataZoom: [{
+	            startValue: '{{{_pjango_param_char_begin_date}}}'
+	        }, {
+	            type: 'inside'
+	        }],
+	        visualMap: {
+	            top: 10,
+	            right: 10,
+	            show: false,
+	            pieces: [{
+	                gt: -1,
+	                lte: 50,
+	                color: '#cc0033'
+	            }, {
+	                gt: 50,
+	                lte: 100,
+	                color: '#ff9933'
+	            }, {
+	                gt: 100,
+	                lte: 150,
+	                color: '#ffde33'
+	            }, {
+	                gt: 150,
+	                lte: 200,
+	                color: '#096'
+	            }],
+	            outOfRange: {
+	                color: '#0B6'
+	            }
+	        },
+	        series: {
+	            name: '首页访问',
+	            type: 'line',
+	            data: data.map(function (item) {
+	                return item[1];
+	            }),
+	            markLine: {
+	                silent: true,
+	                data: [{
+	                    yAxis: 50
+	                }, {
+	                    yAxis: 100
+	                }, {
+	                    yAxis: 150
+	                }, {
+	                    yAxis: 200
+	                }, {
+	                    yAxis: 250
+	                }, {
+	                    yAxis: 300
+	                }, {
+	                    yAxis: 350
+	                }, {
+	                    yAxis: 400
+	                }]
+	            }
+	        }
+	    };
+		chart_daily_index_pv_chart.setOption(option);
+		window.addEventListener("resize", function () { chart_daily_index_pv_chart.resize(); });
+		chart_daily_index_pv_chart.on('click', function (params) {
+			var date = params.name;
+			window.open('http://{{_pjango_url_report_daily}}/' + date);
+		});
+	}
+	// 总阅读
+	{
+		var chart_daily_read_chart = echarts.init(document.getElementById('chart_daily_read'), 'dark');
+		var data = {{{_pjango_chart_daily_read_data}}};
+	    option = {
+	        backgroundColor: 'rgba(0, 0, 0, 0)',
+	        tooltip: {
+	            trigger: 'axis'
+	        },
+	        xAxis: {
+	            data: data.map(function (item) {
+	                return item[0];
+	            }),
+	        },
+	        yAxis: {
+		        max: function(value) {
+				    return Math.min(value.max, 400);
+				},
+	            splitLine: {
+	                show: false
+	            }
+	        },
+	        dataZoom: [{
+	            startValue: '{{{_pjango_param_char_begin_date}}}'
+	        }, {
+	            type: 'inside'
+	        }],
+	        series: [
+	        {
+	            name: '技术博文阅读',
+	            type: 'bar',
+	            stack: '文章阅读',
+	            data: data.map(function (item) {
+	                return item[1];
+	            }),
+	            markLine: {
+	                silent: true,
+	                data: [{
+	                    yAxis: 100
+	                }, {
+	                    yAxis: 150
+	                }, {
+	                    yAxis: 200
+	                }, {
+	                    yAxis: 250
+	                }, {
+	                    yAxis: 300
+	                }, {
+	                    yAxis: 350
+	                }, {
+	                    yAxis: 400
+	                }]
+	            }
+	        },
+	        {
+	            name: '文集文章阅读',
+	            type: 'bar',
+	            stack: '文章阅读',
+	            data: data.map(function (item) {
+	                return item[2];
+	            }),
+	            markLine: {
+	                silent: true,
+	                data: [{
+	                    yAxis: 100
+	                }, {
+	                    yAxis: 150
+	                }, {
+	                    yAxis: 200
+	                }, {
+	                    yAxis: 250
+	                }, {
+	                    yAxis: 300
+	                }, {
+	                    yAxis: 350
+	                }, {
+	                    yAxis: 400
+	                }]
+	            }
+	        },
+	        ]
+	    };
+		chart_daily_read_chart.setOption(option);
+		window.addEventListener("resize", function () { chart_daily_read_chart.resize(); });
+		chart_daily_read_chart.on('click', function (params) {
+			var date = params.name;
+			window.open('http://{{_pjango_url_report_daily}}/' + date);
+		});
+
+	}
+	
+	// 总pv成分
+	{
+		var chart_total_pv_chart = echarts.init(document.getElementById('chart_total_pv'), 'dark');
+		var data = {
+			{{{_pjango_chart_total_pv_data}}}
+		};
+		
+		option = {
+			backgroundColor: 'rgba(0, 0, 0, 0)',
+			tooltip: {
+				trigger: 'item',
+				formatter: "{a} <br/>{b} : {c} ({d}%)"
+			},
+			legend: {
+				type: 'scroll',
+				orient: 'vertical',
+				right: 10,
+				top: 20,
+				bottom: 20,
+				show: false,
+				data: data.legendData,
+			},
+			series : [
+				{
+					name: '行为',
+					type: 'pie',
+					radius : '55%',
+					center: ['50%', '50%'],
+					data: data.seriesData,
+					itemStyle: {
+						emphasis: {
+							shadowBlur: 10,
+							shadowOffsetX: 0,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					},
+					label: {
+						normal: {
+							formatter: '{b} : {c} ({d}%)\n',
+						}
+					},
+				}
+			]
+		};
+		chart_total_pv_chart.setOption(option);
+		window.addEventListener("resize", function () { chart_total_pv_chart.resize(); });
+	}
+	
+	// 总阅读成分
+	{
+		var chart_daily_read_chart = echarts.init(document.getElementById('chart_total_read'), 'dark');
+		var data = {
+			{{{_pjango_chart_total_read_data}}}
+		};
+		option = {
+			backgroundColor: 'rgba(0, 0, 0, 0)',
+			tooltip: {
+				trigger: 'item',
+				formatter: "{a} <br/>{b}: {c} ({d}%)"
+			},
+			legend: {
+				type: 'scroll',
+				orient: 'vertical',
+				right: 10,
+				top: 20,
+				bottom: 20,
+				show: false,
+				data: data.legendData,
+			},
+			series: [
+				{
+					name:'文章阅读',
+					type:'pie',
+					selectedMode: 'single',
+					radius: [0, '20%'],
+					label: {
+						normal: {
+							formatter: '{b}\n{c} ({d}%)',
+							position: 'inner',
+						},
+					},
+					labelLine: {
+						normal: {
+							show: false
+						}
+					},
+					data: data.insideSeriesData
+				},
+				{
+					name:'文章阅读',
+					type:'pie',
+					radius: ['30%', '45%'],
+					label: {
+						normal: {
+							formatter: '{b} : {c} ({d}%)\n',
+						},
+					},
+					data: data.outsideSeriesData
+				}
+			]
+		};
+		chart_daily_read_chart.setOption(option);
+		window.addEventListener("resize", function () { chart_daily_read_chart.resize(); });
+		chart_daily_read_chart.on('click', function (params) {
+			var title = params.name;
+			var splited = title.split('_');
+			if (splited.length != 2) {
+				return;
+			}
+			var type = splited[0];
+			var id = splited[1];
+			if (type == '阅读博文') {
+				window.open('http://{{_pjango_url_posts}}/posts/' + id);
+			} else if (type == '阅读文集文章') {
+				window.open('http://{{_pjango_url_corpus}}/corpus/' + id);
+			}
+		});
+	}
+	
+</script>
+</body>
+</html>
+

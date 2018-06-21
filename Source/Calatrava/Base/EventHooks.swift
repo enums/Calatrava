@@ -98,5 +98,12 @@ class EventHooks {
         StatisticsManager.statisticsEvent(eventType: .visitBilibili, req: req)
     }
     
+    static func hookReportDaily(req: HTTPRequest?, date: String) {
+        StatisticsManager.statisticsEvent(eventType: .reportDaily, param: date, req: req)
+    }
+    
+    static func hookReportTotal(req: HTTPRequest?, date: String) {
+        StatisticsManager.statisticsEvent(eventType: .reportTotal, param: date, req: req)
+    }
     
 }

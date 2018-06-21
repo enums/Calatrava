@@ -39,37 +39,12 @@ class AboutView: PCListView {
     override var viewParam: PCViewParam? {
         EventHooks.hookAbout(req: currentRequest)
         
-        let postsList = PostsModel.queryObjects() as? [PostsModel] ?? []
-        let corpusPostsList = CorpusPostsModel.queryObjects() as? [CorpusPostsModel] ?? []
-
-        let readSum = postsList.reduce(0) {
-            $0 + $1.read.intValue
-        } + corpusPostsList.reduce(0) {
-            $0 + $1.read.intValue
-        }
-        let loveSum = postsList.reduce(0) {
-            $0 + $1.love.intValue
-        } + corpusPostsList.reduce(0) {
-            $0 + $1.love.intValue
-        }
-        
         let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? "null"
-        
-        let counterIndex = Int(ConfigModel.getValueForKey(.counterIndex) ?? "0") ?? 0
-        let counterList = Int(ConfigModel.getValueForKey(.counterPostsList) ?? "0") ?? 0
-        let counterSearch = Int(ConfigModel.getValueForKey(.counterPostsSearch) ?? "0") ?? 0
         
         return [
             "_pjango_template_navigation_bar": NavigationBarView.html,
             "_pjango_template_footer_bar": FooterBarView.html,
             "_pjango_param_title_message": titleMessage,
-            
-            "_pjango_param_counter_posts": postsList.count + corpusPostsList.count,
-            "_pjango_param_counter_read": readSum,
-            "_pjango_param_counter_love": loveSum,
-            "_pjango_param_counter_index": counterIndex,
-            "_pjango_param_counter_list": counterList,
-            "_pjango_param_counter_search": counterSearch,
             
         ]
     }

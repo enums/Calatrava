@@ -27,6 +27,35 @@ enum VisitStatisticsEventType: String {
     case blogUpdate = "BLOG_UPDATE"
     case visitInstagram = "VISIT_INSTAGRAM"
     case visitBilibili = "VISIT_BILIBILI"
+    case reportDaily = "REPORT_DAILY"
+    case reportTotal = "REPORT_TOTAL"
+}
+
+extension VisitStatisticsEventType {
+    var displayValue: String {
+        switch self {
+        case .visitIndex: return "访问主页"
+        case .visitProject: return "业余项目"
+        case .visitAbout: return "查看关于"
+        case .listPosts: return "查看博文列表"
+        case .searchPosts: return "搜索博文"
+        case .readPosts: return "阅读博文"
+        case .lovePosts: return "点赞博文"
+        case .commentPosts: return "评论博文"
+        case .archivePosts: return "查看博文归档"
+        case .listCorpus: return "查看文集列表"
+        case .listCorpusPosts: return "查看文集文章列表"
+        case .readCorpusPosts: return "阅读文集文章"
+        case .loveCorpusPosts: return "点赞文集文章"
+        case .commentCorpusPosts: return "评论文集文章"
+        case .leaveMessage: return "留言"
+        case .blogUpdate: return "查看动态聚合"
+        case .visitInstagram: return "访问IG抓取"
+        case .visitBilibili: return "访问原创视频"
+        case .reportDaily: return "数据每日报告"
+        case .reportTotal: return "数据统计报告"
+        }
+    }
 }
 
 class VisitStatisticsModel: PCModel {

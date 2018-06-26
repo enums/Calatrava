@@ -97,7 +97,6 @@ class ReportDailyModel: PCModel {
     }
 
     static func allReport() -> [ReportDailyModel] {
-//        generateAllReport()
         guard let reports = ReportDailyModel.queryObjects() as? [ReportDailyModel] else {
             return []
         }

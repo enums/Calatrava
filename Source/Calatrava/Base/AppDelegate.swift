@@ -160,6 +160,7 @@ class AppDelegate: PjangoDelegate {
             DailyCleanPlugin.meta,
             InstagramTimerPlugin.meta,
             ReportUpdatePlugin.meta,
+            ReportGeneratePlugin.meta,
         ]
     }
     

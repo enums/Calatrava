@@ -211,7 +211,7 @@
 						<div class="col-md-12 column" style="height: 20px;"></div>
 						<div class="col-md-12 column dark">
 							<div class="col-md-12 column" style="height: 20px;"></div>
-							<div class="col-md-12 column chart" style="height: 600px" id="chart_daily_read"></div>
+							<div class="col-md-12 column chart" id="chart_daily_read"></div>
 						</div>
 						<div class="col-md-12 column" style="height: 20px;"></div>
 					</div>
@@ -271,19 +271,18 @@
 					type: 'pie',
 					radius : '55%',
 					center: ['50%', '50%'],
-					data: data.seriesData,
-					itemStyle: {
-						emphasis: {
-							shadowBlur: 10,
-							shadowOffsetX: 0,
-							shadowColor: 'rgba(0, 0, 0, 0.5)'
-						}
-					},
 					label: {
 						normal: {
-							formatter: '{b} : {c} ({d}%)\n',
-						}
+							formatter: '{b} : {c} ({d}%)',
+		                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+		                    borderColor: 'white',
+                            fontSize: 14,
+		                    borderWidth: 1,
+		                    borderRadius: 4,
+		                    padding: [8, 8],
+						},
 					},
+					data: data.seriesData,
 				}
 			]
 		};
@@ -317,7 +316,7 @@
 					name:'文章阅读',
 					type:'pie',
 					selectedMode: 'single',
-					radius: [0, '20%'],
+					radius: [0, '30%'],
 					label: {
 						normal: {
 							formatter: '{b}\n{c} ({d}%)',
@@ -334,10 +333,17 @@
 				{
 					name:'文章阅读',
 					type:'pie',
-					radius: ['30%', '45%'],
+					radius: ['40%', '55%'],
+					avoidLabelOverlap: false,
 					label: {
 						normal: {
-							formatter: '{b} : {c} ({d}%)\n',
+							formatter: '{b} : {c} ({d}%)',
+		                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+		                    borderColor: 'white',
+                            fontSize: 14,
+		                    borderWidth: 1,
+		                    borderRadius: 4,
+		                    padding: [8, 8],
 						},
 					},
 					data: data.outsideSeriesData

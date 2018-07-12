@@ -85,7 +85,7 @@ class ReportDailyView: PCListView {
         let message = ConfigModel.getValueForKey(.reportDailyMessage) ?? "null"
         let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? "null"
         
-        EventHooks.hookReportTotal(req: currentRequest, date: date.dayStringValue)
+        EventHooks.hookReportDaily(req: currentRequest, date: date.dayStringValue)
         
         return [
             "_pjango_template_navigation_bar": NavigationBarView.html,

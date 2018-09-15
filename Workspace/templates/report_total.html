@@ -317,7 +317,7 @@
 	        },
 	        yAxis: {
 		        max: function(value) {
-				    return Math.min(value.max, 4000);
+				    return Math.min(value.max, 1400);
 				},
 	            splitLine: {
 	                show: false
@@ -334,19 +334,19 @@
 	            show: false,
 	            pieces: [{
 	                gt: -1,
-	                lte: 500,
+	                lte: 200,
 	                color: '#cc0033'
 	            }, {
-	                gt: 500,
-	                lte: 1000,
+	                gt: 200,
+	                lte: 400,
 	                color: '#ff9933'
 	            }, {
-	                gt: 1000,
-	                lte: 1500,
+	                gt: 400,
+	                lte: 600,
 	                color: '#ffde33'
 	            }, {
-	                gt: 1500,
-	                lte: 2000,
+	                gt: 600,
+	                lte: 1400,
 	                color: '#096'
 	            }],
 	            outOfRange: {
@@ -362,25 +362,19 @@
 	            markLine: {
 	                silent: true,
 	                data: [{
-	                    yAxis: 500
+	                    yAxis: 200
+	                }, {
+	                    yAxis: 400
+	                }, {
+	                    yAxis: 600
+	                }, {
+	                    yAxis: 800
 	                }, {
 	                    yAxis: 1000
 	                }, {
-	                    yAxis: 1500
+	                    yAxis: 1200
 	                }, {
-	                    yAxis: 2000
-	                }, {
-	                    yAxis: 2500
-	                }, {
-	                    yAxis: 3000
-	                }, {
-	                    yAxis: 3500
-	                }, {
-	                    yAxis: 4000
-	                }, {
-	                    yAxis: 4500
-	                }, {
-	                    yAxis: 5000
+	                    yAxis: 1400
 	                }]
 	            }
 	        }

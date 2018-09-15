@@ -154,7 +154,7 @@ class ReportDailyModel: PCModel {
         var result = [VisitStatisticsEventType: Int]()
         let types = Array(keys)
         types.forEach { (type) in
-            result[type] = eventsDict?[VisitStatisticsEventType.visitIndex]?.count ?? 0
+            result[type] = eventsDict?[type]?.count ?? 0
         }
         return result
     }

@@ -102,6 +102,10 @@ class UpdateListView: PCListView {
         if let pageParam = Int(req.getUrlParam(key: "page") ?? ""), pageParam > 0 {
             page = pageParam
         }
+        let ignorePostman = Bool(req.getUrlParam(key: "ignore_postman") ?? "") ?? false
+        if ignorePostman {
+            updateList = updateList.filter { $0.type != .instagram }
+        }
         let eachPageFeedCount = 12
         let begin = eachPageFeedCount * (page - 1)
         let end = eachPageFeedCount * page - 1
@@ -110,12 +114,13 @@ class UpdateListView: PCListView {
             let trueEnd = min(updateList.count - 1, end)
             updates = Array(updateList[begin..<(trueEnd + 1)])
         }
+        
         displayUpdates = updates
-        
-        
+
         EventHooks.hookBlogUpdate(req: currentRequest)
         
         let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? "null"
+        let ignorePostmanButtonTitle = ignorePostman ? "包含 Postman 抓取 Instagram 的动态" : "忽略 Postman 抓取 Instagram 的动态"
         
         return [
             "_pjango_template_navigation_bar": NavigationBarView.html,
@@ -127,6 +132,8 @@ class UpdateListView: PCListView {
             "_pjango_param_param_page": page,
             "_pjango_param_param_page_total": max(0, updateList.count - 1) / eachPageFeedCount + 1,
             "_pjango_param_param_total_count": updateList.count,
+            "_pjango_param_param_ignore_postman": ignorePostman,
+            "_pjango_param_param_ignore_postman_button_title": ignorePostmanButtonTitle
 
         ]
     }

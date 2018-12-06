@@ -17,6 +17,10 @@ class EventHooks {
         StatisticsManager.statisticsEvent(eventType: .visitIndex, req: req)
     }
     
+    static func hookModuleList(req: HTTPRequest?) {
+        StatisticsManager.statisticsEvent(eventType: .listModules, req: req)
+    }
+    
     static func hookAbout(req: HTTPRequest?) {
         StatisticsManager.statisticsEvent(eventType: .visitAbout, req: req)
     }

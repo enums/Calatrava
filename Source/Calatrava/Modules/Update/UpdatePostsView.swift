@@ -32,7 +32,7 @@ class UpdatePostsView: PCDetailView {
             "_pjango_param_date": model.date.strValue,
             "_pjango_param_table_tag": model.tagModel.map { $0.toViewParam() },
             
-            "_pjango_url_index": "\(WEBSITE_HOST)",
+            "_pjango_url_index": WEBSITE_HOST,
             "_pjango_url_posts": "posts.\(WEBSITE_HOST)",
         ]
     }

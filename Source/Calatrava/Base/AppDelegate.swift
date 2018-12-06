@@ -61,8 +61,10 @@ class AppDelegate: PjangoDelegate {
             
             WEBSITE_HOST: [
                 pjangoUrl("", name: "index", handle: IndexView.asHandle()),
+                pjangoUrl("modules", name: "modules", handle: ModuleListView.asHandle()),
                 pjangoUrl("about", name: "about", handle: AboutView.asHandle()),
                 pjangoUrl("update", name: "update", handle: UpdateListView.asHandle()),
+                pjangoUrl("report/daily/today", name: "report.daily.today", handle: ReportDailyView.asHandle()),
                 pjangoUrl("report/daily/{date}", name: "report.daily", handle: ReportDailyView.asHandle()),
                 pjangoUrl("report/total/{opt}", name: "report.total", handle: ReportTotalView.asHandle()),
 
@@ -126,6 +128,7 @@ class AppDelegate: PjangoDelegate {
     
     func registerModels() -> [PCModel]? {
         return [
+            ModuleModel.meta,
             PostsModel.meta,
             PostsTagModel.meta,
             PostsCommentModel.meta,

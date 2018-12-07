@@ -70,7 +70,7 @@ class UpdateListView: PCListView {
         var list1 = [UpdateModel]()
         var list2 = [UpdateModel]()
         for i in 0..<updates.count {
-            if i % 2 == 0 {
+            if i < 6 {
                 list1.append(updates[i])
             } else {
                 list2.append(updates[i])

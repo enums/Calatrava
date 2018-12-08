@@ -120,10 +120,15 @@
 <div class="box">
 	
 {{{_pjango_template_navigation_bar}}}
-	
 	<div class="col-md-12 column height-more-than-85">
 		<div class="col-md-10 col-md-offset-1 column">
-			<div class="col-md-6 column">
+			<div class="col-md-12 column gap"></div>
+			<div class="col-md-12 column">
+				<div class="col-md-12 column">
+					<a class="button button-block button-rounded button-primary" onclick="switchIgnorePostman()">{{_pjango_param_param_ignore_postman_button_title}}</a>
+				</div>
+			</div>
+  			<div class="col-md-6 column">
 				<div class="col-md-12 column gap"></div>
 {{#_pjango_param_table_update_1}}
 				{{{_pjango_param_table_update_HTML}}}
@@ -165,12 +170,18 @@
 <script>
 	var page = {{{_pjango_param_param_page}}};
 	var total = {{{_pjango_param_param_page_total}}};
+	var ignorePostman = {{{_pjango_param_param_ignore_postman}}};
 	
 	function prePage() {
 		if (page <= 1) {
 			alert("不能再往前翻页啦！");
 		} else {
-			location = 'http://{{_pjango_url_update}}?page=' + (page - 1);
+			var url = 'http://{{_pjango_url_update}}?page=' + (page - 1);
+			if (ignorePostman == true) {
+				location = url + '&ignore_postman=true';
+			} else {
+				location = url;
+			}
 		}
 	}
 	
@@ -178,8 +189,23 @@
 		if (page >= total) {
 			alert("不能再往后翻页啦！");
 		} else {
-			location = 'http://{{_pjango_url_update}}?page=' + (page + 1);
+			var url = 'http://{{_pjango_url_update}}?page=' + (page + 1);
+			if (ignorePostman == true) {
+				location = url + '&ignore_postman=true';
+			} else {
+				location = url;
+			}
 		}
+	}
+	
+	function switchIgnorePostman() {
+		var url = 'http://{{_pjango_url_update}}?page=' + page;
+		if (ignorePostman == true) {
+			location = url;
+		} else {
+			location = url + '&ignore_postman=true';
+		}
+
 	}
 </script>
 </body>

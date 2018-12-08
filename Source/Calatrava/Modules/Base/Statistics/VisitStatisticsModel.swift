@@ -10,6 +10,7 @@ import Pjango
 
 enum VisitStatisticsEventType: String {
     case visitIndex = "VISIT_INDEX"
+    case listModules = "VISIT_MODULES"
     case visitProject = "VISIT_PROJECT"
     case visitAbout = "VISIT_ABOUT"
     case listPosts = "LIST_POSTS"
@@ -35,6 +36,7 @@ extension VisitStatisticsEventType {
     var displayValue: String {
         switch self {
         case .visitIndex: return "访问主页"
+        case .listModules: return "查看内容列表"
         case .visitProject: return "业余项目"
         case .visitAbout: return "查看关于"
         case .listPosts: return "查看博文列表"

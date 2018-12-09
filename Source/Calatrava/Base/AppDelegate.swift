@@ -9,8 +9,8 @@
 import Foundation
 import PerfectHTTP
 import Pjango
-import Pjango_MySQL
-import Pjango_Postman
+import PjangoMySQL
+import PjangoPostman
 
 
 class AppDelegate: PjangoDelegate {

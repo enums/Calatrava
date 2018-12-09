@@ -1,38 +1,28 @@
+// swift-tools-version:4.2
+// The swift-tools-version declares the minimum version of Swift required to build this package.
+
 import PackageDescription
 
-#if os(OSX)
 let package = Package(
     name: "Calatrava",
-    targets: [
-        Target(name: "Calatrava", dependencies:[]),
+    products: [
+        .executable(
+            name: "Calatrava",
+            targets: ["Calatrava"]),
         ],
     dependencies: [
-        .Package(url: "https://github.com/PerfectlySoft/Perfect-HTTPServer.git", majorVersion: 3, minor: 0),
-        .Package(url: "https://github.com/PerfectlySoft/Perfect-Mustache.git", majorVersion: 3, minor: 0),
-        .Package(url: "https://github.com/PerfectlySoft/Perfect-CURL.git", majorVersion: 3, minor: 0),
-        .Package(url: "https://github.com/enums/Pjango.git", majorVersion: 1, minor: 1),
-        .Package(url: "https://github.com/enums/Pjango-MySQL.git", majorVersion: 1, minor: 1),
-        .Package(url: "https://github.com/enums/Pjango-Postman.git", majorVersion: 1, minor: 1),
-        .Package(url: "https://github.com/enums/SwiftyJSON.git", majorVersion: 4),
-        ]
-)
-#else
-let package = Package(
-    name: "Calatrava",
-    targets: [
-        Target(name: "Calatrava", dependencies:[]),
+        .package(url:"https://github.com/PerfectlySoft/Perfect-HTTPServer.git" , from: "3.0.19"),
+        .package(url:"https://github.com/PerfectlySoft/Perfect-Mustache.git" , from: "3.0.2"),
+        .package(url:"https://github.com/PerfectlySoft/Perfect-CURL.git" , from: "3.1.0"),
+        .package(url:"https://github.com/PerfectlySoft/Perfect-Crypto.git" , from: "3.1.2"),
+        .package(url:"https://github.com/enums/Pjango.git" , from: "2.0.0"),
+        .package(url:"https://github.com/enums/Pjango-MySQL.git" , from: "2.0.0"),
+        .package(url:"https://github.com/enums/Pjango-Postman.git" , from: "2.0.0"),
+        .package(url:"https://github.com/enums/Pjango-SwiftyJSON.git" , from: "1.0.0"),
         ],
-    dependencies: [
-        .Package(url: "https://github.com/PerfectlySoft/Perfect-HTTPServer.git", majorVersion: 2, minor: 0),
-        .Package(url: "https://github.com/PerfectlySoft/Perfect-Mustache.git", majorVersion: 2, minor: 0),
-        .Package(url: "https://github.com/PerfectlySoft/Perfect-CURL.git", majorVersion: 2, minor: 0),
-        .Package(url: "https://github.com/PerfectlySoft/Perfect-Crypto.git", majorVersion: 1, minor: 0),
-        .Package(url: "https://github.com/enums/Pjango.git", majorVersion: 1, minor: 1),
-        .Package(url: "https://github.com/enums/Pjango-MySQL.git", majorVersion: 1, minor: 1),
-        .Package(url: "https://github.com/enums/Pjango-Postman.git", majorVersion: 1, minor: 1),
-        .Package(url: "https://github.com/enums/SwiftyJSON.git", majorVersion: 4),
-        ]
+    targets: [
+        .target(
+            name: "Calatrava",
+            dependencies: ["PerfectHTTPServer", "PerfectMustache", "PerfectCURL", "PerfectCrypto", "Pjango", "PjangoMySQL", "PjangoPostman", "SwiftyJSON"])
+    ]
 )
-#endif
-
-

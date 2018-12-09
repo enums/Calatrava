@@ -9,7 +9,7 @@ import Foundation
 import SwiftyJSON
 import PerfectLib
 import Pjango
-import Pjango_Postman
+import PjangoPostman
 
 class InstagramMediaNode {
     
@@ -122,7 +122,7 @@ class InstagramInfo {
         guard let nodesJson = mediaJson["edges"].array else {
             return nil
         }
-        let nodes = nodesJson.flatMap { InstagramMediaNode.init(json: $0["node"]) }
+        let nodes = nodesJson.compactMap { InstagramMediaNode.init(json: $0["node"]) }
         guard let end_cursor = mediaJson["page_info"]["end_cursor"].string else {
             return nil
         }
@@ -150,7 +150,7 @@ class InstagramInfo {
             guard let nodesJson = edgeJson["edges"].array else {
                 return
             }
-            var nodes = nodesJson.flatMap { InstagramMediaNode.init(json: $0["node"]) }
+            var nodes = nodesJson.compactMap { InstagramMediaNode.init(json: $0["node"]) }
             nodes.sort(by: { (nodeA, feedB) -> Bool in
                 nodeA.date > feedB.date
             })
@@ -218,7 +218,7 @@ extension PostmanCURL {
             guard let html = PostmanCURL.getString(url: url, clientIp: "Blog", clientPort: "0") else {
                 return nil
             }
-            json = JSON.parse(html)
+            json = JSON.init(parseJSON: html)
             guard json.type != .null else {
                 return nil
             }

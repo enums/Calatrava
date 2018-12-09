@@ -18,7 +18,7 @@ class ReportCache {
         if let todayReport = ReportDailyModel.reportForDate(date: Date.today.dayStringValue) {
             reports.append(todayReport)
         }
-        reports.sort(by: { $0.0.date.strValue < $0.1.date.strValue })
+        reports.sort(by: { $0.date.strValue < $1.date.strValue })
         
         let cache = [
             "_pjango_chart_daily_index_pv_data": totalDailyIndexPvData(allReport: reports),
@@ -36,15 +36,15 @@ class ReportCache {
     
     func totalPvData(allReport: [ReportDailyModel]) -> String {
         var allPvs = [VisitStatisticsEventType: Int]()
-        allReport.forEach {
-            let pvs = $0.dailyPv()
-            pvs.forEach({ (type, count) in
+        allReport.forEach { report in
+            let pvs = report.dailyPv()
+            pvs.forEach { (type, count) in
                 if allPvs[type] == nil {
                     allPvs[type] = count
                 } else {
                     allPvs[type]! += count
                 }
-            })
+            }
         }
         let legendDataList = Array(allPvs.keys).map { "'\($0.displayValue)'" }.sorted(by: >)
         let seriesDataList = Array(allPvs.keys).map { "{name: '\($0.displayValue)', value: \(allPvs[$0] ?? 0)}" }
@@ -54,7 +54,7 @@ class ReportCache {
     }
     
     func totalDailyPvData(allReport: [ReportDailyModel]) -> String {
-        return "[\(allReport.map { "['\($0.date.strValue)', \($0.totalPv().reduce(0) { $0.0 + $0.1.value })]" }.joined(separator: ", "))]"
+        return "[\(allReport.map { "['\($0.date.strValue)', \($0.totalPv().reduce(0) { $0 + $1.value })]" }.joined(separator: ", "))]"
     }
     
     func totalReadData(allReport: [ReportDailyModel]) -> String {
@@ -63,7 +63,7 @@ class ReportCache {
         var insideSeriesDataList = [String]()
         var outsideSeriesDataList = [String]()
         allReport.forEach {
-            $0.dailyRead().forEach({ (type, read) in
+            $0.dailyRead().forEach { (type, read) in
                 guard type == VisitStatisticsEventType.readPosts || type == VisitStatisticsEventType.readCorpusPosts else {
                     return
                 }
@@ -78,7 +78,7 @@ class ReportCache {
                         }
                     }
                 }
-            })
+            }
         }
         allRead.forEach { (type, read) in
             guard type == VisitStatisticsEventType.readPosts || type == VisitStatisticsEventType.readCorpusPosts else {

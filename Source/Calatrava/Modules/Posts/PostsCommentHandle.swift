@@ -19,9 +19,9 @@ func postsCommentHandle() -> PCUrlHandle {
             return 0
         }
         if let floor = Int(comment[begin..<end]), floor <= posts.commentsCount {
-            comment = comment.substring(from: endUpper)
-            if comment.characters.first == "\n" {
-                comment = String(comment.characters.dropFirst())
+            comment = String(comment.suffix(from: endUpper))
+            if comment.first == "\n" {
+                comment = String(comment.dropFirst())
             }
             return floor
         } else {
@@ -38,7 +38,7 @@ func postsCommentHandle() -> PCUrlHandle {
             pjangoHttpResponse("请把内容填写完整哦！")(req, res)
             return
         }
-        let json = JSON.parse(jsonStr)
+        let json = JSON.init(parseJSON: jsonStr)
         guard json != JSON.null else {
             pjangoHttpResponse("请把内容填写完整哦！")(req, res)
             return
@@ -59,16 +59,16 @@ func postsCommentHandle() -> PCUrlHandle {
             pjangoHttpResponse("目标博文不存在！")(req, res)
             return
         }
-        guard name.characters.count > 2 else {
+        guard name.count > 2 else {
             pjangoHttpResponse("昵称太短啦！")(req, res)
             return
         }
-        guard email.contains(string: "@"), email.contains(string: "."), email.characters.count > 5 else {
+        guard email.contains(string: "@"), email.contains(string: "."), email.count > 5 else {
             pjangoHttpResponse("邮箱地址不合法！")(req, res)
             return
         }
         let refer = processRefer(comment: &comment, posts: tmpPosts)
-        guard comment.characters.count > 2 else {
+        guard comment.count > 2 else {
             pjangoHttpResponse("评论太短啦！")(req, res)
             return
         }

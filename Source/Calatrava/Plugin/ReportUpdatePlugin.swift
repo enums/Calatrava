@@ -18,7 +18,13 @@ class ReportUpdatePlugin: PCTimerPlugin {
     override var task: PCTask? {
         return {
             logger.info("[Report] Updating!")
-            ReportCache.shared.updateCacheData()
+            #if os(macOS)
+                autoreleasepool {
+                    ReportCache.shared.updateCacheData()
+                }
+            #else
+                ReportCache.shared.updateCacheData()
+            #endif
             logger.info("[Report] Done!")
         }
     }

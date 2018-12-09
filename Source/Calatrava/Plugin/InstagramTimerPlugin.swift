@@ -7,7 +7,7 @@
 
 import Foundation
 import Pjango
-import Pjango_Postman
+import PjangoPostman
 import SwiftyJSON
 
 class InstagramTimerPlugin: PCTimerPlugin {

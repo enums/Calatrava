@@ -8,7 +8,7 @@
 import Foundation
 import PerfectLib
 import Pjango
-import Pjango_Postman
+import PjangoPostman
 import SwiftyJSON
 
 enum InstagramCurlAction: String {

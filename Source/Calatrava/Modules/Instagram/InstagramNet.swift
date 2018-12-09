@@ -9,7 +9,7 @@ import Foundation
 import SwiftyJSON
 import PerfectLib
 import Pjango
-import Pjango_Postman
+import PjangoPostman
 
 class InstagramMediaNode {
     

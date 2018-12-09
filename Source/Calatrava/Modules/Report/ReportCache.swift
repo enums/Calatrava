@@ -31,20 +31,24 @@ class ReportCache {
     }
     
     func totalDailyIndexPvData(allReport: [ReportDailyModel]) -> String {
-        return "[\(allReport.map { "['\($0.date.strValue)', \($0.totalPv()[VisitStatisticsEventType.visitIndex] ?? 0)]" }.joined(separator: ", "))]"
+        return autoreleasepool {
+            "[\(allReport.map { "['\($0.date.strValue)', \($0.totalPv()[VisitStatisticsEventType.visitIndex] ?? 0)]" }.joined(separator: ", "))]"
+        }
     }
     
     func totalPvData(allReport: [ReportDailyModel]) -> String {
         var allPvs = [VisitStatisticsEventType: Int]()
-        allReport.forEach {
-            let pvs = $0.dailyPv()
-            pvs.forEach({ (type, count) in
-                if allPvs[type] == nil {
-                    allPvs[type] = count
-                } else {
-                    allPvs[type]! += count
-                }
-            })
+        allReport.forEach { report in
+            autoreleasepool {
+                let pvs = report.dailyPv()
+                pvs.forEach({ (type, count) in
+                    if allPvs[type] == nil {
+                        allPvs[type] = count
+                    } else {
+                        allPvs[type]! += count
+                    }
+                })
+            }
         }
         let legendDataList = Array(allPvs.keys).map { "'\($0.displayValue)'" }.sorted(by: >)
         let seriesDataList = Array(allPvs.keys).map { "{name: '\($0.displayValue)', value: \(allPvs[$0] ?? 0)}" }
@@ -54,7 +58,9 @@ class ReportCache {
     }
     
     func totalDailyPvData(allReport: [ReportDailyModel]) -> String {
-        return "[\(allReport.map { "['\($0.date.strValue)', \($0.totalPv().reduce(0) { $0.0 + $0.1.value })]" }.joined(separator: ", "))]"
+        return autoreleasepool { _ in
+            "[\(allReport.map { "['\($0.date.strValue)', \($0.totalPv().reduce(0) { $0.0 + $0.1.value })]" }.joined(separator: ", "))]"
+        }
     }
     
     func totalReadData(allReport: [ReportDailyModel]) -> String {
@@ -63,7 +69,7 @@ class ReportCache {
         var insideSeriesDataList = [String]()
         var outsideSeriesDataList = [String]()
         allReport.forEach {
-            $0.dailyRead().forEach({ (type, read) in
+            $0.dailyRead().forEach { (type, read) in
                 guard type == VisitStatisticsEventType.readPosts || type == VisitStatisticsEventType.readCorpusPosts else {
                     return
                 }
@@ -78,7 +84,7 @@ class ReportCache {
                         }
                     }
                 }
-            })
+            }
         }
         allRead.forEach { (type, read) in
             guard type == VisitStatisticsEventType.readPosts || type == VisitStatisticsEventType.readCorpusPosts else {
@@ -117,6 +123,8 @@ class ReportCache {
         }
         let keys = Array(allRead.keys).sorted(by: <)
         
-        return "[\(keys.map{ "['\($0)', \(allRead[$0]?[VisitStatisticsEventType.readPosts] ?? 0), \(allRead[$0]?[VisitStatisticsEventType.readCorpusPosts] ?? 0)]" }.joined(separator: ", "))]"
+        return autoreleasepool { _ in
+            "[\(keys.map{ "['\($0)', \(allRead[$0]?[VisitStatisticsEventType.readPosts] ?? 0), \(allRead[$0]?[VisitStatisticsEventType.readCorpusPosts] ?? 0)]" }.joined(separator: ", "))]"
+        }
     }
 }

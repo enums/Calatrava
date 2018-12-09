@@ -21,7 +21,7 @@ class ReportDailyModel: PCModel {
     var eventsDict: [VisitStatisticsEventType: [String]]? {
         get {
             let jsonStr = events.strValue
-            let json = JSON.parse(jsonStr)
+            let json = JSON.init(parseJSON: jsonStr)
             guard let dictJson = json.dictionary else {
                 return nil
             }
@@ -30,7 +30,7 @@ class ReportDailyModel: PCModel {
                 guard let type = VisitStatisticsEventType(rawValue: key), let list = value.array else {
                     return
                 }
-                let params = list.flatMap { $0.string }
+                let params = list.compactMap { $0.string }
                 result[type] = params
             }
             return result

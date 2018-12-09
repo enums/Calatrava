@@ -54,7 +54,7 @@ class UpdateListView: PCListView {
                 updates += bilibilis.map { UpdateModel.init($0) }
             }
             
-            updates.sort(by: { $0.0.date > $0.1.date })
+            updates.sort(by: { $0.date > $1.date })
             
             UpadateListCache = updates
             UpadateListCacheTime = Date.init()

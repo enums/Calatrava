@@ -22,7 +22,7 @@ func InstagramCurlHandle() -> PCUrlHandle {
             pjangoHttpResponse("")(req, res)
             return
         }
-        let json = JSON.parse(paramStr)
+        let json = JSON.init(parseJSON: paramStr)
         guard json != JSON.null else {
             pjangoHttpResponse("")(req, res)
             return

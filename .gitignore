@@ -79,6 +79,7 @@ fastlane/test_output
 Package.pins
 Calatrava.xcodeproj
 Workspace/runtime/calatrava.log
+Workspace/static/resume.pdf
 /Package.resolved
 /Workspace/static/_md
 /Workspace/static/img/post
@@ -89,6 +90,7 @@ Workspace/runtime/calatrava.log
 /Workspace/static/img/corpus/*.png
 /Workspace/static/img/corpus/*.mp4
 /Workspace/static/img/corpus/*.jpg
+/Workspace/static/img/corpus/*.JPG
 /Workspace/static/img/corpus/*.jpeg
 /Workspace/static/img/corpus/*.gif
 /Workspace/static/img/corpus/*.mov

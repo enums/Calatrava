@@ -9,8 +9,8 @@
 import Foundation
 import PerfectHTTP
 import Pjango
-import Pjango_MySQL
-import Pjango_Postman
+import PjangoMySQL
+import PjangoPostman
 
 
 class AppDelegate: PjangoDelegate {
@@ -22,7 +22,7 @@ class AppDelegate: PjangoDelegate {
         #if os(macOS)
             PJANGO_WORKSPACE_PATH = "/Users/Enum/Developer/Calatrava/Workspace"
         #else
-            PJANGO_WORKSPACE_PATH = "/home/uftp/Calatrava-Blog/Workspace"
+            PJANGO_WORKSPACE_PATH = "/home/uftp/Calatrava/Workspace"
         #endif
         
         

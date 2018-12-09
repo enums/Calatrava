@@ -58,7 +58,7 @@ extension Int {
     
     static func rand(_ to: Int) -> Int {
         #if os(Linux)
-            return Int(random()) % to
+            return Int.random(in: 0..<to)
         #else
             return Int(arc4random()) % to
         #endif

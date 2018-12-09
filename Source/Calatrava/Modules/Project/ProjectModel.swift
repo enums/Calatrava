@@ -26,7 +26,7 @@ class ProjectModel: PCModel {
         let tagList = (tag.value as! String).components(separatedBy: "|")
         PostsTagModel.updateHtmlDictIfNeed()
         
-        return tagList.flatMap {
+        return tagList.compactMap {
             PostsTagModel.htmlDict[$0]
         }
     }

@@ -7,7 +7,7 @@
 
 import Foundation
 import Pjango
-import Pjango_Postman
+import PjangoPostman
 
 class InstagramListView: PCListView {
     

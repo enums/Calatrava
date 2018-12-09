@@ -18,7 +18,7 @@ class ReportCache {
         if let todayReport = ReportDailyModel.reportForDate(date: Date.today.dayStringValue) {
             reports.append(todayReport)
         }
-        reports.sort(by: { $0.0.date.strValue < $0.1.date.strValue })
+        reports.sort(by: { $0.date.strValue < $1.date.strValue })
         
         let cache = [
             "_pjango_chart_daily_index_pv_data": totalDailyIndexPvData(allReport: reports),
@@ -31,23 +31,19 @@ class ReportCache {
     }
     
     func totalDailyIndexPvData(allReport: [ReportDailyModel]) -> String {
-        return autoreleasepool {
-            "[\(allReport.map { "['\($0.date.strValue)', \($0.totalPv()[VisitStatisticsEventType.visitIndex] ?? 0)]" }.joined(separator: ", "))]"
-        }
+        return "[\(allReport.map { "['\($0.date.strValue)', \($0.totalPv()[VisitStatisticsEventType.visitIndex] ?? 0)]" }.joined(separator: ", "))]"
     }
     
     func totalPvData(allReport: [ReportDailyModel]) -> String {
         var allPvs = [VisitStatisticsEventType: Int]()
         allReport.forEach { report in
-            autoreleasepool {
-                let pvs = report.dailyPv()
-                pvs.forEach({ (type, count) in
-                    if allPvs[type] == nil {
-                        allPvs[type] = count
-                    } else {
-                        allPvs[type]! += count
-                    }
-                })
+            let pvs = report.dailyPv()
+            pvs.forEach { (type, count) in
+                if allPvs[type] == nil {
+                    allPvs[type] = count
+                } else {
+                    allPvs[type]! += count
+                }
             }
         }
         let legendDataList = Array(allPvs.keys).map { "'\($0.displayValue)'" }.sorted(by: >)
@@ -58,9 +54,7 @@ class ReportCache {
     }
     
     func totalDailyPvData(allReport: [ReportDailyModel]) -> String {
-        return autoreleasepool { _ in
-            "[\(allReport.map { "['\($0.date.strValue)', \($0.totalPv().reduce(0) { $0.0 + $0.1.value })]" }.joined(separator: ", "))]"
-        }
+        return "[\(allReport.map { "['\($0.date.strValue)', \($0.totalPv().reduce(0) { $0 + $1.value })]" }.joined(separator: ", "))]"
     }
     
     func totalReadData(allReport: [ReportDailyModel]) -> String {
@@ -123,8 +117,6 @@ class ReportCache {
         }
         let keys = Array(allRead.keys).sorted(by: <)
         
-        return autoreleasepool { _ in
-            "[\(keys.map{ "['\($0)', \(allRead[$0]?[VisitStatisticsEventType.readPosts] ?? 0), \(allRead[$0]?[VisitStatisticsEventType.readCorpusPosts] ?? 0)]" }.joined(separator: ", "))]"
-        }
+        return "[\(keys.map{ "['\($0)', \(allRead[$0]?[VisitStatisticsEventType.readPosts] ?? 0), \(allRead[$0]?[VisitStatisticsEventType.readCorpusPosts] ?? 0)]" }.joined(separator: ", "))]"
     }
 }

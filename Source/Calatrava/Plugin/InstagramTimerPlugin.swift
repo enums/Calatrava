@@ -7,7 +7,7 @@
 
 import Foundation
 import Pjango
-import Pjango_Postman
+import PjangoPostman
 import SwiftyJSON
 
 class InstagramTimerPlugin: PCTimerPlugin {
@@ -65,8 +65,8 @@ class InstagramTimerPlugin: PCTimerPlugin {
             return nil
         }
         let jsonRange = jsonBegin..<html.index(jsonEnd, offsetBy: 1)
-        let subString = html.substring(with: jsonRange)
-        let json = JSON.parse(subString)
+        let subString = String(html[jsonRange])
+        let json = JSON.init(parseJSON: subString)
         guard let info = InstagramInfo.init(json: json) else {
             return nil
         }

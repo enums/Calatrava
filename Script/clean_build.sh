@@ -1,0 +1,2 @@
+cd ../
+swift package clean

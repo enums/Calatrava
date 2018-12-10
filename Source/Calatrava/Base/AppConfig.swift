@@ -40,7 +40,7 @@ let APP_CONFIG: AppConfig = {
         let configPath = "/Users/enum/Developer/Calatrava/Workspace/runtime/config.json"
     #else
         let currentPath = FileManager.default.currentDirectoryPath
-        let configPath = "\(currentPath)/../../Workspace/runtime/config.json"
+        let configPath = "\(currentPath)/Workspace/runtime/config.json"
     #endif
     let configFile = File.init(configPath)
     let content = (try? configFile.readString()) ?? ""

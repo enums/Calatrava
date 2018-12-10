@@ -1,0 +1,19 @@
+{
+    "macos_workspace_path": "",
+    "workspace_path": "",
+
+    "log_path": "runtime/calatrava.log",
+
+    "base_dir": "",
+    "template_dir": "templates",
+    "static_dir": "static",
+
+    "port": 80,
+    "log_debug": false,
+
+    "mysql_schema": "Pjango_calatrava",
+    "mysql_user": "",
+    "mysql_password": "",
+    "mysql_host": "127.0.0.1",
+    "mysql_port": 3306
+}

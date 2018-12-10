@@ -7,39 +7,36 @@
 //
 
 import Foundation
+import SwiftyJSON
 import PerfectHTTP
 import Pjango
 import PjangoMySQL
 import PjangoPostman
-
 
 class AppDelegate: PjangoDelegate {
     
     func setSettings() {
         
         // Pjango
-        
         #if os(macOS)
-            PJANGO_WORKSPACE_PATH = "/Users/Enum/Developer/Calatrava/Workspace"
+            PJANGO_WORKSPACE_PATH = APP_CONFIG.string(forKey: "macos_workspace_path") ?? "/Calatrava"
         #else
-            PJANGO_WORKSPACE_PATH = "/home/uftp/Calatrava/Workspace"
+            PJANGO_WORKSPACE_PATH = APP_CONFIG.string(forKey: "workspace_path") ?? "/Calatrava"
         #endif
         
+        PJANGO_LOG_DEBUG = APP_CONFIG.bool(forKey: "log_debug") ?? true
         
-        PJANGO_LOG_DEBUG = false
+        PJANGO_SERVER_PORT = UInt16(APP_CONFIG.int(forKey: "port") ?? 80)
         
-        PJANGO_SERVER_PORT = 80
-        
-        PJANGO_LOG_PATH = "runtime/calatrava.log"
+        PJANGO_LOG_PATH = APP_CONFIG.string(forKey: "log_path") ?? "pjango.log"
         
         // Django
         
-        PJANGO_BASE_DIR = ""
+        PJANGO_BASE_DIR = APP_CONFIG.string(forKey: "base_dir") ?? ""
         
-        PJANGO_TEMPLATES_DIR = "templates"
+        PJANGO_TEMPLATES_DIR = APP_CONFIG.string(forKey: "templates") ?? "templates"
         
-        PJANGO_STATIC_URL = "static"
-        
+        PJANGO_STATIC_URL = APP_CONFIG.string(forKey: "static") ?? "static"
     }
     
     func setUrls() -> [String: [PCUrlConfig]]? {
@@ -118,11 +115,11 @@ class AppDelegate: PjangoDelegate {
     
     func setDB() -> PCDataBase? {
         return MySQLDataBase.init(param: [
-            "SCHEMA": "Pjango_calatrava",
-            "USER": "",
-            "PASSWORD": "",
-            "HOST": "127.0.0.1",
-            "PORT": UInt16(3306),
+            "SCHEMA": APP_CONFIG.string(forKey: "mysql_schema") ?? "Pjango_calatrava",
+            "USER": APP_CONFIG.string(forKey: "mysql_user") ?? "",
+            "PASSWORD": APP_CONFIG.string(forKey: "mysql_password") ?? "",
+            "HOST": APP_CONFIG.string(forKey: "mysql_host") ?? "127.0.0.1",
+            "PORT":  UInt16(APP_CONFIG.int(forKey: "mysql_schema") ?? 3306),
             ])
     }
     

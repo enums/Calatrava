@@ -21,8 +21,12 @@ class DailyCleanPlugin: PCTimerPlugin {
     
     override var task: PCTask? {
         return {
+            postsLoveDict.removeAll()
             postsCommentLastTimeDict.removeAll()
             postsCommentDailyDict.removeAll()
+            corpusPostsLoveDict.removeAll()
+            corpusPostsCommentLastTimeDict.removeAll()
+            corpusPostsCommentDailyDict.removeAll()
             messageLastTimeDict.removeAll()
             messageDailyDict.removeAll()
             verificationLastTimeDict.removeAll()

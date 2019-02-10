@@ -180,7 +180,7 @@
 			if (ignorePostman == true) {
 				location = url + '&ignore_postman=true';
 			} else {
-				location = url;
+				location = url + '&ignore_postman=false';
 			}
 		}
 	}
@@ -193,7 +193,7 @@
 			if (ignorePostman == true) {
 				location = url + '&ignore_postman=true';
 			} else {
-				location = url;
+				location = url + '&ignore_postman=false';
 			}
 		}
 	}
@@ -201,7 +201,7 @@
 	function switchIgnorePostman() {
 		var url = 'http://{{_pjango_url_update}}?page=' + page;
 		if (ignorePostman == true) {
-			location = url;
+			location = url + '&ignore_postman=false';
 		} else {
 			location = url + '&ignore_postman=true';
 		}

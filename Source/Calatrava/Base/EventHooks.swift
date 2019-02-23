@@ -21,6 +21,11 @@ class EventHooks {
         StatisticsManager.statisticsEvent(eventType: .listModules, req: req)
     }
     
+    static func hookSearchAll(req: HTTPRequest?, module: String?, keyword: String?) {
+        addCountForKey(.counterPostsSearch)
+        StatisticsManager.statisticsEvent(eventType: .searchAll, param: "\(module ?? "null")_\(keyword ?? "null")", req: req)
+    }
+    
     static func hookAbout(req: HTTPRequest?) {
         StatisticsManager.statisticsEvent(eventType: .visitAbout, req: req)
     }
@@ -61,6 +66,7 @@ class EventHooks {
     }
     
     static func hookCorpusPostsList(req: HTTPRequest?, cid: Int) {
+        addCountForKey(.counterPostsList)
         StatisticsManager.statisticsEvent(eventType: .listCorpusPosts, param: "\(cid)", req: req)
     }
     

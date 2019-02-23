@@ -30,7 +30,10 @@ class IndexView: PCDetailView {
             "_pjango_param_message": indexMessage,
             
             "_pjango_url_posts_list": pjangoUrlReverse(host: "posts.\(WEBSITE_HOST)", name: "list") ?? "",
+            "_pjango_url_corpus_list": pjangoUrlReverse(host: "corpus.\(WEBSITE_HOST)", name: "list") ?? "",
+            "_pjango_url_about": pjangoUrlReverse(host: WEBSITE_HOST, name: "about") ?? "",
             "_pjango_url_update": pjangoUrlReverse(host: WEBSITE_HOST, name: "update") ?? "",
+            "_pjango_url_data": pjangoUrlReverse(host: WEBSITE_HOST, name: "report.daily.today") ?? "",
             "_pjango_url_modules": pjangoUrlReverse(host: WEBSITE_HOST, name: "modules") ?? "",
         ]
     }

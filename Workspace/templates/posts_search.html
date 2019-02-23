@@ -2,7 +2,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="user-scalable=no, width=720px, height=1280px"/> 
-	<title>全站内容搜索 | {{_pjango_param_title_message}}</title>
+	<title>搜索博文 | {{_pjango_param_title_message}}</title>
 	<link rel="icon" href="/img/favicon.png" type="image/png">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">  
 	<link rel="stylesheet" href="/css/font-awesome.min.css"> 
@@ -32,7 +32,6 @@
 	}
 	a.tag {
 		margin-right: 4px;
-		font-size: 18px;
 	}
 </style>
 <body class="main">
@@ -47,20 +46,20 @@
 			<div class="col-md-8 col-center height-40 corner-window shadow">
 				<div class="height-20"></div>
 				<div class="height-20 text-center">
-					<p id="title" class="title">搜索全站内容</p>
+					<p id="title" class="title">搜索全部博文</p>
 				</div>
                 <div class="input-group input-group-lg col-md-10 column col-md-offset-1">
-                    <input id="search_input" type="text" class="form-control search" placeholder="Keyword or Date. e.g., Metal, 东京, 2019-02-23" onkeydown='if(event.keyCode==13) search()'>
+                    <input id="search_input" type="text" class="form-control search" placeholder="Keyword or Date. e.g., Swift, Perfect, Linux, 2017-03-03, 03-03" onkeydown='if(event.keyCode==13) search()'>
                     <span class="input-group-btn button-dropdown-plain">
                         <button class="btn btn-default search" onclick="search()">搜索</button>
                     </span>
                 </div>
                 <div class="height-10"></div>
                 <div class="col-md-10 column col-md-offset-1">
-	                <p class="tag text-center">
-						<a class="label label-danger tag" onclick="chooseModule('')">全站内容</a>
+	                <p class="tag">
+						<a class="label label-danger tag" onclick="chooseTag('')">全部</a>
 						{{#_pjango_param_all_tags}}
-						<a class="label label-primary tag" onclick="chooseModule('{{{_pjango_param_table_Module_TITLE}}}')">{{{_pjango_param_table_Module_ICON}}} {{{_pjango_param_table_Module_TITLE}}}</a>
+						<a class="label {{{_pjango_param_table_PostsTag_LABEL}}} tag" onclick="chooseTag('{{{_pjango_param_table_PostsTag_TAG}}}')">{{{_pjango_param_table_PostsTag_TAG}}}</a>
 						{{/_pjango_param_all_tags}}
 	                </p>
                 </div>
@@ -73,26 +72,26 @@
 </div>
 <script>
 
-var module = "";
+var tag = "";
 
 function search() {
 	var text = document.getElementById('search_input').value;
-	var url = 'http://{{_pjango_param_host}}/search_result?'
-	if (module != "") {
-		url += "module=" + module + "&";
+	var url = 'http://posts.{{_pjango_param_host}}/list?'
+	if (tag != "") {
+		url += "tag=" + tag + "&";
 	}
 	if (text != "") {
 		url += "keyword=" + text;
 	}
 	location = url;
 }
-function chooseModule(t) {
+function chooseTag(t) {
 	if (t == "") {
-		document.getElementById("title").innerHTML="搜索全站内容";
+		document.getElementById("title").innerHTML="搜索全部博文";
 	} else {
-		document.getElementById("title").innerHTML="搜索 `" + t + "` 板块内容";
+		document.getElementById("title").innerHTML="搜索标签为 `" + t + "` 的博文";
 	}
-	module = t;
+	tag = t;
 }
 </script>
 </body>

@@ -61,6 +61,8 @@ class AppDelegate: PjangoDelegate {
                 pjangoUrl("modules", name: "modules", handle: ModuleListView.asHandle()),
                 pjangoUrl("about", name: "about", handle: AboutView.asHandle()),
                 pjangoUrl("update", name: "update", handle: UpdateListView.asHandle()),
+                pjangoUrl("search", name: "search", handle: SearchView.asHandle()),
+                pjangoUrl("search_result", name: "search.result", handle: SearchResultListView.asHandle()),
                 pjangoUrl("report/daily/today", name: "report.daily.today", handle: ReportDailyView.asHandle()),
                 pjangoUrl("report/daily/{date}", name: "report.daily", handle: ReportDailyView.asHandle()),
                 pjangoUrl("report/total/{opt}", name: "report.total", handle: ReportTotalView.asHandle()),
@@ -77,8 +79,8 @@ class AppDelegate: PjangoDelegate {
             "posts.\(WEBSITE_HOST)": [
                 pjangoUrl("list", name: "list", handle: PostsListView.asHandle()),
                 pjangoUrl("posts/{pid}", name: "posts", handle: PostsView.asHandle()),
-                pjangoUrl("search", name: "search", handle: PostsSearchView.asHandle()),
                 pjangoUrl("archive", handle: PostsArchiveView.asHandle()),
+                pjangoUrl("search", name: "search", handle: PostsSearchView.asHandle()),
                 
                 pjangoUrl("api/love", name: "api.love@posts", handle: postsLoveHandle),
                 pjangoUrl("api/comment", name: "api.comment@posts", handle: postsCommentHandle),

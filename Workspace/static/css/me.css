@@ -4,7 +4,7 @@ body.main {
 	background-size: cover;
 }
 
-body:before {
+body.main:before {
   	content: ' ';
   	position: fixed;
   	z-index: -1;
@@ -13,6 +13,40 @@ body:before {
   	bottom: 0;
   	left: 0;
 	background: url("/img/background.jpg") center center no-repeat;
+	background-size: cover;
+}
+
+body.main-index {
+	background: url("/img/background_index.jpg") fixed center center no-repeat;
+	background-size: cover;
+}
+
+body.main-index:before {
+  	content: ' ';
+  	position: fixed;
+  	z-index: -1;
+  	top: 0;
+  	right: 0;
+  	bottom: 0;
+  	left: 0;
+	background: url("/img/background_index.jpg") center center no-repeat;
+	background-size: cover;
+}
+
+body.main-me {
+	background: url("/img/background_me.jpg") fixed center center no-repeat;
+	background-size: cover;
+}
+
+body.main-me:before {
+  	content: ' ';
+  	position: fixed;
+  	z-index: -1;
+  	top: 0;
+  	right: 0;
+  	bottom: 0;
+  	left: 0;
+	background: url("/img/background_me.jpg") center center no-repeat;
 	background-size: cover;
 }
 

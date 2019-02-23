@@ -15,7 +15,7 @@ class InstagramTimerPlugin: PCTimerPlugin {
     var isLoading = false
     
     override var timerInterval: TimeInterval {
-        return 60 * 10
+        return 60 * 60 * 3
     }
     
     override var task: PCTask? {

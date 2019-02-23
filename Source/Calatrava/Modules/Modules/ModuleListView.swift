@@ -46,6 +46,7 @@ class ModuleListView: PCListView {
             "_pjango_param_title_message": titleMessage,
             "_pjango_param_name": name,
             "_pjango_param_message": indexMessage,
+            "_pjango_url_search": pjangoUrlReverse(host: WEBSITE_HOST, name: "search") ?? ""
         ]
     }
 }

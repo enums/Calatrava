@@ -1,0 +1,28 @@
+<div class="col-md-12 column">
+	<div class="col-md-12 column corner-window shadow project-cell" onclick="window.open('{{{_pjango_param_url}}}')">
+		<div class="col-md-12 column gap"></div>
+		<div class="col-md-12 column">
+		<div class="col-md-12 column" style="height: 20px;"></div>
+			<p class="title">
+				<img class="head img-circle" src="/img/head_128.png">
+				我 发布的【业余项目】：
+			</p>
+			<p class="big-title"><i class="fa fa-fw fa-github"></i>{{_pjango_param_title}}</p>
+			<p class="sub-title">{{_pjango_param_subtitle}}</p>
+			<p class="title">
+				{{#_pjango_param_table_TAGHTML}}
+				<a class="label {{{_pjango_param_table_PostsTag_LABEL}}} tag">{{{_pjango_param_table_PostsTag_TAG}}}</a>
+				{{/_pjango_param_table_TAGHTML}}
+			</p>
+			<p class="text">{{_pjango_param_memo}}</p>
+		</div>
+		<div class="col-md-12 column gap"></div>
+		<div class="col-md-12 column">
+			<i class="fa fa-fw fa-calendar text"></i>
+			<i class="text">发布于: {{_pjango_param_date}}</i>
+		</div>
+		<div class="col-md-12 column" style="height: 16px"></div>
+
+	</div>
+</div>
+<div class="col-md-12 column gap"></div>

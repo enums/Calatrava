@@ -19,7 +19,8 @@ class ModuleModel: PCModel {
     var icon = PCDataBaseField.init(name: "ICON", type: .string, length: 64)
     var memo = PCDataBaseField.init(name: "MEMO", type: .string, length: 128)
     var url = PCDataBaseField.init(name: "URL", type: .string, length: 128)
-    
+    var searchable = PCDataBaseField.init(name: "SEARCHABLE", type: .int)
+
     var realUrl: String {
         get {
             let urlDict = [
@@ -38,7 +39,7 @@ class ModuleModel: PCModel {
     
     override func registerFields() -> [PCDataBaseField] {
         return [
-            title, icon, memo, url
+            title, icon, memo, url, searchable
         ]
     }
     

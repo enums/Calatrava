@@ -1,28 +1,22 @@
 <div class="col-md-12 column">
-	<div class="col-md-12 column corner-window shadow project-cell">
+	<div class="col-md-12 column corner-window shadow cell">
 		<div class="col-md-12 column" style="height: 20px;"></div>
 		<p class="title">
 			<img class="head img-circle" src="/img/head_128.png">
-			<font>
-			我
-			刚刚发布了新的
-			业余项目：
-			</font>
+			我 发表的【文集文章】：
 		</p>
 		<div class="col-md-12 column" style="height: 8px;"></div>
 		<p>
-			<a class="title" style="font-size: 26" target="_blank" href="{{{_pjango_param_url}}}">
-				<i class="fa fa-fw fa-github"></i>
+			<a class="title" href="http://{{{_pjango_url_corpus}}}/corpus/{{{_pjango_param_cpid}}}">
+				<i class="fa fa-fw fa-file-text"></i>
 				{{_pjango_param_title}}
 			</a>
 		</p>
-		<p class="title">{{_pjango_param_sub_title}}</p>
-		<p class="title">
-			{{#_pjango_param_table_TAGHTML}}
-			<a class="label {{{_pjango_param_table_PostsTag_LABEL}}} tag">{{{_pjango_param_table_PostsTag_TAG}}}</a>
-			{{/_pjango_param_table_TAGHTML}}
-		</p>
-		<p class="text">{{_pjango_param_memo}}</p>
+		<p>
+			<a class="title" href="http://{{{_pjango_url_corpus}}}/list/{{{_pjango_param_cid}}}">
+				<i class="fa fa-fw fa-book"></i>
+				收录于文集：《{{_pjango_param_corpus_title}}》
+			</a>
 		</p>
 		<div class="col-md-12 column" style="height: 8px;"></div>
 		<div class="col-md-12 column">

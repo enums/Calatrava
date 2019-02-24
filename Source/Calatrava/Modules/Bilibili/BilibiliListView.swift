@@ -86,9 +86,8 @@ class BilibiliListView: PCListView {
         if let idParam = request.getUrlParam(key: "id"), idParam != "" {
             feeds = feeds.filter { "\($0.blid.intValue)" == idParam }
             id = idParam
-        } else {
-            feeds = feeds.reversed()
         }
+        feeds = feeds.sorted { $0.date.strValue > $1.date.strValue }
         var page = 1
         if let pageParam = Int(request.getUrlParam(key: "page") ?? ""), pageParam > 0 {
             page = pageParam

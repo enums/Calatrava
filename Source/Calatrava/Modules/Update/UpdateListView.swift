@@ -67,18 +67,8 @@ class UpdateListView: PCListView {
         guard let updates = displayUpdates else {
             return nil
         }
-        var list1 = [UpdateModel]()
-        var list2 = [UpdateModel]()
-        for i in 0..<updates.count {
-            if i < 6 {
-                list1.append(updates[i])
-            } else {
-                list2.append(updates[i])
-            }
-        }
         return [
-            "_pjango_param_table_update_1": list1,
-            "_pjango_param_table_update_2": list2
+            "_pjango_param_table_update": updates,
         ]
     }
     

@@ -43,30 +43,32 @@
 	<div class="col-md-12 column height-85">
 		<div class="col-md-12 column">
 			<div class="height-20"></div>
-			<div class="col-md-8 col-center corner-window shadow" style="height: 360px">
-				<div class="height-10"></div>
-				<div class="text-center">
+			<div class="col-md-8 col-center corner-window shadow">
+				<div style="height: 20px"></div>
+				<div class="col-md-12 column text-center">
 					<p id="title" class="title">搜索全部博文</p>
 				</div>
+				<div class="col-md-12" style="height: 10px"></div>
                 <div class="input-group input-group-lg col-md-10 column col-md-offset-1">
                     <input id="search_input" type="text" class="form-control search" placeholder="Keyword or Date. e.g., Swift, Perfect, Linux, 2017-03-03, 03-03" onkeydown='if(event.keyCode==13) search()'>
                     <span class="input-group-btn button-dropdown-plain">
                         <button class="btn btn-default search" onclick="search()">搜索</button>
                     </span>
                 </div>
-                <div class="height-10"></div>
-                <div class="col-md-10 column col-md-offset-1">
-	                <p class="tag">
-						<a class="label label-danger tag" onclick="chooseTag('')">全部</a>
-						{{#_pjango_param_all_tags}}
-						<a class="label {{{_pjango_param_table_PostsTag_LABEL}}} tag" onclick="chooseTag('{{{_pjango_param_table_PostsTag_TAG}}}')">{{{_pjango_param_table_PostsTag_TAG}}}</a>
-						{{/_pjango_param_all_tags}}
-	                </p>
-                </div>
-				<div class="col-md-12 column">
-					<div class="height-5"></div>
-					<a class="button button-block button-rounded button-primary" onclick="location='{{_pjango_url_search}}'"><i class="fa fa-fw fa-search"></i> 推荐使用：全站内容搜索</a>
-				</div>
+				<div style="height: 20px"></div>
+                <p class="tag">
+					<a class="label label-danger tag" onclick="chooseTag('')">全部</a>
+					{{#_pjango_param_all_tags}}
+					<a class="label {{{_pjango_param_table_PostsTag_LABEL}}} tag" onclick="chooseTag('{{{_pjango_param_table_PostsTag_TAG}}}')">{{{_pjango_param_table_PostsTag_TAG}}}</a>
+					{{/_pjango_param_all_tags}}
+                </p>
+				<div style="height: 10px"></div>
+			</div>
+			<div style="height: 20px"></div>
+			<div class="col-md-8 col-center corner-window shadow">
+			<div style="height: 10px"></div>
+				<a class="button button-block button-rounded button-primary" onclick="location='{{_pjango_url_search}}'"><i class="fa fa-fw fa-search"></i> 推荐使用：搜索全站内容</a>
+			<div style="height: 10px"></div>
 			</div>
 		</div>
 

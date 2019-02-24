@@ -32,13 +32,12 @@ class PostsTagModel: PCModel {
     static var htmlDictUpdateTime: TimeInterval = 0
     
     static func updateHtmlDictIfNeed() {
-        guard let tagObjs = queryObjects(), Date.init().timeIntervalSince1970 - htmlDictUpdateTime > cacheTime! else {
+        guard let tagObjs = queryObjects() as? [PostsTagModel], Date.init().timeIntervalSince1970 - htmlDictUpdateTime > cacheTime! else {
             return
         }
         var htmlDict = [String: PostsTagModel]()
         tagObjs.forEach {
-            let tagModel = $0 as! PostsTagModel
-            htmlDict[tagModel.tag.value as! String] = tagModel
+            htmlDict[$0.tag.strValue] = $0
         }
         self.htmlDict = htmlDict
         

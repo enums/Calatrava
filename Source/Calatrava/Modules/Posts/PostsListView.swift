@@ -57,7 +57,7 @@ class PostsListView: PCListView {
         if let tag = tag {
             needHooks = true
             postsList = postsList.filter { posts in
-                return (posts.tag.value as! String).components(separatedBy: "|").contains(tag)
+                return posts.tag.strValue.components(separatedBy: "|").contains(tag)
             }
         }
         if let keyword = keyword?.lowercased() {

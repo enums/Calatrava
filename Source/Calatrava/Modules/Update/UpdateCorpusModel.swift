@@ -26,7 +26,7 @@ class UpdateCorpusView: PCDetailView {
     }
     
     override var viewParam: PCViewParam? {
-        let corpus = ((CorpusModel.queryObjects() as? [CorpusModel])?.filter { $0.cid.intValue == model.cid.intValue })?.first
+        let corpus = (CorpusModel.queryObjects() as? [CorpusModel])?.first(where: { $0.cid.intValue == model.cid.intValue })
         let corpusTitle = corpus?.title.strValue ?? "null"
         
         return [

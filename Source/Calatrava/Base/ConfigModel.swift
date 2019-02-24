@@ -49,9 +49,9 @@ class ConfigModel: PCModel {
     
     static func getValueForKey(_ key: ConfigModelKey) -> String? {
         let values = (self.queryObjects() as? [ConfigModel])?.filter {
-            ($0.key.value as! String) == key.rawValue
+            $0.key.strValue == key.rawValue
         }.map {
-            $0.value.value as! String
+            $0.value.strValue
         }
         if values != nil, values!.count > 0 {
             return values![0]
@@ -62,7 +62,7 @@ class ConfigModel: PCModel {
     
     @discardableResult
     static func setValueForKey(_ key: ConfigModelKey, value: PCModelDataBaseFieldType) -> Bool {
-        if let models = (self.queryObjects() as? [ConfigModel])?.filter({ ($0.key.value as! String) == key.rawValue }), let model = models.first {
+        if let model = (self.queryObjects() as? [ConfigModel])?.first(where: { ($0.key.strValue) == key.rawValue }) {
             model.value.value = value
             return self.updateObject(model)
         } else {

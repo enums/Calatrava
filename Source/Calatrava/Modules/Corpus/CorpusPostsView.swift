@@ -23,11 +23,7 @@ class CorpusPostsView: PCListView {
             let cpid = Int(cpidStr) else {
                 return false
         }
-        let models = CorpusPostsModel.queryObjects() as! [CorpusPostsModel]
-        let postsFilterResult = (models).filter {
-            ($0.cpid.value as! Int) == cpid
-        }
-        guard let posts = postsFilterResult.first else {
+        guard let posts = (CorpusPostsModel.queryObjects() as? [CorpusPostsModel])?.first(where: { $0.cpid.intValue == cpid }) else {
             return false
         }
         currentPosts = posts
@@ -43,7 +39,7 @@ class CorpusPostsView: PCListView {
             return nil
         }
         let hasRefer = model.refer_floor.intValue > 0
-        if hasRefer, let refer = (CorpusPostsCommentModel.queryObjects() as? [CorpusPostsCommentModel])?.filter({ $0.cpid.intValue == model.cpid.intValue && $0.floor.intValue == model.refer_floor.intValue }).first {
+        if hasRefer, let refer = (CorpusPostsCommentModel.queryObjects() as? [CorpusPostsCommentModel])?.first(where: { $0.cpid.intValue == model.cpid.intValue && $0.floor.intValue == model.refer_floor.intValue }) {
             var fields: [String : Any] =  [
                 "_pjango_param_table_CorpusPostsComment_ISADMIN": model.admin.intValue == 1 ? 1 : 0,
                 "_pjango_param_table_CorpusPostsComment_HAVE_REFER": 1,
@@ -109,7 +105,7 @@ class CorpusPostsView: PCListView {
             "_pjango_param_posts_read": read,
             "_pjango_param_posts_comment": comment,
             "_pjango_param_posts_love": love,
-            "_pjango_template_posts_text": CorpusTextView.init(cpid: posts.cpid.value as! Int).getTemplate(),
+            "_pjango_template_posts_text": CorpusTextView.init(cpid: posts.cpid.intValue).getTemplate(),
         ]
     }
 }

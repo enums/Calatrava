@@ -35,7 +35,7 @@ class SearchResultBilibiliView: PCDetailView {
             coverName = "\(model.blid.intValue)_cover.jpg"
         }
         let coverUrl = "bilibili.\(WEBSITE_HOST)/img/bilibili/\(coverName)"
-        let list = ((BilibiliListModel.queryObjects() as? [BilibiliListModel])?.filter { $0.blid.intValue == model.blid.intValue })?.first
+        let list = (BilibiliListModel.queryObjects() as? [BilibiliListModel])?.first (where: { $0.blid.intValue == model.blid.intValue })
         
         let name = ConfigModel.getValueForKey(.bilibiliName) ?? "null"
         let listTitle = list?.name.strValue ?? "null"

@@ -11,7 +11,7 @@ import Pjango
 func corpusPostsLoveHandle() -> PCUrlHandle {
     
     return pjangoHttpResponse { req, res in
-        guard let postsList = CorpusPostsModel.queryObjects() else {
+        guard let postsList = (CorpusPostsModel.queryObjects() as? [CorpusPostsModel]) else {
             pjangoHttpResponse("居然出错了！")(req, res)
             return
         }
@@ -19,10 +19,7 @@ func corpusPostsLoveHandle() -> PCUrlHandle {
             pjangoHttpResponse("AI娘无法识别你的请求哦！")(req, res)
             return
         }
-        let tmpPosts = postsList.filter {
-            let posts = $0 as! CorpusPostsModel
-            return posts.cpid.intValue == cpid
-            }.first as? CorpusPostsModel
+        let tmpPosts = postsList.first(where: { $0.cpid.intValue == cpid })
         guard let posts = tmpPosts else {
             pjangoHttpResponse("目标博文不存在！")(req, res)
             return

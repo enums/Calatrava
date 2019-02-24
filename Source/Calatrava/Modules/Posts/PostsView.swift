@@ -24,11 +24,7 @@ class PostsView: PCListView {
               let pid = Int(pidStr) else {
                 return false
         }
-        let models = PostsModel.queryObjects() as! [PostsModel]
-        let postsFilterResult = (models).filter {
-            ($0.pid.value as! Int) == pid
-        }
-        guard let posts = postsFilterResult.first else {
+        guard let posts = (PostsModel.queryObjects() as? [PostsModel])?.first(where: { $0.pid.intValue == pid }) else {
             return false
         }
         currentPosts = posts
@@ -44,7 +40,7 @@ class PostsView: PCListView {
             return nil
         }
         let hasRefer = model.refer_floor.intValue > 0
-        if hasRefer, let refer = (PostsCommentModel.queryObjects() as? [PostsCommentModel])?.filter({ $0.pid.intValue == model.pid.intValue && $0.floor.intValue == model.refer_floor.intValue }).first {
+        if hasRefer, let refer = (PostsCommentModel.queryObjects() as? [PostsCommentModel])?.first(where: { $0.pid.intValue == model.pid.intValue && $0.floor.intValue == model.refer_floor.intValue }) {
             var fields: [String : Any] =  [
                 "_pjango_param_table_PostsComment_ISADMIN": model.admin.intValue == 1 ? 1 : 0,
                 "_pjango_param_table_PostsComment_HAVE_REFER": 1,
@@ -112,7 +108,7 @@ class PostsView: PCListView {
             "_pjango_param_posts_read": read,
             "_pjango_param_posts_comment": comment,
             "_pjango_param_posts_love": love,
-            "_pjango_template_posts_text": PostsTextView.init(pid: posts.pid.value as! Int).getTemplate(),
+            "_pjango_template_posts_text": PostsTextView.init(pid: posts.pid.intValue).getTemplate(),
         ]
     }
 }

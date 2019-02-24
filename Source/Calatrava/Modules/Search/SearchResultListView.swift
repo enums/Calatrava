@@ -15,14 +15,14 @@ class SearchResultListView: PCListView {
         return "search_result.html"
     }
     
-    var searchResult: [PCModel]?
+    var searchResult: [SearchModelProtocol]?
     
     override var listObjectSets: [String : [PCModel]]? {
         defer {
             searchResult = nil
         }
         return [
-            "_pjango_param_table_result": searchResult ?? [],
+            "_pjango_param_table_result": searchResult as? [PCModel] ?? [],
         ]
     }
     
@@ -58,7 +58,7 @@ class SearchResultListView: PCListView {
         let keywordList = keyword.split(separator: " ")
         let lowercasedKeywordList = keywordList.map { $0.lowercased() }
         
-        var result: [PCModel]
+        var result: [SearchModelProtocol]
         if module != "" {
             result = search(module: module, with: lowercasedKeywordList, ignorePostman: ignorePostman)
         } else {
@@ -97,21 +97,21 @@ class SearchResultListView: PCListView {
         ];
     }
     
-    func searchAllModuleWithKeyword(keywords: [String], ignorePostman: Bool) -> [PCModel] {
+    func searchAllModuleWithKeyword(keywords: [String], ignorePostman: Bool) -> [SearchModelProtocol] {
         var modules: [String]
         if (ignorePostman) {
             modules = ["技术博文", "文集文章", "业余项目", "原创视频"]
         } else {
             modules = ["技术博文", "文集文章", "业余项目", "原创视频", "图片抓取"]
         }
-        var result = [PCModel]()
+        var result = [SearchModelProtocol]()
         for module in modules {
             result += search(module: module, with: keywords, ignorePostman: ignorePostman)
         }
-        return result.sorted { ($0 as! SearchModelProtocol).toSearchDate() > ($1 as! SearchModelProtocol).toSearchDate() }
+        return result.sorted { $0.toSearchDate() > $1.toSearchDate() }
     }
     
-    func search(module: String, with keywords: [String], ignorePostman: Bool) -> [PCModel] {
+    func search(module: String, with keywords: [String], ignorePostman: Bool) -> [SearchModelProtocol] {
         if (module == "技术博文") {
             guard var postsList = PostsModel.queryObjects() as? [PostsModel] else {
                 return [];
@@ -141,7 +141,7 @@ class SearchResultListView: PCListView {
             }
             if !keywords.isEmpty {
                 postsList = postsList.filter { posts in
-                    let corpus = ((CorpusModel.queryObjects() as? [CorpusModel])?.filter { $0.cid.intValue == posts.cid.intValue })?.first
+                    let corpus = (CorpusModel.queryObjects() as? [CorpusModel])?.first(where: { $0.cid.intValue == posts.cid.intValue })
                     let corpusTitle = corpus?.title.strValue ?? ""
                     for keyword in keywords {
                         guard keyword != "" else {
@@ -192,7 +192,7 @@ class SearchResultListView: PCListView {
                         guard keyword != "" else {
                             continue
                         }
-                        let corpus = ((BilibiliListModel.queryObjects() as? [BilibiliListModel])?.filter { $0.blid.intValue == video.blid.intValue })?.first
+                        let corpus = (BilibiliListModel.queryObjects() as? [BilibiliListModel])?.first (where: { $0.blid.intValue == video.blid.intValue })
                         let corpusTitle = corpus?.name.strValue ?? ""
                         let corpusMemo = corpus?.memo.strValue ?? ""
                         guard video.name.strValue.lowercased().contains(string: keyword) ||

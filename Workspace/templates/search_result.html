@@ -156,9 +156,9 @@
 		<div class="col-md-8 col-md-offset-2 column">
 			<div class="col-md-12 column gap"></div>
 			<div class="col-md-12 column">
-				<div class="col-md-12 corner-window shadow" style="height: 300px">
-				<div class="height-15"></div>
-				<div class="height-20 text-center">
+				<div class="col-md-12 corner-window shadow">
+				<div style="height: 20px"></div>
+				<div class="text-center">
 					<p id="title" class="title">搜索全站内容</p>
 				</div>
                 <div class="input-group input-group-lg col-md-10 column col-md-offset-1">
@@ -167,20 +167,18 @@
                         <button class="btn btn-default search" onclick="search()">搜索</button>
                     </span>
                 </div>
-                <div class="height-10"></div>
-                <div class="col-md-10 column col-md-offset-1">
-	                <p class="tag text-center">
-						<a class="label label-danger tag" onclick="chooseModule('')">全站内容</a>
-						{{#_pjango_param_all_tags}}
-						<a class="label label-primary tag" onclick="chooseModule('{{{_pjango_param_table_Module_TITLE}}}')">{{{_pjango_param_table_Module_ICON}}} {{{_pjango_param_table_Module_TITLE}}}</a>
-						{{/_pjango_param_all_tags}}
-	                </p>
-                </div>
+				<div style="height: 20px"></div>
+                <p class="tag text-center">
+					<a class="label label-danger tag" onclick="chooseModule('')">全站内容</a>
+					{{#_pjango_param_all_tags}}
+					<a class="label label-primary tag" onclick="chooseModule('{{{_pjango_param_table_Module_TITLE}}}')">{{{_pjango_param_table_Module_ICON}}} {{{_pjango_param_table_Module_TITLE}}}</a>
+					{{/_pjango_param_all_tags}}
+                </p>
+				<div style="height: 10px"></div>
 				<div class="col-md-12 column">
-					<div class="col-md-12 column">
-						<a class="button button-block button-rounded button-primary" onclick="switchIgnorePostman()">{{_pjango_param_param_ignore_postman_button_title}}</a>
-					</div>
+					<a class="button button-block button-rounded button-primary" onclick="switchIgnorePostman()">{{_pjango_param_param_ignore_postman_button_title}}</a>
 				</div>
+				<div class="col-md-12 column" style="height: 20px"></div>
 			</div>
 		</div>
 	<div class="col-md-12 column" style="height: 20px;"></div>

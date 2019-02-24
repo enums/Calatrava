@@ -23,7 +23,7 @@ class PostsModel: PCModel {
     var tag = PCDataBaseField.init(name: "TAG", type: .string, length: 64)
     
     var tagModel: [PostsTagModel] {
-        let tagList = (tag.value as! String).components(separatedBy: "|")
+        let tagList = tag.strValue.components(separatedBy: "|")
         PostsTagModel.updateHtmlDictIfNeed()
 
         return tagList.compactMap {
@@ -32,7 +32,7 @@ class PostsModel: PCModel {
     }
     
     var commentsCount: Int {
-        if let comments = PostsCommentModel.queryObjects()?.filter({ ($0 as! PostsCommentModel).pid.intValue == pid.intValue }) {
+        if let comments = (PostsCommentModel.queryObjects() as? [PostsCommentModel])?.filter({ $0.pid.intValue == pid.intValue }) {
             return comments.count
         } else {
             return 0

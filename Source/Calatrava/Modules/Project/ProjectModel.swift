@@ -23,7 +23,7 @@ class ProjectModel: PCModel {
     var memo = PCDataBaseField.init(name: "MEMO", type: .string, length: 512)
     
     var tagModel: [PostsTagModel] {
-        let tagList = (tag.value as! String).components(separatedBy: "|")
+        let tagList = tag.strValue.components(separatedBy: "|")
         PostsTagModel.updateHtmlDictIfNeed()
         
         return tagList.compactMap {

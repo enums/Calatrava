@@ -15,12 +15,10 @@ class CorpusListView: PCListView {
     }
     
     override var listObjectSets: [String : [PCModel]]? {
-        guard var corpusList = CorpusModel.queryObjects() else {
+        guard var corpusList = CorpusModel.queryObjects() as? [CorpusModel] else {
             return nil
         }
-        corpusList.sort { (modelA, modelB) -> Bool in
-            (modelA as! CorpusModel).updateDate > (modelB as! CorpusModel).updateDate
-        }
+        corpusList.sort { $0.updateDate > $1.updateDate }
         return [
             "_pjango_param_table_corpus": corpusList
         ]

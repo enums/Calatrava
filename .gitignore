@@ -97,3 +97,7 @@ Workspace/static/resume.pdf
 /Workspace/static/img/instagram/*.png
 /Workspace/static/img/bilibili/*.jpg
 /Workspace/static/img/bilibili/*.png
+/Workspace/static/*.md
+/Workspace/templates/_posts
+/Workspace/templates/_corpus
+/ins.json

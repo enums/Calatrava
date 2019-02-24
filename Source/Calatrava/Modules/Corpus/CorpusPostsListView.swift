@@ -52,9 +52,9 @@ class CorpusPostsListView: PCListView {
         EventHooks.hookCorpusPostsList(req: currentRequest, cid: currentCID ?? -1)
 
         let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? "null"
-        let corpusModel = (CorpusModel.queryObjects() as? [CorpusModel])?.filter {
+        let corpusModel = (CorpusModel.queryObjects() as? [CorpusModel])?.first(where: {
             $0.cid.intValue == currentCID
-        }.first
+        })
         let postsListMessage = corpusModel?.memo.strValue ?? "null"
         let postsListTitle = corpusModel?.title.strValue ?? "null"
 

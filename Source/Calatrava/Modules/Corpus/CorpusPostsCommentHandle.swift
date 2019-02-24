@@ -55,7 +55,7 @@ func corpusPostsCommentHandle() -> PCUrlHandle {
             pjangoHttpResponse("请把内容填写完整哦！")(req, res)
             return
         }
-        guard let tmpPosts = postsList.filter({ $0.cpid.intValue == cpid }).first else {
+        guard let tmpPosts = postsList.first(where: { $0.cpid.intValue == cpid }) else {
             pjangoHttpResponse("目标博文不存在！")(req, res)
             return
         }

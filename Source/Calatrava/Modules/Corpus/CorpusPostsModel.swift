@@ -22,7 +22,7 @@ class CorpusPostsModel: PCModel {
     var love = PCDataBaseField.init(name: "LOVE", type: .int)
     
     var commentsCount: Int {
-        if let comments = CorpusPostsCommentModel.queryObjects()?.filter({ ($0 as! CorpusPostsCommentModel).cpid.intValue == cpid.intValue }) {
+        if let comments = (CorpusPostsCommentModel.queryObjects() as? [CorpusPostsCommentModel])?.filter({ $0.cpid.intValue == cpid.intValue }) {
             return comments.count
         } else {
             return 0

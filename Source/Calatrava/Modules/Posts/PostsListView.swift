@@ -57,14 +57,25 @@ class PostsListView: PCListView {
         if let tag = tag {
             needHooks = true
             postsList = postsList.filter { posts in
-                return (posts.tag.value as! String).components(separatedBy: "|").contains(tag)
+                return posts.tag.strValue.components(separatedBy: "|").contains(tag)
             }
         }
         if let keyword = keyword?.lowercased() {
-            needHooks = true
-            postsList = postsList.filter { posts in
-                return (posts.title.value as! String).lowercased().contains(keyword) ||
-                    (posts.date.value as! String).lowercased().contains(keyword)
+            let keywordList = keyword.split(separator: " ")
+            if !keywordList.isEmpty {
+                needHooks = true
+                postsList = postsList.filter { posts in
+                    for keyword in keywordList {
+                        guard keyword != "" else {
+                            continue
+                        }
+                        guard posts.title.strValue.lowercased().contains(keyword) ||
+                            posts.date.strValue.lowercased().contains(keyword) else {
+                                return false
+                        }
+                    }
+                    return true
+                }
             }
         }
         if needHooks {

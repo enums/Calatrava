@@ -26,6 +26,7 @@ class PostsSearchView: PCDetailView {
             "_pjango_param_title_message": titleMessage,
             
             "_pjango_param_all_tags": allTags,
+            "_pjango_url_search": pjangoUrlReverse(host: WEBSITE_HOST, name: "search") ?? "",
 
             "_pjango_param_host": WEBSITE_HOST,
         ]

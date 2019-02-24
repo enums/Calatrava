@@ -40,7 +40,7 @@ class BilibiliListView: PCListView {
                 coverName = "\(feed.blid.intValue)_cover.jpg"
             }
             let coverUrl = "bilibili.\(WEBSITE_HOST)/img/bilibili/\(coverName)"
-            let fromList = (BilibiliListModel.queryObjects()?.filter { ($0 as! BilibiliListModel).blid.intValue == feed.blid.intValue })?.first as? BilibiliListModel
+            let fromList = (BilibiliFeedModel.queryObjects() as? [BilibiliFeedModel])?.first(where: { $0.blid.intValue == feed.blid.intValue })
             let listName = fromList?.name.strValue
             return [
                 "_pjango_param_table_BilibiliFeed_COVER_URL": coverUrl,
@@ -60,7 +60,7 @@ class BilibiliListView: PCListView {
                 buttonText = "选择播单"
                 buttonId = "\(list.blid.intValue)"
             }
-            let videos = (BilibiliFeedModel.queryObjects() as! [BilibiliFeedModel]).filter { $0.blid.intValue == list.blid.intValue }
+            let videos = (BilibiliFeedModel.queryObjects() as? [BilibiliFeedModel])?.filter { $0.blid.intValue == list.blid.intValue } ?? []
             let videoCount = videos.count
             let lastUpdate = videos.last?.date.strValue ?? "1970-01-01 08:00"
             return [

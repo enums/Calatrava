@@ -12,7 +12,7 @@ import Pjango
 func postsLoveHandle() -> PCUrlHandle {
     
     return pjangoHttpResponse { req, res in
-        guard let postsList = PostsModel.queryObjects() else {
+        guard let postsList = (PostsModel.queryObjects() as? [PostsModel]) else {
             pjangoHttpResponse("居然出错了！")(req, res)
             return
         }
@@ -20,11 +20,7 @@ func postsLoveHandle() -> PCUrlHandle {
             pjangoHttpResponse("AI娘无法识别你的请求哦！")(req, res)
             return
         }
-        let tmpPosts = postsList.filter {
-            let posts = $0 as! PostsModel
-            return posts.pid.intValue == pid
-        }.first as? PostsModel
-        guard let posts = tmpPosts else {
+        guard let posts = postsList.first(where: { $0.pid.intValue == pid }) else {
             pjangoHttpResponse("目标博文不存在！")(req, res)
             return
         }

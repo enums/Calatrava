@@ -21,7 +21,7 @@ class BilibiliListView: PCListView {
             displayFeed = nil
         }
         var list = BilibiliListModel.queryObjects() as? [BilibiliListModel]
-        list?.sort(by: { $0.updateDate > $1.updateDate });
+        list?.sort(by: { $0.updateDate > $1.updateDate })
         return [
             "_pjango_param_table_bilibili_feed": displayFeed ?? [],
             "_pjango_param_table_bilibili_list": list ?? []

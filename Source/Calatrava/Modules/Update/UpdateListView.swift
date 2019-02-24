@@ -32,7 +32,7 @@ class UpdateListView: PCListView {
             needRebuild = true
         }
         
-        var updates = [UpdateModel]();
+        var updates = [UpdateModel]()
         if needRebuild {
             if let posts = PostsModel.queryObjects() as? [PostsModel] {
                 updates += posts.map { UpdateModel.init($0) }
@@ -94,9 +94,9 @@ class UpdateListView: PCListView {
     
     override var viewParam: PCViewParam? {
         guard let req = currentRequest else {
-            return nil;
+            return nil
         }
-        var updateList = generateAllUpdate();
+        var updateList = generateAllUpdate()
         
         var page = 1
         if let pageParam = Int(req.getUrlParam(key: "page") ?? ""), pageParam > 0 {

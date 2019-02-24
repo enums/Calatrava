@@ -92,7 +92,7 @@ func corpusPostsCommentHandle() -> PCUrlHandle {
             return
         }
         
-        let date = Date.init().stringValue;
+        let date = Date.init().stringValue
         let commentModel = CorpusPostsCommentModel.init()
         commentModel.cpcid.strValue = "\(cpid)_\(name)#\(date)@\(ip)"
         commentModel.cpid.intValue = cpid

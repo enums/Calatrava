@@ -88,7 +88,7 @@ class ReportDailyModel: PCModel {
                 continue
             }
             if eventSpiltDict[type] == nil {
-                eventSpiltDict[type] = [model.param.strValue];
+                eventSpiltDict[type] = [model.param.strValue]
             } else {
                 eventSpiltDict[type]!.append(model.param.strValue)
             }

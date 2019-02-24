@@ -65,7 +65,7 @@ func messageHandle() -> PCUrlHandle {
             return
         }
         
-        let date = Date.init().stringValue;
+        let date = Date.init().stringValue
         let messageModel = MessageModel.init()
         messageModel.mid.strValue = "\(name)#\(date)@\(ip)"
         messageModel.date.strValue = date
@@ -74,7 +74,7 @@ func messageHandle() -> PCUrlHandle {
         messageModel.admin.intValue = 0
         messageModel.email.strValue = email
         messageModel.comment.strValue = comment
-        messageModel.fromIp.strValue = ip;
+        messageModel.fromIp.strValue = ip
         guard MessageModel.insertObject(messageModel) else {
             pjangoHttpResponse("居然出错了！")(req, res)
             return

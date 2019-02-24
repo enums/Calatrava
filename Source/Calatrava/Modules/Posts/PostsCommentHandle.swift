@@ -92,7 +92,7 @@ func postsCommentHandle() -> PCUrlHandle {
             return
         }
         
-        let date = Date.init().stringValue;
+        let date = Date.init().stringValue
         let commentModel = PostsCommentModel.init()
         commentModel.pcid.strValue = "\(pid)_\(name)#\(date)@\(ip)"
         commentModel.pid.intValue = pid

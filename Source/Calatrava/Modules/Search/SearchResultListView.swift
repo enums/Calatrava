@@ -40,7 +40,7 @@ class SearchResultListView: PCListView {
         let titleMessage = ConfigModel.getValueForKey(.titleMessage) ?? "null"
         
         guard let req = currentRequest else {
-            return nil;
+            return nil
         }
         
         let allTags = (ModuleModel.queryObjects() as? [ModuleModel])?.filter { $0.searchable.intValue > 0 }.map { $0.toViewParam() } ?? []
@@ -64,7 +64,7 @@ class SearchResultListView: PCListView {
         } else {
             result = searchAllModuleWithKeyword(keywords: lowercasedKeywordList, ignorePostman: ignorePostman)
         }
-        let totalCount = result.count;
+        let totalCount = result.count
         
         let begin = eachPageResultCount * (page - 1)
         let end = eachPageResultCount * page - 1
@@ -94,7 +94,7 @@ class SearchResultListView: PCListView {
             "_pjango_param_all_tags": allTags,
             
             "_pjango_param_host": WEBSITE_HOST,
-        ];
+        ]
     }
     
     func searchAllModuleWithKeyword(keywords: [String], ignorePostman: Bool) -> [SearchModelProtocol] {
@@ -114,7 +114,7 @@ class SearchResultListView: PCListView {
     func search(module: String, with keywords: [String], ignorePostman: Bool) -> [SearchModelProtocol] {
         if (module == "技术博文") {
             guard var postsList = PostsModel.queryObjects() as? [PostsModel] else {
-                return [];
+                return []
             }
             
             if !keywords.isEmpty {
@@ -137,7 +137,7 @@ class SearchResultListView: PCListView {
             return postsList.sorted { $0.date.strValue > $1.date.strValue }
         } else if (module == "文集文章") {
             guard var postsList = CorpusPostsModel.queryObjects() as? [CorpusPostsModel] else {
-                return [];
+                return []
             }
             if !keywords.isEmpty {
                 postsList = postsList.filter { posts in
@@ -161,7 +161,7 @@ class SearchResultListView: PCListView {
             return postsList.sorted { $0.date.strValue > $1.date.strValue }
         } else if (module == "业余项目") {
             guard var projectList = ProjectModel.queryObjects() as? [ProjectModel] else {
-                return [];
+                return []
             }
             if !keywords.isEmpty {
                 projectList = projectList.filter {
@@ -184,7 +184,7 @@ class SearchResultListView: PCListView {
             return projectList.sorted { $0.date.strValue > $1.date.strValue }
         } else if (module == "原创视频") {
             guard var videoList = BilibiliFeedModel.queryObjects() as? [BilibiliFeedModel] else {
-                return [];
+                return []
             }
             if !keywords.isEmpty {
                 videoList = videoList.filter { video in
@@ -210,7 +210,7 @@ class SearchResultListView: PCListView {
             return videoList.sorted { $0.date.strValue > $1.date.strValue }
         } else if (module == "图片抓取" && ignorePostman == false) {
             guard var imageList = InstagramFeedModel.queryObjects() as? [InstagramFeedModel] else {
-                return [];
+                return []
             }
             if !keywords.isEmpty {
                 imageList = imageList.filter {

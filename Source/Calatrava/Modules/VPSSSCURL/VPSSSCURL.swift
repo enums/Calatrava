@@ -17,7 +17,7 @@ class VPSSSCURL {
         
         let curl = CURL(url: url)
         curl.setOption(CURLOPT_PROXYTYPE, int: Int(CURLPROXY_SOCKS5.rawValue))
-        curl.setOption(CURLOPT_PROXY, s: "socks5h://127.0.0.1:1080");
+        curl.setOption(CURLOPT_PROXY, s: "socks5h://127.0.0.1:1080")
         
         let (_, _, resBody) = curl.performFully()
         

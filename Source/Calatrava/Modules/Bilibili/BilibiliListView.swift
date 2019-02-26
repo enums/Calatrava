@@ -40,7 +40,7 @@ class BilibiliListView: PCListView {
                 coverName = "\(feed.blid.intValue)_cover.jpg"
             }
             let coverUrl = "bilibili.\(WEBSITE_HOST)/img/bilibili/\(coverName)"
-            let fromList = (BilibiliFeedModel.queryObjects() as? [BilibiliFeedModel])?.first(where: { $0.blid.intValue == feed.blid.intValue })
+            let fromList = (BilibiliListModel.queryObjects() as? [BilibiliListModel])?.first(where: { $0.blid.intValue == feed.blid.intValue })
             let listName = fromList?.name.strValue
             return [
                 "_pjango_param_table_BilibiliFeed_COVER_URL": coverUrl,
@@ -87,7 +87,9 @@ class BilibiliListView: PCListView {
             feeds = feeds.filter { "\($0.blid.intValue)" == idParam }
             id = idParam
         }
-        feeds = feeds.sorted { $0.date.strValue > $1.date.strValue }
+        // 相同日期时候需要按照id逆序，所以先排序后逆转
+        feeds = feeds.sorted { $0.date.strValue < $1.date.strValue }
+        feeds.reverse()
         var page = 1
         if let pageParam = Int(request.getUrlParam(key: "page") ?? ""), pageParam > 0 {
             page = pageParam

@@ -35,8 +35,8 @@ func InstagramCurlHandle() -> PCUrlHandle {
             pjangoHttpResponse("")(req, res)
             return
         }
-        let ip = req.remoteAddress.host
-        let port = "\(req.remoteAddress.port)"
+        let ip = req.param(name: "watchdog_ip") ?? req.remoteAddress.host
+        let port = "\(req.param(name: "watchdog_port") ?? req.remoteAddress.port)"
         switch action {
         case .html:
             guard let url = json["url"].string else {

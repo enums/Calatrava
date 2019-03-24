@@ -24,7 +24,7 @@ func corpusPostsLoveHandle() -> PCUrlHandle {
             pjangoHttpResponse("目标博文不存在！")(req, res)
             return
         }
-        let ip = req.remoteAddress.host
+        let ip = req.param(name: "watchdog_ip") ?? req.remoteAddress.host
         let key = "\(cpid)@\(ip)"
         guard !corpusPostsLoveDict.contains(key) else {
             pjangoHttpResponse("今天您已经赞过这篇文章啦！")(req, res)

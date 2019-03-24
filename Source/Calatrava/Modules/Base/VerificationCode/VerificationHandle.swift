@@ -11,7 +11,7 @@ import Pjango
 func verificationHandle() -> PCUrlHandle {
     
     return pjangoHttpResponse { req, res in
-        let ip = req.remoteAddress.host
+        let ip = req.param(name: "watchdog_ip") ?? req.remoteAddress.host
         if let lastTime = verificationLastTimeDict[ip] {
             guard Date.init().timeIntervalSince1970 - lastTime > 10 else {
                 logger.info("Verification - Frequency anomaly @ \(ip)")

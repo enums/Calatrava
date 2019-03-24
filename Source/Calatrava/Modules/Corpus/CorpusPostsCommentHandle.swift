@@ -72,7 +72,7 @@ func corpusPostsCommentHandle() -> PCUrlHandle {
             pjangoHttpResponse("评论太短啦！")(req, res)
             return
         }
-        let ip = req.remoteAddress.host
+        let ip = req.header(.custom(name: "watchdog_ip")) ?? req.remoteAddress.host
         if let lastTime = corpusPostsCommentLastTimeDict[ip] {
             guard Date.init().timeIntervalSince1970 - lastTime > 1 else {
                 logger.info("Comment - Frequency anomaly @ \(ip): NAME: \(name), EMAIL: \(email), COMMENT: \(comment)")

@@ -45,7 +45,7 @@ func messageHandle() -> PCUrlHandle {
             pjangoHttpResponse("评论太短啦！")(req, res)
             return
         }
-        let ip = req.remoteAddress.host
+        let ip = req.header(.custom(name: "watchdog_ip")) ?? req.remoteAddress.host
         if let lastTime = messageLastTimeDict[ip] {
             guard Date.init().timeIntervalSince1970 - lastTime > 10 else {
                 logger.info("Message - Frequency anomaly @ \(ip): NAME: \(name), EMAIL: \(email), COMMENT: \(comment)")

@@ -13,8 +13,8 @@ class StatisticsManager {
     static func statisticsEvent(eventType: VisitStatisticsEventType, param: String? = nil, req: HTTPRequest?) {
         let date = Date.init()
         let dateStr = Int(date.timeIntervalSince1970 * 1000)
-        let ip = req?.remoteAddress.host ?? "unknow"
-        let port = req?.remoteAddress.port ?? 0
+        let ip = req?.header(.custom(name: "watchdog_ip")) ?? req?.remoteAddress.host ?? "unknow"
+        let port = UInt16(req?.header(.custom(name: "watchdog_port")) ?? "") ?? 0
         
         let model = VisitStatisticsModel.init()
         model.vid.strValue = "\(dateStr)@\(ip):\(port)"

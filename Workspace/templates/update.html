@@ -175,7 +175,7 @@
 		if (page <= 1) {
 			alert("不能再往前翻页啦！");
 		} else {
-			var url = 'http://{{_pjango_url_update}}?page=' + (page - 1);
+			var url = 'http://{{_pjango_url_host}}/update?page=' + (page - 1);
 			if (ignorePostman == true) {
 				location = url + '&ignore_postman=true';
 			} else {
@@ -188,7 +188,7 @@
 		if (page >= total) {
 			alert("不能再往后翻页啦！");
 		} else {
-			var url = 'http://{{_pjango_url_update}}?page=' + (page + 1);
+			var url = 'http://{{_pjango_url_host}}/update?page=' + (page + 1);
 			if (ignorePostman == true) {
 				location = url + '&ignore_postman=true';
 			} else {
@@ -198,7 +198,7 @@
 	}
 	
 	function switchIgnorePostman() {
-		var url = 'http://{{_pjango_url_update}}?page=' + page;
+		var url = 'http://{{_pjango_url_host}}/update?page=' + page;
 		if (ignorePostman == true) {
 			location = url + '&ignore_postman=false';
 		} else {

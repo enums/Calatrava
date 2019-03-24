@@ -38,7 +38,7 @@ class SearchResultCorpusView: PCDetailView {
             "_pjango_param_cpid": model.cpid.intValue,
             "_pjango_param_date": model.date.strValue,
             
-            "_pjango_url_corpus": "corpus.\(WEBSITE_HOST)",
+            "_pjango_url_host": WEBSITE_HOST,
         ]
     }
     

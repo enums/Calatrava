@@ -53,13 +53,13 @@ function getMsgToChangeHTML(url, id) {
 } 
 
 function _posts_love(pid) {
-	getMsgToDo("/api/love?pid=" + pid, function(text) {
+	getMsgToDo("/api/posts/love?pid=" + pid, function(text) {
 		alert(text)
 	})
 }
 
 function _corpus_love(pid) {
-	getMsgToDo("/api/love?cpid=" + pid, function(text) {
+	getMsgToDo("/api/corpus/love?cpid=" + pid, function(text) {
 		alert(text)
 	})
 }
@@ -73,7 +73,7 @@ function _posts_comment(pid, name, email, comment, v_id, v_a, onSuccess, onFaile
 		v_id: v_id,
 		v_a: v_a,
 	};
-	postMsgToDo("/api/comment", JSON.stringify(obj), function(text) {
+	postMsgToDo("/api/posts/comment", JSON.stringify(obj), function(text) {
 		alert(text)
 		if (text == "发表成功！") {
 			onSuccess();
@@ -92,7 +92,7 @@ function _corpus_comment(cpid, name, email, comment, v_id, v_a, onSuccess, onFai
 		v_id: v_id,
 		v_a: v_a,
 	};
-	postMsgToDo("/api/comment", JSON.stringify(obj), function(text) {
+	postMsgToDo("/api/corpus/comment", JSON.stringify(obj), function(text) {
 		alert(text)
 		if (text == "发表成功！") {
 			onSuccess();

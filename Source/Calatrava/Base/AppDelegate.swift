@@ -48,70 +48,52 @@ class AppDelegate: PjangoDelegate {
                 pjangoUrl("404", name: "error.404", handle: ErrorNotFoundView.asHandle()),
             ],
             
-            "project.\(WEBSITE_HOST)": [
-                pjangoUrl("list", name: "list", handle: ProjectListView.asHandle()),
-            ],
-            
-            "playground.\(WEBSITE_HOST)": [
-                pjangoUrl("swift", name: "swift", handle: ErrorNotSupportView.asHandle()),
-            ],
-            
             WEBSITE_HOST: [
                 pjangoUrl("", name: "index", handle: IndexView.asHandle()),
                 pjangoUrl("modules", name: "modules", handle: ModuleListView.asHandle()),
                 pjangoUrl("about", name: "about", handle: AboutView.asHandle()),
                 pjangoUrl("update", name: "update", handle: UpdateListView.asHandle()),
+                
+                // search
                 pjangoUrl("search", name: "search", handle: SearchView.asHandle()),
                 pjangoUrl("search_result", name: "search.result", handle: SearchResultListView.asHandle()),
+                
+                // project
+                pjangoUrl("project", name: "project", handle: ProjectListView.asHandle()),
+                
+                // report
                 pjangoUrl("report/daily/today", name: "report.daily.today", handle: ReportDailyView.asHandle()),
                 pjangoUrl("report/daily/{date}", name: "report.daily", handle: ReportDailyView.asHandle()),
                 pjangoUrl("report/total/{opt}", name: "report.total", handle: ReportTotalView.asHandle()),
-
-                pjangoUrl("api/message", name: "api.message", handle: messageHandle),
-                pjangoUrl("api/verification", name: "api.verification@index", handle: verificationHandle),
                 
-                //Old
-                pjangoUrl("post", name: "old.posts.1", handle: postsOldHandle),
-                pjangoUrl("posts", name: "old.posts.2", handle: postsOldHandle),
-                pjangoUrl("playground", name: "old.playground", handle: ErrorNotSupportView.asHandle()),
-            ],
-            
-            "posts.\(WEBSITE_HOST)": [
-                pjangoUrl("list", name: "list", handle: PostsListView.asHandle()),
-                pjangoUrl("posts/{pid}", name: "posts", handle: PostsView.asHandle()),
-                pjangoUrl("archive", handle: PostsArchiveView.asHandle()),
-                pjangoUrl("search", name: "search", handle: PostsSearchView.asHandle()),
+                // posts
+                pjangoUrl("posts/list", name: "posts.list", handle: PostsListView.asHandle()),
+                pjangoUrl("posts/article/{pid}", name: "posts.posts", handle: PostsView.asHandle()),
+                pjangoUrl("posts/archive", name: "posts.archive", handle: PostsArchiveView.asHandle()),
+                pjangoUrl("posts/search", name: "posts.search", handle: PostsSearchView.asHandle()),
                 
-                pjangoUrl("api/love", name: "api.love@posts", handle: postsLoveHandle),
-                pjangoUrl("api/comment", name: "api.comment@posts", handle: postsCommentHandle),
+                // corpus
+                pjangoUrl("corpus/list", name: "corpus.list", handle: CorpusListView.asHandle()),
+                pjangoUrl("corpus/list/{cid}", name: "corpus.corpus", handle: CorpusPostsListView.asHandle()),
+                pjangoUrl("corpus/article/{cpid}", name: "corpus.posts", handle: CorpusPostsView.asHandle()),
                 
-                pjangoUrl("api/verification", name: "api.verification@posts", handle: verificationHandle),
-            ],
-            
-            "corpus.\(WEBSITE_HOST)": [
-                pjangoUrl("list", name: "list", handle: CorpusListView.asHandle()),
-                pjangoUrl("list/{cid}", name: "corpus.list", handle: CorpusPostsListView.asHandle()),
-                pjangoUrl("corpus/{cpid}", name: "corpus.posts", handle: CorpusPostsView.asHandle()),
+                // instagram
+                pjangoUrl("instagram/list", name: "instagram.list", handle: InstagramListView.asHandle()),
+                pjangoUrl("instagram/resource", name: "instagram.resource", handle: InstagramCurlHandle),
                 
-                pjangoUrl("api/love", name: "api.love@corpus", handle: corpusPostsLoveHandle),
-                pjangoUrl("api/comment", name: "api.comment@corpus", handle: corpusPostsCommentHandle),
+                // bilibili
+                pjangoUrl("bilibili/list", name: "bilibili.list", handle: BilibiliListView.asHandle()),
+                
+                // API
+                pjangoUrl("api/posts/love", name: "api.posts.love", handle: postsLoveHandle),
+                pjangoUrl("api/posts/comment", name: "api.posts.comment", handle: postsCommentHandle),
+                
+                pjangoUrl("api/corpus/love", name: "api.corpus.love", handle: corpusPostsLoveHandle),
+                pjangoUrl("api/corpus/comment", name: "api.corpus.comment", handle: corpusPostsCommentHandle),
+                
                 pjangoUrl("api/verification", name: "api.verification@corpus", handle: verificationHandle),
+                pjangoUrl("api/message", name: "api.message", handle: messageHandle),
             ],
-            
-            "instagram.\(WEBSITE_HOST)": [
-                pjangoUrl("list", name: "list", handle: InstagramListView.asHandle()),
-                pjangoUrl("resource", name: "resource", handle: InstagramCurlHandle),
-                
-                // old
-                pjangoUrl("feed", name: "feed", handle: InstagramListView.asHandle()),
-            ],
-            
-            "bilibili.\(WEBSITE_HOST)": [
-                pjangoUrl("list", name: "list", handle: BilibiliListView.asHandle()),
-                
-                // old
-                pjangoUrl("feed", name: "feed", handle: BilibiliListView.asHandle()),
-            ]
         ]
     }
     
@@ -158,7 +140,8 @@ class AppDelegate: PjangoDelegate {
     func registerPlugins() -> [PCPlugin]? {
         return [
             PCLogFilterPlugin.meta,
-            HostRedirectFilter.meta,
+//            为更换域名而准备
+//            HostRedirectFilter.meta,
             NotFoundFilterPlugin.meta,
             DailyCleanPlugin.meta,
             InstagramTimerPlugin.meta,

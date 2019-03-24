@@ -117,7 +117,7 @@ class UpdateListView: PCListView {
             "_pjango_template_footer_bar": FooterBarView.html,
             "_pjango_param_title_message": titleMessage,
             
-            "_pjango_url_update": "\(WEBSITE_HOST)/update",
+            "_pjango_url_host": WEBSITE_HOST,
             
             "_pjango_param_param_page": page,
             "_pjango_param_param_page_total": max(0, updateList.count - 1) / eachPageFeedCount + 1,

@@ -119,11 +119,11 @@
 				<hr />
 				<div class="col-md-10 column col-center">
 					<p class="author"><i class="fa fa-fw fa-angle-right"></i>作者：<a style="color: #145d7e" href='http://{{_pjango_param_host}}'><i>{{_pjango_param_name}}</i></a></p>
-					<p class="author"><i class="fa fa-fw fa-angle-right"></i>原文链接：<a style="color: #145d7e" href='http://posts.{{_pjango_param_host}}/posts/{{_pjango_param_posts_pid}}'>http://posts.{{_pjango_param_host}}/posts/{{_pjango_param_posts_pid}}</a></p>
+					<p class="author"><i class="fa fa-fw fa-angle-right"></i>原文链接：<a style="color: #145d7e" href='http://{{_pjango_param_host}}/posts/article/{{_pjango_param_posts_pid}}'>http://{{_pjango_param_host}}/posts/article/{{_pjango_param_posts_pid}}</a></p>
 					<p class="author"><i class="fa fa-fw fa-angle-right"></i> 
 						TAG: 
 						{{#_pjango_param_posts_tag}}
-						<a href="/list?tag={{{_pjango_param_table_PostsTag_TAG}}}" class="label {{{_pjango_param_table_PostsTag_LABEL}}} tag">{{{_pjango_param_table_PostsTag_TAG}}}</a>
+						<a href="/posts/list?tag={{{_pjango_param_table_PostsTag_TAG}}}" class="label {{{_pjango_param_table_PostsTag_LABEL}}} tag">{{{_pjango_param_table_PostsTag_TAG}}}</a>
 						{{/_pjango_param_posts_tag}}
 					</p>
 				</div>

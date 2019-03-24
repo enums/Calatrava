@@ -107,10 +107,7 @@ class PostsListView: PCListView {
             "_pjango_template_footer_bar": FooterBarView.html,
             "_pjango_param_title_message": titleMessage,
             
-            "_pjango_url_posts_list": "posts.\(WEBSITE_HOST)",
-            "_pjango_url_posts_search": "posts.\(WEBSITE_HOST)/search",
-            "_pjango_url_posts_archive": "posts.\(WEBSITE_HOST)/archive",
-            "_pjango_url_corpus_list": "corpus.\(WEBSITE_HOST)/list",
+            "_pjango_url_host": WEBSITE_HOST,
             
             "_pjango_param_message": postsListMessage,
             "_pjango_param_list_title": listTitle,

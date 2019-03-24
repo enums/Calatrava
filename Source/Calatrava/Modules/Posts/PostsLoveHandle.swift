@@ -24,7 +24,7 @@ func postsLoveHandle() -> PCUrlHandle {
             pjangoHttpResponse("目标博文不存在！")(req, res)
             return
         }
-        let ip = req.param(name: "watchdog_ip") ?? req.remoteAddress.host
+        let ip = req.header(.custom(name: "watchdog_ip")) ?? req.remoteAddress.host
         let key = "\(pid)@\(ip)"
         guard !postsLoveDict.contains(key) else {
             pjangoHttpResponse("今天您已经赞过这篇博文啦！")(req, res)

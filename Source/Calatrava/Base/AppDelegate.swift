@@ -158,6 +158,7 @@ class AppDelegate: PjangoDelegate {
     func registerPlugins() -> [PCPlugin]? {
         return [
             PCLogFilterPlugin.meta,
+            HostRedirectFilter.meta,
             NotFoundFilterPlugin.meta,
             DailyCleanPlugin.meta,
             InstagramTimerPlugin.meta,

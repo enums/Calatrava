@@ -46,6 +46,7 @@ class AppDelegate: PjangoDelegate {
             PJANGO_HOST_DEFAULT: [
                 pjangoUrl("", name: "index", handle: IndexView.asHandle()),
                 pjangoUrl("404", name: "error.404", handle: ErrorNotFoundView.asHandle()),
+                pjangoUrl("not_support", name: "error.notsupport", handle: ErrorNotSupportView.asHandle()),
             ],
             
             WEBSITE_HOST: [
@@ -140,8 +141,6 @@ class AppDelegate: PjangoDelegate {
     func registerPlugins() -> [PCPlugin]? {
         return [
             PCLogFilterPlugin.meta,
-//            为更换域名而准备
-//            HostRedirectFilter.meta,
             NotFoundFilterPlugin.meta,
             DailyCleanPlugin.meta,
             InstagramTimerPlugin.meta,

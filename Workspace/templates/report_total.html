@@ -150,16 +150,16 @@
 						</div>
 						<div class="gap"></div>
 						<div class="col-md-12 column archive-cell">
-							<a class="text" href="http://{{{_pjango_url_report_total}}}/all" style="color: {{_pjango_param_color_all}}"><i class="fa fa-fw fa-angle-right"></i>日访问统计：全部时间</a>
+							<a class="text" href="http://{{{_pjango_url_host}}}/report/total/all" style="color: {{_pjango_param_color_all}}"><i class="fa fa-fw fa-angle-right"></i>日访问统计：全部时间</a>
 						</div>
 						<div class="col-md-12 column archive-cell">
-							<a class="text" href="http://{{{_pjango_url_report_total}}}/week" style="color: {{_pjango_param_color_week}}"><i class="fa fa-fw fa-angle-right"></i>日访问统计：最近一周</a>
+							<a class="text" href="http://{{{_pjango_url_host}}}/report/total/week" style="color: {{_pjango_param_color_week}}"><i class="fa fa-fw fa-angle-right"></i>日访问统计：最近一周</a>
 						</div>
 						<div class="col-md-12 column archive-cell">
-							<a class="text" href="http://{{{_pjango_url_report_total}}}/month_1" style="color: {{_pjango_param_color_month_1}}"><i class="fa fa-fw fa-angle-right"></i>日访问统计：最近一个月</a>
+							<a class="text" href="http://{{{_pjango_url_host}}}/report/total/month_1" style="color: {{_pjango_param_color_month_1}}"><i class="fa fa-fw fa-angle-right"></i>日访问统计：最近一个月</a>
 						</div>
 						<div class="col-md-12 column archive-cell">
-							<a class="text" href="http://{{{_pjango_url_report_total}}}/month_3" style="color: {{_pjango_param_color_month_3}}"><i class="fa fa-fw fa-angle-right"></i>日访问统计：最近三个月</a>
+							<a class="text" href="http://{{{_pjango_url_host}}}/report/total/month_3" style="color: {{_pjango_param_color_month_3}}"><i class="fa fa-fw fa-angle-right"></i>日访问统计：最近三个月</a>
 						</div>
 						<div class="gap"></div>
 					</div>
@@ -187,7 +187,7 @@
 					<div class="col-md-12 column corner-window shadow">
 						<div class="gap"></div>
 						<div class="col-md-12 column archive-cell">
-							<a class="text" href="http://{{{_pjango_url_report_daily}}}/today"><i class="fa fa-fw fa-angle-right"></i>前往每日数据报告</a>
+							<a class="text" href="http://{{{_pjango_url_host}}}/report/daily/today"><i class="fa fa-fw fa-angle-right"></i>前往每日数据报告</a>
 						</div>
 						<div class="gap"></div>
 					</div>
@@ -383,7 +383,7 @@
 		window.addEventListener("resize", function () { chart_daily_pv_chart.resize(); });
 		chart_daily_pv_chart.on('click', function (params) {
 			var date = params.name;
-			window.open('http://{{_pjango_url_report_daily}}/' + date);
+			window.open('http://{{_pjango_url_host}}/report/daily/' + date);
 		});
 	}
 	// 首页pv
@@ -470,7 +470,7 @@
 		window.addEventListener("resize", function () { chart_daily_index_pv_chart.resize(); });
 		chart_daily_index_pv_chart.on('click', function (params) {
 			var date = params.name;
-			window.open('http://{{_pjango_url_report_daily}}/' + date);
+			window.open('http://{{_pjango_url_host}}/report/daily/' + date);
 		});
 	}
 	// 总阅读
@@ -559,7 +559,7 @@
 		window.addEventListener("resize", function () { chart_daily_read_chart.resize(); });
 		chart_daily_read_chart.on('click', function (params) {
 			var date = params.name;
-			window.open('http://{{_pjango_url_report_daily}}/' + date);
+			window.open('http://{{_pjango_url_host}}/report/daily/' + date);
 		});
 
 	}
@@ -682,9 +682,9 @@
 			var type = splited[0];
 			var id = splited[1];
 			if (type == '阅读博文') {
-				window.open('http://{{_pjango_url_posts}}/posts/' + id);
+				window.open('http://{{_pjango_url_host}}/posts/article/' + id);
 			} else if (type == '阅读文集文章') {
-				window.open('http://{{_pjango_url_corpus}}/corpus/' + id);
+				window.open('http://{{_pjango_url_host}}/corpus/article/' + id);
 			}
 		});
 	}

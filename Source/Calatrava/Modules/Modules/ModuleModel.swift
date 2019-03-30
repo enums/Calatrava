@@ -24,11 +24,11 @@ class ModuleModel: PCModel {
     var realUrl: String {
         get {
             let urlDict = [
-                "_pjango_url_posts_list": pjangoUrlReverse(host: "posts.\(WEBSITE_HOST)", name: "list") ?? "",
-                "_pjango_url_corpus_list": pjangoUrlReverse(host: "corpus.\(WEBSITE_HOST)", name: "list") ?? "",
-                "_pjango_url_project_list": pjangoUrlReverse(host: "project.\(WEBSITE_HOST)", name: "list") ?? "",
-                "_pjango_url_instagram_list": pjangoUrlReverse(host: "instagram.\(WEBSITE_HOST)", name: "list") ?? "",
-                "_pjango_url_bilibili_list": pjangoUrlReverse(host: "bilibili.\(WEBSITE_HOST)", name: "list") ?? "",
+                "_pjango_url_posts_list": pjangoUrlReverse(host: WEBSITE_HOST, name: "posts.list") ?? "",
+                "_pjango_url_corpus_list": pjangoUrlReverse(host: WEBSITE_HOST, name: "corpus.list") ?? "",
+                "_pjango_url_project_list": pjangoUrlReverse(host: WEBSITE_HOST, name: "project") ?? "",
+                "_pjango_url_instagram_list": pjangoUrlReverse(host: WEBSITE_HOST, name: "instagram.list") ?? "",
+                "_pjango_url_bilibili_list": pjangoUrlReverse(host: WEBSITE_HOST, name: "bilibili.list") ?? "",
                 "_pjango_url_update": pjangoUrlReverse(host: WEBSITE_HOST, name: "update") ?? "",
                 "_pjango_url_report": pjangoUrlReverse(host: WEBSITE_HOST, name: "report.daily.today") ?? "",
                 "_pjango_url_about": pjangoUrlReverse(host: WEBSITE_HOST, name: "about") ?? "",

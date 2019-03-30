@@ -198,10 +198,10 @@ extension PostmanCURL {
             let path = "\(PJANGO_STATIC_URL)/img/instagram/\(filename).png"
             let file = File.init(path)
             if (file.exists) {
-                return "http://instagram.\(WEBSITE_HOST)/img/instagram/\(filename).png"
+                return "http://\(WEBSITE_HOST)/img/instagram/\(filename).png"
             }
         }
-        return toPostmanURL(base: "instagram.\(WEBSITE_HOST)/resource", param: param)
+        return toPostmanURL(base: "\(WEBSITE_HOST)/instagram/resource", param: param)
     }
     
     // 包含频率控制，如果失败了就等待600秒继续。

@@ -82,7 +82,7 @@ var tag = "";
 
 function search() {
 	var text = document.getElementById('search_input').value;
-	var url = 'http://posts.{{_pjango_param_host}}/list?'
+	var url = 'http://{{_pjango_param_host}}/posts/list?'
 	if (tag != "") {
 		url += "tag=" + tag + "&";
 	}

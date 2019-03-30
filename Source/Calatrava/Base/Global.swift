@@ -10,9 +10,9 @@ import Foundation
 import Pjango
 
 #if os(macOS)
-let WEBSITE_HOST = "calatravatest.com"
+let WEBSITE_HOST = "blog.yuusanntest.com"
 #else
-let WEBSITE_HOST = "enumsblog.com"
+let WEBSITE_HOST = "blog.yuusann.com"
 #endif
 
 let logger = PCLog.init(tag: "Calatrava-Blog")

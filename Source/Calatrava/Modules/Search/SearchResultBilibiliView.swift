@@ -34,7 +34,7 @@ class SearchResultBilibiliView: PCDetailView {
         } else {
             coverName = "\(model.blid.intValue)_cover.jpg"
         }
-        let coverUrl = "bilibili.\(WEBSITE_HOST)/img/bilibili/\(coverName)"
+        let coverUrl = "\(WEBSITE_HOST)/img/bilibili/\(coverName)"
         let list = (BilibiliListModel.queryObjects() as? [BilibiliListModel])?.first (where: { $0.blid.intValue == model.blid.intValue })
         
         let name = ConfigModel.getValueForKey(.bilibiliName) ?? "null"
@@ -50,7 +50,7 @@ class SearchResultBilibiliView: PCDetailView {
             "_pjango_param_memo": model.memo.strValue,
             "_pjango_param_date": model.date.strValue,
             
-            "_pjango_url_bilibili": "bilibili.\(WEBSITE_HOST)"
+            "_pjango_url_host": WEBSITE_HOST,
         ]
     }
     

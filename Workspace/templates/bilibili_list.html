@@ -219,9 +219,9 @@
 			alert("不能再往前翻页啦！");
 		} else {
 			if (id != "") {
-				location='http://{{_pjango_url_bilibili_list}}?id=' + id + '&page=' + (page - 1);
+				location='http://{{_pjango_url_host}}/bilibili/list?id=' + id + '&page=' + (page - 1);
 			} else {
-				location='http://{{_pjango_url_bilibili_list}}?page=' + (page - 1);
+				location='http://{{_pjango_url_host}}/bilibili/list?page=' + (page - 1);
 			}
 		}
 	}
@@ -231,18 +231,18 @@
 			alert("不能再往后翻页啦！");
 		} else {
 			if (id != "") {
-				location='http://{{_pjango_url_bilibili_list}}?id=' + id + '&page=' + (page + 1);
+				location='http://{{_pjango_url_host}}/bilibili/list?id=' + id + '&page=' + (page + 1);
 			} else {
-				location='http://{{_pjango_url_bilibili_list}}?page=' + (page + 1);
+				location='http://{{_pjango_url_host}}/bilibili/list?page=' + (page + 1);
 			}
 		}
 	}
 	
 	function onlyDisplay(id) {
 		if (id == "") {
-			location='http://{{_pjango_url_bilibili_list}}';
+			location='http://{{_pjango_url_host}}/bilibili/list';
 		} else {
-			location='http://{{_pjango_url_bilibili_list}}?id=' + id;
+			location='http://{{_pjango_url_host}}/bilibili/list?id=' + id;
 		}
 	}
 	

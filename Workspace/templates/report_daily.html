@@ -151,7 +151,7 @@
 					<div class="gap"></div>
 {{#_pjango_param_table_close_date}}
 					<div class="col-md-12 column archive-cell">
-						<a class="text" href="http://{{{_pjango_url_report_daily}}}/{{{_pjango_param_table_close_date_DATE}}}" style="color: {{_pjango_param_table_close_date_COLOR}}"><i class="fa fa-fw fa-angle-right"></i>数据日报：{{_pjango_param_table_close_date_DATE}}</a>
+						<a class="text" href="http://{{{_pjango_url_host}}}/report/daily/{{{_pjango_param_table_close_date_DATE}}}" style="color: {{_pjango_param_table_close_date_COLOR}}"><i class="fa fa-fw fa-angle-right"></i>数据日报：{{_pjango_param_table_close_date_DATE}}</a>
 					</div>
 {{/_pjango_param_table_close_date}}
 						<div class="gap"></div>
@@ -173,7 +173,7 @@
 					<div class="col-md-12 column corner-window shadow">
 						<div class="gap"></div>
 						<div class="col-md-12 column archive-cell">
-							<a class="text" href="http://{{{_pjango_url_report_total}}}/all"><i class="fa fa-fw fa-angle-right"></i>前往统计数据报告</a>
+							<a class="text" href="http://{{{_pjango_url_host}}}/report/total/all"><i class="fa fa-fw fa-angle-right"></i>前往统计数据报告</a>
 						</div>
 						<div class="gap"></div>
 					</div>
@@ -237,9 +237,9 @@
 	function go() {
 		var text = document.getElementById('go_input').value;
 		if (text == '') {
-			location = 'http://{{_pjango_url_report_daily}}/today'
+			location = 'http://{{_pjango_url_host}}/report/today'
 		} else {
-			location = 'http://{{_pjango_url_report_daily}}/' + text
+			location = 'http://{{_pjango_url_host}}/report/daily/' + text
 		}
 	}
 	
@@ -361,9 +361,9 @@
 			var type = splited[0];
 			var id = splited[1];
 			if (type == '阅读博文') {
-				window.open('http://{{_pjango_url_posts}}/posts/' + id);
+				window.open('http://{{_pjango_url_host}}/posts/article/' + id);
 			} else if (type == '阅读文集文章') {
-				window.open('http://{{_pjango_url_corpus}}/corpus/' + id);
+				window.open('http://{{_pjango_url_host}}/corpus/article/' + id);
 			}
 		});
 	}

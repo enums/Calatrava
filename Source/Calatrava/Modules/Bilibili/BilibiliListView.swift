@@ -39,7 +39,7 @@ class BilibiliListView: PCListView {
             } else {
                 coverName = "\(feed.blid.intValue)_cover.jpg"
             }
-            let coverUrl = "bilibili.\(WEBSITE_HOST)/img/bilibili/\(coverName)"
+            let coverUrl = "\(WEBSITE_HOST)/img/bilibili/\(coverName)"
             let fromList = (BilibiliListModel.queryObjects() as? [BilibiliListModel])?.first(where: { $0.blid.intValue == feed.blid.intValue })
             let listName = fromList?.name.strValue
             return [
@@ -50,7 +50,7 @@ class BilibiliListView: PCListView {
             guard let list = model as? BilibiliListModel else {
                 return nil
             }
-            let coverUrl = "bilibili.\(WEBSITE_HOST)/img/bilibili/\(list.blid.intValue)_cover.jpg"
+            let coverUrl = "\(WEBSITE_HOST)/img/bilibili/\(list.blid.intValue)_cover.jpg"
             var buttonText = ""
             var buttonId = ""
             if let id = currentRequest?.getUrlParam(key: "id"), id == "\(list.blid.intValue)" {
@@ -114,7 +114,7 @@ class BilibiliListView: PCListView {
             "_pjango_template_navigation_bar": NavigationBarView.html,
             "_pjango_template_footer_bar": FooterBarView.html,
             "_pjango_param_title_message": titleMessage,
-            "_pjango_url_bilibili_list": "bilibili.\(WEBSITE_HOST)/list",
+            "_pjango_url_host": WEBSITE_HOST,
 
             "_pjango_param_param_id": id,
             "_pjango_param_name": bilibiliName,

@@ -12,6 +12,6 @@ import Pjango
 func postsOldHandle() -> PCUrlHandle {
     return { req, res in
         let pid = Int(req.getUrlParam(key: "pid") ?? "-1") ?? -1
-        pjangoHttpRedirect(url: "http://posts.\(WEBSITE_HOST)/posts/\(pid)")(req, res)
+        pjangoHttpRedirect(url: "http://\(WEBSITE_HOST)/posts/article/\(pid)")(req, res)
     }
 }

@@ -97,10 +97,7 @@ class ReportTotalView: PCView {
             "_pjango_param_title_message": titleMessage,
             "_pjango_param_message": message,
             
-            "_pjango_url_posts": "posts.\(WEBSITE_HOST)",
-            "_pjango_url_corpus": "corpus.\(WEBSITE_HOST)",
-            "_pjango_url_report_daily": "\(WEBSITE_HOST)/report/daily",
-            "_pjango_url_report_total": "\(WEBSITE_HOST)/report/total",
+            "_pjango_url_host": WEBSITE_HOST,
             
             "_pjango_param_color_all": colorAll,
             "_pjango_param_color_week": colorWeek,

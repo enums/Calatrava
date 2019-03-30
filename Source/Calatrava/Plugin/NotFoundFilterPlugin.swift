@@ -1,5 +1,5 @@
 //
-//  NotFoundFilter.swift
+//  NotFoundFilterPlugin.swift
 //  Calatrava
 //
 //  Created by 郑宇琦 on 2017/6/25.

@@ -47,6 +47,7 @@ class AppDelegate: PjangoDelegate {
                 pjangoUrl("", name: "index", handle: IndexView.asHandle()),
                 pjangoUrl("404", name: "error.404", handle: ErrorNotFoundView.asHandle()),
                 pjangoUrl("not_support", name: "error.notsupport", handle: ErrorNotSupportView.asHandle()),
+                pjangoUrl("api/monitor", name: "api.monitor", handle: monitorHandle),
             ],
             
             WEBSITE_HOST: [

@@ -13,7 +13,7 @@ let package = Package(
     dependencies: [
         .package(url:"https://github.com/enums/Pjango.git" , from: "2.1.0"),
         .package(url:"https://github.com/enums/Pjango-MySQL.git" , from: "2.1.0"),
-        .package(url:"https://github.com/enums/Pjango-Postman.git" , from: "2.1.0"),
+        .package(url:"https://github.com/enums/Pjango-Postman.git" , from: "2.2.0"),
         ],
     targets: [
         .target(

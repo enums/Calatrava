@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Build-Passing-brightgreen.svg?style=flat">
-  <img src="https://img.shields.io/badge/Swift-3.2-orange.svg?style=flat">
+  <img src="https://img.shields.io/badge/Swift-4.2-orange.svg?style=flat">
   <img src="https://img.shields.io/badge/Perfect-2.x-orange.svg?style=flat">
   <img src="https://img.shields.io/badge/Platforms-OS%20X%20%7C%20Linux%20-lightgray.svg?style=flat">
   <img src="https://img.shields.io/badge/License-AGPL--3.0-lightgrey.svg?style=flat">
@@ -11,9 +11,13 @@
   <img src="https://img.shields.io/badge/made%20with-%3C3-orange.svg">
 </p>
 
-基于 [Pjango](https://github.com/enums/pjango) 的主题博客。使用 `Swift3.x` 开发，运行在 `macOS` 和 `Linux` 上。使用 Pjango，可以快速搭建你的网站。只需集成你需要的组件，而无需关心服务器和数据库具体的实现细节。
+基于 [Pjango](https://github.com/enums/pjango) 的主题博客。使用 `Swift4.x` 开发，运行在 `macOS` 和 `Linux` 上。使用 Pjango，可以快速搭建你的网站。只需集成你需要的组件，而无需关心服务器和数据库具体的实现细节。
 
 Calatrava 则是对其的高度集成，它是已经完成的博客系统。使用 Calatrava，你可以迅速在你的云服务器上运行起你的博客，直接开始写作。
+
+## 更新
+
+注意：个人博客最新的更新已转为私有仓库，不再开源，该仓库不再维护。
 
 ## 组分
 
